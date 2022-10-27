@@ -64,7 +64,7 @@ class ProfilController extends AbstractController
             $user = $this->getUser();
             if ($request->request->get('supprimer')) {
                 $user->setDateEdit(new \DateTime());
-                $user->setActivation(4);
+                $user->setActivation(3);
 
                 $em = $doctrine->getManager();
                 $em->flush();

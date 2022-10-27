@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Demandes |
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1 class="text-center">Toutes les demandes</h1>
+				{% if unread %}
+					<div class="accordion" id="accordionExample">
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+									Demandes Non Lues
+								</button>
+							</h2>
+							<div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#accordionExample">
+
+
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">n°</th>
+											<th scope="col">Entreprise</th>
+
+											<th scope="col">Sujet</th>
+											<th scope="col">contenu</th>
+											<th scope="col">Piece jointe</th>
+											<th scope="col">Date de Creation</th>
+											<th scope="col">Actions</th>
+
+
+										</tr>
+									</thead>
+									<tbody>
+										{% for demande in demandes %}
+											{% if demande.readed == false %}
+												<tr>
+													<th scope="row">{{demande.id}}</th>
+													<td>
+														{{demande.user.entreprise}}
+													</td>
+													<td>{{demande.sujet}}</td>
+													<td>{{demande.contenu[:40]|raw}}</td>
+													<td>{{demande.pieceJointe}}</td>
+													<td>{{demande.dateEnvoi|date('d/m/Y')}}</td>
+													<td>
+														<a class="badge bg-info text-white" href="{{path('app_admin_show_demande', {'id':demande.id})}}">Lire</a>
+													</td>
+
+												</tr>
+											{% endif %}
+
+										{% endfor %}
+									</tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+			<div class="accordion" id="accordionExample">
+				<div class="accordion-item">
+					<h2 class="accordion-header">
+						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
+							Demandes Lues
+						</button>
+					</h2>
+					<div id="collapse2" class="accordion-collapse collapse show" aria-labelledby="heading2" data-bs-parent="#accordionExample">
+
+
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">n°</th>
+									<th scope="col">Entreprise</th>
+
+									<th scope="col">Sujet</th>
+									<th scope="col">contenu</th>
+									<th scope="col">Piece jointe</th>
+									<th scope="col">Date de Creation</th>
+									<th scope="col">Actions</th>
+
+
+								</tr>
+							</thead>
+							<tbody>
+								{% for demande in demandes %}
+									{% if demande.readed %}
+										<tr>
+											<th scope="row">{{demande.id}}</th>
+											<td>
+												{{demande.user.entreprise}}
+											</td>
+											<td>{{demande.sujet}}</td>
+											<td>{{demande.contenu[:40]|raw}}</td>
+											<td>{{demande.pieceJointe}}</td>
+											<td>{{demande.dateEnvoi|date('d/m/Y')}}</td>
+											<td>
+												<a class="badge bg-info text-white" href="{{path('app_admin_show_demande', {'id':demande.id})}}">Lire</a>
+											</td>
+
+										</tr>
+									{% endif %}
+
+								{% endfor %}
+							</tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

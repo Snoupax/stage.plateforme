@@ -11,8 +11,12 @@
 			<div class="alert alert-info">{{flashMessage}}</div>
 		{% endfor %}
 		<ul>
-			<li><a alt="profil"href="{{path('admin_users')}}">Liste des utilisateurs</a></li>
-			<li><a alt="profil"href="{{path('admin_create_user')}}">Ajout Utilisateur</a></li>
+			<li><a alt="List-User"href="{{path('app_admin_users')}}">Liste des utilisateurs</a></li>
+			<li><a alt="Add-User"href="{{path('app_admin_create_user')}}">Ajout Utilisateur</a></li>
+			<li><a alt="List-Facture"href="{{path('app_admin_factures')}}">Liste Facture</a></li>
+			<li><a alt="Add-Facture"href="{{path('app_admin_add_facture')}}">Ajout Facture</a></li>
+			<li><a alt="List-Demande"href="{{path('app_admin_demandes')}}">Liste Demandes</a></li>
+			<li><a alt="Send-Message"href="{{path('app_admin_message')}}">Envoyer message</a></li>
 
 		</ul>
 	</div>

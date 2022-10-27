@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %}Envoyer un message |
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1 class="text-center">Formulaire d'Envoi de Message</h1>
+			</div>
+		</div>
+	</div>
+	{% include "forms/admin_message.html.twig" %}
+{% endblock %}

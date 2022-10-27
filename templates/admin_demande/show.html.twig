@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre profil |
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+	<div>
+		<h1>Votre Profil</h1>
+		<ul>
+			<li>Id :
+				{{demande.id}}</li>
+			<li>Entreprise :
+				{{demande.user.entreprise}}</li>
+			<li>Sujet :
+				{{demande.sujet}}</li>
+			<li>Contenu :
+				{{demande.contenu}}</li>
+			<li>Date d'envoi :
+				{{demande.dateEnvoi|date('d/m/Y')}}</li>
+		</ul>
+	</div>
+{% endblock %}

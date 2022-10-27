@@ -1,14 +1,7 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Register |
-	{{parent()}}
-{% endblock %}
-
-{% block body %}
-	<h1>Register</h1>
-
+<div>
 	{{ form_start(registrationForm) }}
 	{{ form_row(registrationForm.Entreprise) }}
 	{{ form_row(registrationForm.email) }}
 	{{ form_end(registrationForm) }}
-{% endblock %}
+
+</div>

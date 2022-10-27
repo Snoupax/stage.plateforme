@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block title %}Listing des Factures |
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1 class="text-center">Listing des factures</h1>
+
+				{% for year in years %}
+					<div class="accordion" id="accordionExample">
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{loop.index}}" aria-expanded="true" aria-controls="collapse{{loop.index}}">
+									Année -
+									{{year}}
+								</button>
+							</h2>
+							<div id="collapse{{loop.index}}" class="accordion-collapse collapse {{loop.index == 1 ? 'show' : ''}}" aria-labelledby="heading{{loop.index}}" data-bs-parent="#accordionExample">
+
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">Ref.</th>
+											<th scope="col">Entreprise</th>
+											<th scope="col">Date d'ajout</th>
+											<th scope="col">Url</th>
+											<th scope="col">Lu/Non lu</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for facture in factures %}
+											{% if facture.dateAjout|date('Y') == year %}
+												<tr>
+													<th scope="row">{{facture.reference}}</th>
+													<td>
+														{{facture.user.entreprise}}
+													</td>
+													<td>{{facture.dateAjout|date('d/m/Y')}}</td>
+													<td>
+														<a class="badge rounded-pill bg-info text-dark" href="{{facture.url}}" target='_blank'>Voir</a>
+														<a class="badge rounded-pill bg-primary" href="{{facture.url}}" download>Télécharger</a>
+													</td>
+													<td>{{facture.readed ? '<span class="badge bg-primary">Lu</span>' : '<span class="badge bg-danger">Non Lu</span>'}}</td>
+
+												</tr>
+											{% endif %}
+										{% endfor %}
+									</tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

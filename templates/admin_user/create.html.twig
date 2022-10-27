@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un utilisateur |
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+	<h1>Ajouter un utilisateur</h1>
+
+
+	{% include "forms/admin_user.html.twig" %}
+{% endblock %}

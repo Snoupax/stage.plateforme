@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %}Envoyer une facture |
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1 class="text-center">Formulaire d'envoi de Facture</h1>
+			</div>
+		</div>
+	</div>
+	{% include "forms/admin_facture.html.twig" %}
+{% endblock %}

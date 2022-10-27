@@ -18,9 +18,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AdminUserController extends AbstractController
 {
 
-    #[Route('/admin/create-user', name: 'admin_create_user')]
+    #[Route('/admin/user/create', name: 'app_admin_create_user')]
     #[IsGranted('ROLE_ADMIN')]
-    public function createUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -48,28 +48,28 @@ class AdminUserController extends AbstractController
             // do anything else you need here, like send an email
             $this->addFlash('info_admin', "L'utilisateur a bien été ajouté, avec le mot de passe : $userSecret");
 
-            return $this->redirectToRoute('admin_home');
+            return $this->redirectToRoute('app_admin_home');
         }
 
-        return $this->render('admin/create-user.html.twig', [
+        return $this->render('admin_user/create.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
 
 
-    #[Route('/admin/users', name: 'admin_users')]
+    #[Route('/admin/users', name: 'app_admin_users')]
     #[IsGranted('ROLE_ADMIN')]
-    public function listUsers(ManagerRegistry $doctrine): Response
+    public function listingUsers(ManagerRegistry $doctrine): Response
     {
         $users = $doctrine->getRepository(User::class)->findAll();
 
-        return $this->render('admin/users.html.twig', ['users' => $users]);
+        return $this->render('admin_user/users.html.twig', ['users' => $users]);
     }
 
-    #[Route('/admin/edit-user/{id}', name: 'admin_edit_user')]
+    #[Route('/admin/user/edit/{id}', name: 'app_admin_edit_user')]
     #[IsGranted('ROLE_ADMIN')]
     #[ParamConverter('User', class: User::class)]
-    public function editUser(User $user, ManagerRegistry $doctrine, Request $request): Response
+    public function edit(User $user, ManagerRegistry $doctrine, Request $request): Response
     {
         $form = $this->createForm(ProfilFormType::class, $user);
         $form->handleRequest($request);
@@ -84,7 +84,7 @@ class AdminUserController extends AbstractController
 
             $this->addFlash('info_admin', 'Le profil a bien été modifié');
 
-            return $this->redirectToRoute('admin_home');
+            return $this->redirectToRoute('app_admin_home');
         }
 
 
@@ -92,27 +92,38 @@ class AdminUserController extends AbstractController
     }
 
 
-    #[Route('/admin/delete-user/{id}', name: 'admin_delete_user')]
+    #[Route('/admin/user/delete/{id}', name: 'app_admin_delete_user')]
     #[IsGranted('ROLE_ADMIN')]
     #[ParamConverter('User', class: User::class)]
-    public function deleteUser(User $user, ManagerRegistry $doctrine, Request $request): Response
+    public function delete(User $user, ManagerRegistry $doctrine, Request $request): Response
     {
 
 
         if ($request->request->get('supprimer')) {
             $user->setDateEdit(new \DateTime());
-            $user->setActivation(4);
+            $user->setActivation(3);
 
             $em = $doctrine->getManager();
             $em->flush();
 
             $this->addFlash('info_admin', 'Le profil ' . $user->getId() . ' a été désactivé!');
 
-            return $this->redirectToRoute('admin_home');
+            return $this->redirectToRoute('app_admin_home');
         } elseif ($request->request->get('annuler')) {
             return $this->redirectToRoute('app_profile');
         }
 
         return $this->render('profile/delete.html.twig', ['users' => $user]);
+    }
+
+    #[Route('/admin/user/profile/{id}', name: 'app_admin_show_user')]
+    #[IsGranted('ROLE_ADMIN')]
+    #[ParamConverter('User', class: User::class)]
+    public function show(User $user): Response
+    {
+
+        // dd($user);
+
+        return $this->render('profile/index.html.twig', ['user' => $user]);
     }
 }
