@@ -15,14 +15,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class AdminController extends AbstractController
+class AdminUserController extends AbstractController
 {
-    #[Route('/admin', name: 'admin_home')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function index(): Response
-    {
-        return $this->render('admin/index.html.twig', []);
-    }
 
     #[Route('/admin/create-user', name: 'admin_create_user')]
     #[IsGranted('ROLE_ADMIN')]
