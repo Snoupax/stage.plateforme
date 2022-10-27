@@ -18,6 +18,7 @@ class ProfilFormType extends AbstractType
             ->add('prenom')
             ->add('entreprise')
             ->add('site_web')
+            ->add('activation')
             ->add('Modifer', SubmitType::class, ['attr' => ['class' => 'btn-primary']]);
     }
 

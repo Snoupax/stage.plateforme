@@ -8,6 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -31,8 +32,9 @@ class ProfilController extends AbstractController
     public function edit(ManagerRegistry $doctrine, Request $request): Response
     {
 
-        $user = $this->getUser();
-        if ($this->getUser()->getId() === $user->getId() || in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
+
+        if ($this->getUser()) {
+            $user = $this->getUser();
             $form = $this->createForm(ProfilFormType::class, $user);
             $form->handleRequest($request);
 
@@ -51,17 +53,15 @@ class ProfilController extends AbstractController
 
             return $this->render('profile/edit.html.twig', ['form' => $form->createView()]);
         }
-
-        return $this->redirectToRoute('app_home');
     }
 
-    #[Route('/profile/{id}/delete', name: 'app_delete_profile', requirements: ['id' => "\d+"])]
+    #[Route('/profile/delete', name: 'app_delete_profile', requirements: ['id' => "\d+"])]
     #[IsGranted('ROLE_USER')]
-    public function delete(User $user, Request $request, ManagerRegistry $doctrine): Response
+    public function delete(Request $request, ManagerRegistry $doctrine): Response
     {
 
-        if ($this->getUser()->getId() === $user->getId() || in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
-
+        if ($this->getUser()) {
+            $user = $this->getUser();
             if ($request->request->get('supprimer')) {
                 $user->setDateEdit(new \DateTime());
                 $user->setActivation(4);
@@ -69,9 +69,9 @@ class ProfilController extends AbstractController
                 $em = $doctrine->getManager();
                 $em->flush();
 
-                $this->addFlash('info_home', 'Le profil ' . $user->getId() . ' a été désactivé!');
+                $this->addFlash('info_login', 'Le profil ' . $user->getId() . ' a été désactivé!');
 
-                return $this->redirectToRoute('app_home');
+                return $this->redirectToRoute('app_logout');
             } elseif ($request->request->get('annuler')) {
                 return $this->redirectToRoute('app_profile');
             }

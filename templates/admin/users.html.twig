@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listes des utilisateurs |
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1 class="text-center">Liste des utilisateurs</h1>
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">id</th>
+							<th scope="col">Entreprise</th>
+							<th scope="col">Date de Création</th>
+							<th scope="col">Date de Modification</th>
+							<th scope="col">Activaion</th>
+							<th scope="col">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for user in users %}
+							<tr>
+								<td scope="row">{{user.id}}</td>
+								<td>{{user.email}}</td>
+								<td>{{user.dateCreation|date('d/m/Y')}}</td>
+								<td>{{user.dateEdit|date('d/m/Y')}}</td>
+								<td>{{user.activation}}</td>
+								<td>
+									<a class="badge bg-warning text-dark" href="{{path('admin_edit_user', {'id':user.id})}}">Modifier</a>
+
+
+									<a class="badge bg-danger text-white" href="{{path('admin_delete_user', {'id':user.id})}}">Supprimer</a>
+								</td>
+							</tr>
+						</th>
+					</tbody>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</tbody>
+</table></div></div>{% endblock %}

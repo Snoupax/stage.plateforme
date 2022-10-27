@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration |
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+	<div>
+		<h1>Dashboard Admin</h1>
+		{% for flashMessage in app.flashes('info_admin')%}
+			<div class="alert alert-info">{{flashMessage}}</div>
+		{% endfor %}
+		<ul>
+			<li><a alt="profil"href="{{path('admin_users')}}">Liste des utilisateurs</a></li>
+		</ul>
+	</div>
+{% endblock %}
