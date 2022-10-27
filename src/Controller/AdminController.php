@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfilFormType;
+use App\Form\RegistrationFormType;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminController extends AbstractController
 {
@@ -19,6 +22,44 @@ class AdminController extends AbstractController
     public function index(): Response
     {
         return $this->render('admin/index.html.twig', []);
+    }
+
+    #[Route('/admin/create-user', name: 'admin_create_user')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function createUser(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $userSecret = substr(md5($user->getEntreprise()), 0, 9);
+            var_dump($user->getId());
+            var_dump($userSecret);
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $userSecret
+                )
+            );
+            $user->setActivation(0);
+
+            if (!(file_exists($this->getParameter('factures_directory') . "/" . substr(md5($user->getId()), 0, 9)))) {
+                mkdir($this->getParameter('factures_directory') . "/" . substr(md5($user->getId()), 0, 9), 0777);
+            }
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+            // do anything else you need here, like send an email
+            $this->addFlash('info_admin', "L'utilisateur a bien été ajouté, avec le mot de passe : $userSecret");
+
+            return $this->redirectToRoute('admin_home');
+        }
+
+        return $this->render('admin/create-user.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
     }
 
 
@@ -44,11 +85,12 @@ class AdminController extends AbstractController
 
             $em = $doctrine->getManager();
 
+            var_dump($user);
             $em->flush();
 
-            $this->addFlash('profile', 'Votre profil a bien été modifié');
+            $this->addFlash('info_admin', 'Le profil a bien été modifié');
 
-            return $this->redirectToRoute('app_profile');
+            return $this->redirectToRoute('admin_home');
         }
 
 

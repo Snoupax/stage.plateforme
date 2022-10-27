@@ -16,6 +16,9 @@
 		{% if is_granted('ROLE_ADMIN') %}
 			{{form_row(form.activation)}}
 		{% endif %}
+		{{form_row(form.modifier)}}
+		{{ form_row(form._token) }}
+		{{ form_end(form, {render_rest: false}) }}
 	</div>
 
 {% endblock %}
