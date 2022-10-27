@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre profil |
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+	<div>
+		<h1>Votre Profil</h1>
+		<ul>
+			<li>Id :
+				{{user.id}}</li>
+			<li>Nom :
+				{{user.nom}}</li>
+			<li>Prenom :
+				{{user.prenom}}</li>
+			<li>Email :
+				{{user.email}}</li>
+			<li>Entreprise :
+				{{user.entreprise}}</li>
+			<li>Site web :
+				{{user.siteWeb}}</li>
+			<li>Date de Création :
+				{{user.dateCreation|date('d/m/Y')}}</li>
+			<li>Date d'update :
+				{{user.dateEdit|date('d/m/Y')}}</li>
+		</ul>
+	</div>
+{% endblock %}

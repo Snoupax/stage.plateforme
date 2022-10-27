@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard |
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+	<div>
+		<h1>Dashboard</h1>
+		{% for flashMessage in app.flashes('info_home')%}
+			<div class="alert alert-info">{{flashMessage}}</div>
+		{% endfor %}
+		<ul>
+			<li><a alt="profil"href="{{path('app_profile')}}">Profil</a></li>
+			<li><a alt="modifier"href="{{path('app_edit_profile',{'id':app.user.id})}}">Edite Profil</a></li>
+			<li><a alt="supprimer"href="{{path('app_delete_profile',{'id':app.user.id})}}">Supprimer Profil</a></li>
+
+		</ul>
+	</div>
+{% endblock %}
