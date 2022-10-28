@@ -32,7 +32,7 @@ class FactureFormType extends AbstractType
             )
             ->add('message_optionnel', TextType::class, ['label' => 'Message(Facultatif)', 'required' => false])
             ->add('url', FileType::class, ['label' => "Facture"])
-            ->add('envoyer', SubmitType::class, ['attr' => ['class' => "btn-danger"]]);
+            ->add('envoyer', SubmitType::class, ['attr' => ['class' => "btn-success"]]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

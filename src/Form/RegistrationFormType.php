@@ -19,7 +19,7 @@ class RegistrationFormType extends AbstractType
             ->add('email')
             ->add('Entreprise')
             ->add('Site_Web')
-            ->add('envoyer', SubmitType::class, ['attr' => ['class' => "btn-danger"]]);
+            ->add('envoyer', SubmitType::class, ['attr' => ['class' => "btn-success"]]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

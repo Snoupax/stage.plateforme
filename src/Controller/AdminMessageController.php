@@ -29,7 +29,7 @@ class AdminMessageController extends AbstractController
             $em->flush();
 
 
-            $this->addFlash('info_admin', "Le message a bien été envoyé à {$message->getUser()->getEntreprise()}");
+            $this->addFlash('info_admin', "<i class='bi bi-check2-square'></i> Le message a bien été envoyé à {$message->getUser()->getEntreprise()}");
 
             return $this->redirectToRoute('app_admin_home');
         }

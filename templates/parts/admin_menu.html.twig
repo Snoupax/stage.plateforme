@@ -12,7 +12,7 @@
 				{% set count = 0 %}
 					{% for menu in adminMenu %}
 					
-					{% if (count == 3) or (count == 5) or (count == 7)%}
+					{% if (count == 1) or (count == 4) or (count == 5)%}
 					<hr class="bg-dark">
 					{% endif %}
 
@@ -20,7 +20,7 @@
 							<li class="nav-item my-2">
 
 							
-								<a class="text-success fw-bold nav-link" href="{{menu.url}}" title="{{menu.title}}">
+								<a class="text-primary fw-bold nav-link" href="{{menu.url}}" title="{{menu.title}}">
 									<div>
 										<i class="fs-2 bi-speedometer2"></i>
 									</div>
@@ -34,7 +34,7 @@
 							<li class="nav-item my-2">
 
 								
-								<a class="text-danger fw-bold nav-link {% if routeName == menu.url %} active{% endif %}" href="{{menu.url}}" title="{{menu.title}}">
+								<a class="text-danger fw-bold nav-link {% if routeName == menu.url %} actived{% endif %}" href="{{menu.url}}" title="{{menu.title}}">
 									<div>
 										<i class="fs-2 fs-md-4 {{menu.icon}}"></i>
 									</div>
@@ -50,7 +50,7 @@
 								 <li class="nav-item my-2">
 
 								
-								<a class="text-dark fw-bold nav-link {% if routeName == menu.url %} active{% endif %}" href="{{menu.url}}" title="{{menu.title}}">
+								<a class="text-dark fw-bold nav-link {% if routeName == menu.url %} actived{% endif %}" href="{{menu.url}}" title="{{menu.title}}">
 									<div>
 										<i class="fs-2 fs-md-4 {{menu.icon}}"></i>
 									</div>

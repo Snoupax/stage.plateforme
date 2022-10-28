@@ -7,11 +7,10 @@
 	{{render(controller("App\\Controller\\AdminHomeController::menu"))}}
 {% endblock %}
 {% block body %}
-
 	<div>
 		<h1>Dashboard Admin</h1>
 		{% for flashMessage in app.flashes('info_admin')%}
-			<div class="alert alert-info">{{flashMessage}}</div>
+			<div class="alert alert-success">{{flashMessage|raw}}</div>
 		{% endfor %}
 		<ul>
 			<li><a alt="List-User"href="{{path('app_admin_users')}}">Liste des utilisateurs</a></li>
@@ -24,4 +23,6 @@
 
 		</ul>
 	</div>
+</div>
+</div>
 {% endblock %}

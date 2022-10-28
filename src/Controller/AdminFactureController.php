@@ -72,7 +72,7 @@ class AdminFactureController extends AbstractController
             $em->persist($facture);
             $em->flush();
 
-            $this->addFlash('info_admin', "La facture a bien été envoyé à {$facture->getUser()->getEntreprise()}");
+            $this->addFlash('info_admin', "<i class='bi bi-check2-square'></i> La facture a bien été envoyé à {$facture->getUser()->getEntreprise()}");
 
             return $this->redirectToRoute('app_admin_home');
         }

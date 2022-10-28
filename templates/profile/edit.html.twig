@@ -5,19 +5,13 @@
 {% endblock %}
 
 {% block body %}
-	<div>
-		<h1>Modifier le profil</h1>
-		{{form_start(form)}}
-		{{form_row(form.email)}}
-		{{form_row(form.nom)}}
-		{{form_row(form.prenom)}}
-		{{form_row(form.entreprise)}}
-		{{form_row(form.site_web)}}
-		{% if is_granted('ROLE_ADMIN') %}
-			{{form_row(form.activation)}}
-		{% endif %}
-		{{form_row(form.modifier)}}
-		{{ form_row(form._token) }}
-		{{ form_end(form, {render_rest: false}) }}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h2 class="text-right ml-3">Modifier le profil</h2>
+				{% include "forms/edit_profile.html.twig" %}
+				
+			</div>
+		</div>
 	</div>
-</div></div></div>{% endblock %}
+{% endblock %}

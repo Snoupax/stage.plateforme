@@ -19,7 +19,7 @@ class ProfilFormType extends AbstractType
             ->add('entreprise')
             ->add('site_web')
             ->add('activation')
-            ->add('modifier', SubmitType::class, ['attr' => ['class' => 'btn-primary']]);
+            ->add('modifier', SubmitType::class, ['attr' => ['class' => 'btn-success']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

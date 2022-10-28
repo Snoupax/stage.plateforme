@@ -45,6 +45,6 @@ a {
   max-height: 100vh;
   overflow-y: scroll;
 }
-.active {
+.actived {
   color: red!important;
 }

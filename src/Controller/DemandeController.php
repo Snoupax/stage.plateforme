@@ -31,7 +31,7 @@ class DemandeController extends AbstractController
             $em->flush();
 
 
-            $this->addFlash('info_home', "Le demande a bien été envoyé à {$demande->getUser()->getEntreprise()}");
+            $this->addFlash('info_home', "<i class='bi bi-check2-square'></i> Le demande a bien été envoyé");
 
             return $this->redirectToRoute('app_home');
         }

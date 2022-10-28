@@ -4,13 +4,25 @@
 {% endblock %}
 
 {% block body %}
-	<div>
-		<h1>Supprimer mon compte</h1>
-		<h3>Etes vous sur ?
-		</h3>
-		<form method='post'>
-			<input type="submit" name="supprimer" value="Supprimer le compte">
-			<input type="submit" name="annuler" value="Annuler">
-		</form>
-	</div>
+<div class="container">
+		<div class="row">
+			<div class="col">
+				<h2 class="text-right ml-3">Supprimer mon compte</h2>
+			<div class="card my-5 py-3">
+				<h3 class="card-text text-center my-3">
+				<div class="text-danger d-inline-block">
+					<i class="bi bi-exclamation-triangle"></i>
+				</div>
+				Souhaitez-vous supprimer votre compte ? 
+				<div class="text-danger d-inline-block">
+					<i class="bi bi-exclamation-triangle"></i>
+				</div>
+				</h3>
+				<div class="text-center my-3">
+					<form method='post'>
+						<input class="btn btn-outline-secondary bg-warning text-dark" type="submit" name="annuler" value="Annuler">
+						<input class="btn btn-outline-secondary bg-danger text-white" type="submit" name="supprimer" value="Supprimer le compte">
+					</form>
+				</div>
+			</div>
 {% endblock %}

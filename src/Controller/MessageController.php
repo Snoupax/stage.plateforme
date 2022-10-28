@@ -20,8 +20,8 @@ class MessageController extends AbstractController
     {
         $conversation =  [];
         $user = $this->getUser();
-        $messages = $doctrine->getRepository(Message::class)->findBy(['user' => $user],  ['date_envoi' => 'DESC']);
-        $demandes = $doctrine->getRepository(Demande::class)->findBy(['user' => $user],  ['date_envoi' => 'DESC']);
+        $messages = $doctrine->getRepository(Message::class)->findBy(['user' => $user],  ['date_envoi' => 'ASC']);
+        $demandes = $doctrine->getRepository(Demande::class)->findBy(['user' => $user],  ['date_envoi' => 'ASC']);
 
         foreach ($messages as $message) {
             array_push($conversation, $message);
@@ -39,8 +39,12 @@ class MessageController extends AbstractController
         for ($i = 0; $i < count($conversation); $i++) {
             (is_a($conversation[$i], Message::class)) ? array_push($side, 1) : array_push($side, 2);
         }
+        $invConv = array_reverse($conversation);
+        $invSide = array_reverse($side);
+        // dd($side);
+        // dd($invConv);
 
-        return $this->render('message/index.html.twig', ['conversation' => $conversation, 'side' => $side]);
+        return $this->render('message/index.html.twig', ['conversation' => $invConv, 'side' => $invSide]);
     }
 
 

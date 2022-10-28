@@ -46,7 +46,7 @@ class AdminUserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
-            $this->addFlash('info_admin', "L'utilisateur a bien été ajouté, avec le mot de passe : $userSecret");
+            $this->addFlash('info_admin', "<i class='bi bi-check2-square'></i> L'utilisateur a bien été ajouté, avec le mot de passe : $userSecret");
 
             return $this->redirectToRoute('app_admin_home');
         }
@@ -63,7 +63,7 @@ class AdminUserController extends AbstractController
     {
         $users = $doctrine->getRepository(User::class)->findAll();
 
-        return $this->render('admin_user/users.html.twig', ['users' => $users]);
+        return $this->render('admin_user/index.html.twig', ['users' => $users]);
     }
 
     #[Route('/admin/user/edit/{id}', name: 'app_admin_edit_user')]
@@ -82,7 +82,7 @@ class AdminUserController extends AbstractController
             var_dump($user);
             $em->flush();
 
-            $this->addFlash('info_admin', 'Le profil a bien été modifié');
+            $this->addFlash('info_admin', "<i class='bi bi-check2-square'></i> Le profil a bien été modifié");
 
             return $this->redirectToRoute('app_admin_home');
         }
@@ -106,7 +106,7 @@ class AdminUserController extends AbstractController
             $em = $doctrine->getManager();
             $em->flush();
 
-            $this->addFlash('info_admin', 'Le profil ' . $user->getId() . ' a été désactivé!');
+            $this->addFlash('info_admin', "<i class='bi bi-check2-square'></i> Le profil " . $user->getId() . " a été désactivé!");
 
             return $this->redirectToRoute('app_admin_home');
         } elseif ($request->request->get('annuler')) {

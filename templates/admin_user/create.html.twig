@@ -5,8 +5,12 @@
 {% endblock %}
 
 {% block body %}
-	<h2 class="text-right ml-3">Ajouter un utilisateur</h2>
-
-
-	{% include "forms/admin_user.html.twig" %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h2 class="text-right ml-3">Ajouter un utilisateur</h2>
+				{% include "forms/admin_user.html.twig" %}
+			</div>
+		</div>
+	</div>
 {% endblock %}

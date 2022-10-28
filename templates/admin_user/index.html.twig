@@ -1,20 +1,88 @@
 {% extends 'admin/index.html.twig' %}
 
-{% block title %}Hello AdminUserController!{% endblock %}
+{% block title %}Listes des utilisateurs |
+	{{parent()}}
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h2 class="text-right ml-3">Listing Utilisateurs</h2>
+				<div class="">
+					<a class="btn btn-primary" href="{{path('app_admin_create_user')}}" role="button">
+						<i class="fs-5 fs-md-4 bi bi-person-plus"></i>
+						Ajouter un utilisateur
+					</a>
+				</div>
+				<div class="py-2 py-md-5 my-auto h-100">
+				<div class="row d-flex justify-content-center align-items-center h-100">
+					<div class="col col-lg-12 mb-4">
+						<div class="shadow mb-3">
+							
+							<div class="card">
+					
+									<div>
+										<div class="card d-flex flex-row justify-content-around text-center">
+											<div class="col my-2">
+												<strong>Entreprise</strong>
+											</div>
+											<div class="col d-none d-md-none d-lg-inline my-2">
+												<strong>Date Creation</strong>
+											</div>
+											<div class="col d-none d-lg-inline my-2">
+												<strong>Date Modification</strong>
+											</div>
+											<div class="col d-none d-lg-inline my-2">
+												<strong>Detail</strong>
+											</div>
+											<div class="col my-2">
+												<strong>Action</strong>
+											</div>
+										</div>
+										{% for user in users %}
+										
+											<div class="card d-flex flex-row justify-content-around mx-auto text-center">
+												<div class="col my-2">
+													<p class="card-text">{{user.entreprise}}</p>
+												</div>
+												<div class="col d-none d-lg-inline my-2">
+													<p class="card-text">{{user.dateCreation|date('d/m/Y')}}</p>
+												</div>
+												<div class="col d-none d-lg-inline my-2">
+													<p class="card-text">{{user.dateEdit|date('d/m/Y')}}</p>
+												</div>
+												<div class="col d-none d-lg-inline my-2">
+													{% if user.activation == 0 %}
+														<span class="badge bg-primary">Non Activé</span>
+													{% elseif user.activation == 1 %}
+														<span class="badge bg-info">Activé</span>
+													{% elseif user.activation == 2 %}
+														<span class="badge bg-secondary">Desactivé</span>
+													{% elseif user.activation == 3 %}
+														<span class="badge bg-danger">Administrateur</span>
+													{% endif %}
+												</div>
+												<div class="col d-flex justify-content-around my-2">
+													<div>
+														<a class="badge bg-info text-dark " href="{{path('app_admin_show_user', {'id':user.id})}}">Profil</a>
+														<a class="badge bg-warning text-dark d-none d-lg-inline" href="{{path('app_admin_edit_user', {'id':user.id})}}">Modifier</a>
+														<a class="badge bg-danger text-white d-none d-lg-inline" href="{{path('app_admin_delete_user', {'id':user.id})}}">Supprimer</a>
+													</div>
+												</div>
+											</div>
+											
+										{% endfor %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Quentin/git/stage/stage.v.1/src/Controller/AdminUserController.php'|file_link(0) }}">src/Controller/AdminUserController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Quentin/git/stage/stage.v.1/templates/admin_user/index.html.twig'|file_link(0) }}">templates/admin_user/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock %}
+									<div class="card d-flex flex-row justify-content-around mx-auto text-center">
+										<div class="col my-2"></div>
+										<div class="col my-2"></div>
+										<div class="col d-flex justify-content-around my-2"></div>
+										<div class="col d-none d-lg-inline my-2"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+	{% endblock %}

@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class MessageFormType extends AbstractType
 {
@@ -33,8 +34,8 @@ class MessageFormType extends AbstractType
             )
             ->add('sujet', TextType::class, ['label' => 'Sujet'])
             ->add('pieceJointe', FileType::class, ['label' => 'Piece Jointe(Facultatif)', 'required' => false])
-            ->add('contenu', TextType::class, ['label' => 'Message'])
-            ->add('envoyer', SubmitType::class, ['attr' => ['class' => "btn-danger"]]);
+            ->add('contenu', TextareaType::class, ['label' => 'Message', 'attr' => ['class' => 'form-control'],])
+            ->add('envoyer', SubmitType::class, ['attr' => ['class' => "btn-success"]]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
