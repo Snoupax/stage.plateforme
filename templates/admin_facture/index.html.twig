@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/index.html.twig' %}
 {% block title %}Listing des Factures |
 	{{parent()}}
 {% endblock %}
@@ -8,10 +8,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h1 class="text-center">Listing des factures</h1>
-
+				<h2 class="text-right ml-3">Listing Factures</h2>
+				<div  class="col-12 col-lg-10 col-xl-10 mx-auto my-4 py-3 px-3 ">
 				{% for year in years %}
-					<div class="accordion" id="accordionExample">
+					<div class="accordion col-12 col-md-8 " id="accordionExample">
 						<div class="accordion-item">
 							<h2 class="accordion-header">
 								<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{loop.index}}" aria-expanded="true" aria-controls="collapse{{loop.index}}">
@@ -19,7 +19,7 @@
 									{{year}}
 								</button>
 							</h2>
-							<div id="collapse{{loop.index}}" class="accordion-collapse collapse {{loop.index == 1 ? 'show' : ''}}" aria-labelledby="heading{{loop.index}}" data-bs-parent="#accordionExample">
+							<div id="collapse{{loop.index}}" class="table-responsive accordion-collapse collapse {{loop.index == 1 ? 'show' : ''}}" aria-labelledby="heading{{loop.index}}" data-bs-parent="#accordionExample">
 
 								<table class="table">
 									<thead>
@@ -55,7 +55,7 @@
 						</div>
 					</div>
 				{% endfor %}
-
+				</div>
 			</div>
 		</div>
 	</div>

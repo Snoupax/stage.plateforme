@@ -3,12 +3,15 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width" initial-scale="1" shrink-to-fit="no">
+		
 		<title>
 			{% block title %}Pixel Online Creation
 			{% endblock %}
 		</title>
-		<link
-		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		<link rel="icon" href="https://www.pixel-online.fr/wp-content/uploads/2021/08/cropped-icon-1-32x32.jpg" sizes="32x32">
+		<link rel="icon" href="https://www.pixel-online.fr/wp-content/uploads/2021/08/cropped-icon-1-192x192.jpg" sizes="192x192">
+		<link rel="apple-touch-icon" href="https://www.pixel-online.fr/wp-content/uploads/2021/08/cropped-icon-1-180x180.jpg">
+		<meta name="msapplication-TileImage" content="https://www.pixel-online.fr/wp-content/uploads/2021/08/cropped-icon-1-270x270.jpg">
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 		{% block stylesheets %}
 			<!-- Bootstrap CSS -->
@@ -24,6 +27,9 @@
 		{% endblock %}
 	</head>
 	<body>
+		{% block menu %}
+			{{render(controller("App\\Controller\\HomeController::menu"))}}
+		{% endblock %}
 		{% block body %}{% endblock %}
 	</body>
 </html>

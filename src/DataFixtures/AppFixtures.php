@@ -114,21 +114,25 @@ class AppFixtures extends Fixture
         // Message 1
 
         $messageSn = new Message;
+        $date = '10-02-2021';
+        $time = '06:41';
 
         $messageSn->setSujet('Un super sujet de message');
         $messageSn->setContenu("Un contenu très long, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
         $messageSn->setReaded(0);
         $messageSn->setUser($userSn);
+        $messageSn->setDateEnvoi(\DateTime::createFromFormat('d-m-Y H:i', $date . ' ' . $time));
 
         // Message 2
 
         $messageSno = new Message;
-
+        $date = '06-04-2021';
+        $time = '07:21';
         $messageSno->setSujet('Un sujet de message');
         $messageSno->setContenu("Un contenu très long, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
         $messageSno->setReaded(0);
         $messageSno->setUser($userSn);
-
+        $messageSno->setDateEnvoi(\DateTime::createFromFormat('d-m-Y H:i', $date . ' ' . $time));
         // Message 3
 
         $messagePu = new Message;
@@ -146,7 +150,8 @@ class AppFixtures extends Fixture
         // Demande 1
 
         $demandePu = new Demande;
-
+        $date = '06-03-2021';
+        $time = '08:12';
         $demandePu->setSujet('Un sujet de demande très important');
         $demandePu->setContenu("Un contenu très long, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
         $demandePu->setReaded(0);
@@ -170,7 +175,7 @@ class AppFixtures extends Fixture
         $demandeSn->setContenu("Un contenu très long, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
         $demandeSn->setReaded(0);
         $demandeSn->setUser($userSn);
-
+        $demandeSn->setDateEnvoi(\DateTime::createFromFormat('d-m-Y H:i', $date . ' ' . $time));
 
         // Preparation des demandes
 

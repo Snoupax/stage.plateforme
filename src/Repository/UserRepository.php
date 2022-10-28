@@ -62,6 +62,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->where('u.activation < 3');
     }
 
+
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */

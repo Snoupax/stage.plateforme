@@ -1,0 +1,56 @@
+<div class="container-fluid">
+	<div class="row flex-nowrap">
+		<div  class="shadow-lg col-3 col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
+			<div  class="d-flex flex-column align-items-center px-2 pt-2 text-white min-vh-100 text-center">
+				<a class="navbar-brand mx-auto" href="{{path('app_home')}}"><div><img class="s-1 d-none d-lg-inline w-100"  src="{{asset('build/images/pixel-online.gif')}}" alt="Pixel Online Creation"></div>
+				</a>
+				<button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="badge bg-primary">Pixel</span>
+				</button>
+				<ul class="nav nav-navbar flex-column mb-sm-auto mb-0 align-items-center" id="menu">
+					{% if is_granted('ROLE_ADMIN') %}
+						
+						<li class="nav-item my-2">
+
+								
+								<a class=" text-success fw-bold nav-link" href="{{path('app_admin_home')}}" title="Admin Interface">
+									<div>
+									<i class="fs-2 bi-speedometer2"></i></div>
+									<div><span class="s-1 d-none d-sm-inline">Interface Administrateur</span></div>
+								</a>
+							
+							</li>
+					{% endif %}
+					{% for menu in listMenu %}
+
+						{% if menu.text == 'Deconnexion' %}
+							<li class="nav-item my-2">
+
+								
+								<a class=" text-danger fw-bold nav-link {% if routeName == menu.url %} active{% endif %}" href="{{menu.url}}" title="{{menu.title}}">
+									<div>
+									<i class="fs-2 {{menu.icon}}"></i></div>
+									<div><span class="s-1 d-none d-sm-inline">{{menu.text}}</span></div>
+								</a>
+								
+							</li>
+						{% else %}
+							 <li class="nav-item my-2">
+
+								
+								<a class=" text-dark fw-bold nav-link {% if routeName == menu.url %} active{% endif %}" href="{{menu.url}}" title="{{menu.title}}">
+									<div>
+									<i class="fs-2 {{menu.icon}}"></i></div>
+									<div><span class="s-1 d-none d-sm-inline">{{menu.text}}</span></div>
+								</a>
+							
+							</li>
+						{% endif %}
+					{% endfor %}
+
+				</li>
+			</ul>
+			<hr>
+		</div>
+	</div>
+	<div class="col py-3">

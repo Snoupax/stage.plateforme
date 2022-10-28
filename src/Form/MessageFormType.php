@@ -33,7 +33,7 @@ class MessageFormType extends AbstractType
             )
             ->add('sujet', TextType::class, ['label' => 'Sujet'])
             ->add('pieceJointe', FileType::class, ['label' => 'Piece Jointe(Facultatif)', 'required' => false])
-            ->add('contenu', TextType::class, ['label' => 'Demande'])
+            ->add('contenu', TextType::class, ['label' => 'Message'])
             ->add('envoyer', SubmitType::class, ['attr' => ['class' => "btn-danger"]]);
     }
 

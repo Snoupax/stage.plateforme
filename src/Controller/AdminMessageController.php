@@ -22,7 +22,7 @@ class AdminMessageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $message->setReaded(0);
             $em = $doctrine->getManager();
 
             $em->persist($message);
@@ -31,7 +31,7 @@ class AdminMessageController extends AbstractController
 
             $this->addFlash('info_admin', "Le message a bien été envoyé à {$message->getUser()->getEntreprise()}");
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_admin_home');
         }
         return $this->render('admin_message/index.html.twig', ['form' => $form->createView()]);
     }

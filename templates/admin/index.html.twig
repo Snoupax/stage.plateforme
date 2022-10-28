@@ -3,8 +3,11 @@
 {% block title %}Administration |
 	{{parent()}}
 {% endblock %}
-
+{% block menu %}
+	{{render(controller("App\\Controller\\AdminHomeController::menu"))}}
+{% endblock %}
 {% block body %}
+
 	<div>
 		<h1>Dashboard Admin</h1>
 		{% for flashMessage in app.flashes('info_admin')%}
@@ -17,6 +20,7 @@
 			<li><a alt="Add-Facture"href="{{path('app_admin_add_facture')}}">Ajout Facture</a></li>
 			<li><a alt="List-Demande"href="{{path('app_admin_demandes')}}">Liste Demandes</a></li>
 			<li><a alt="Send-Message"href="{{path('app_admin_message')}}">Envoyer message</a></li>
+			<li><a alt="home"href="{{path('app_home')}}">Dashboard</a></li>
 
 		</ul>
 	</div>

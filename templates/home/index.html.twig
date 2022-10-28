@@ -5,26 +5,89 @@
 {% endblock %}
 
 {% block body %}
-	<div>
-		<h1>Dashboard</h1>
-		{% for flashMessage in app.flashes('info_home')%}
-			<div class="alert alert-info">{{flashMessage}}</div>
-		{% endfor %}
-		<ul>
-			<li>
-				<a alt="profil" href="{{path('app_profile')}}">Profil</a>
-			</li>
-			<li>
-				<a alt="modifier" href="{{path('app_edit_profile')}}">Edite Profil</a>
-			</li>
-			<li>
-				<a alt="supprimer" href="{{path('app_delete_profile')}}">Supprimer Profil</a>
-			</li>
-			{% if is_granted('ROLE_ADMIN') %}
-				<li>
-					<a alt="dashboard admin" href="{{path('app_admin_home')}}">Dashboard Admin</a>
-				</li>
-			{% endif %}
-		</ul>
+	<div class="container">
+		<div class="row">
+			<div class="col d-flex flex-column justify-content-start">
+				<h2 class="text-right ml-3">Dashboard</h2>
+				{% for flashMessage in app.flashes('info_home')%}
+				<div class="alert alert-info">
+					{{flashMessage}}
+				</div>
+				{% endfor %}
+				<div class="d-flex  flex-column justify-content-evenly h-100">
+					<div class='d-flex flex-wrap justify-content-evenly '>
+						<div class="shadow col-12 col-md-4 mt-4">
+							<div class="card-body text-center">
+								<h5 class="card-title">Vos Factures</h5>
+								<p class="card-text">Vous avez x nouvelles factures</p>
+								<a href="#" class="btn btn-primary">Voir Factures</a>
+							</div>
+						</div>
+						<div class="shadow col-12 col-md-4 mt-4">
+							<div class="card-body text-center">
+								<h5 class="card-title">Vos Messages</h5>
+								<p class="card-text">Vous avez x nouveaux messages</p>
+								<a href="#" class="btn btn-primary">Voir Messages</a>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="py-5 h-100">
+							<div class="row d-flex justify-content-center align-items-center h-100">
+								<div class="col col-lg-8 mb-4 mb-lg-0">
+									<div class="shadow mb-3">
+										<div class="row g-0">
+											<div class=" col-12 col-md-4 gradient-custom text-center">
+											<img src="https://via.placeholder.com/600x600?text={{user.nom[:1]}}"
+												alt="Avatar" class="rounded-circle img-fluid my-md-5 my-3" style="width: 80px;" />
+											<h5>{{user.nom}} {{user.prenom}}</h5>
+											<p>{{user.entreprise}}</p>
+											<i class="far fa-edit mb-5"></i>
+											</div>
+											<div class="col-md-8">
+												<div class="card-body p-4">
+													<h6>Information</h6>
+													<hr class="mt-0 mb-4">
+													<div class="row d-flex flex-wrap pt-1">
+														<div class="col-12 mb-3">
+															<h6>Email</h6>
+															<p >{{user.email}}</p>
+														</div>
+														<div class="col-12 mb-3">
+															<h6>Site Web</h6>
+															<p>{{user.siteWeb}}</p>
+														</div>
+														</div>
+														<div class="d-none d-lg-inline">
+															<h6>Compte</h6>
+															<hr class="mt-0 mb-4">
+															<div class="row pt-1">
+																<div class="col-6 mb-3">
+																	<h6>Creation</h6>
+																	<p class="text-muted">{{user.dateCreation|date('d/m/Y')}}</p>
+																</div>
+																<div class="col-6 mb-3">
+																	<h6>Modification</h6>
+																	<p class="text-muted">{{user.dateEdit|date('d/m/Y')}}</p>
+																</div>
+															</div>
+														</div>
+														<div class="d-flex flex-wrap justify-content-around">
+															<a class="btn btn-warning fw-bold text-dark mt-2" alt="modifier" href="{{path('app_edit_profile')}}" role="button">Modifier</a>
+															<a class="btn btn-danger fw-bold text-dark mt-2" alt="supprimer" href="{{path('app_delete_profile')}}" role="button">Supprimer</a>
+														</div>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+
 {% endblock %}

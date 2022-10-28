@@ -1,8 +1,50 @@
 body {
-    background-color: lightgray;
+    background-color: #FFFFFF;
 }
 
+.bg-light {
+  background-color: #FFFFFF;
+}
+.login {
+    min-height: 100vh;
+  }
+.login-heading {
+    font-weight: 300;
+  }
+  
+.btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+  }
+.bg-image {
+    background-image: url('/public/build/images/computer-program-coding-on-screen.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(2px);
+    box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.4) inset; 
+	-webkit-box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.4) inset; 
+	-moz-box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.4) inset;
+
+  }
 
 a {
     text-decoration: none!important;
+}
+
+#shadow-nav {
+  box-shadow:3px -1px 6px -1px rgba(0,0,0,0.45);
+}
+
+.accordion-button:not(.collapsed) {
+  color: black;
+  background-color: #FFFFFF;
+} 
+
+.scroll {
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+.active {
+  color: red!important;
 }

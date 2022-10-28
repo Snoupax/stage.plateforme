@@ -37,6 +37,6 @@ class AdminDemandeController extends AbstractController
         $em = $doctrine->getManager();
         $em->flush();
 
-        return $this->render('admin_demande/.html.twig', ['demande' => $demande]);
+        return $this->render('admin_demande/show.html.twig', ['demande' => $demande]);
     }
 }
