@@ -21,7 +21,9 @@ class AdminHomeController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {
-        return $this->render('admin/index.html.twig', []);
+
+        $user = $this->getUser();
+        return $this->render('admin/index.html.twig', ['user' => $user]);
     }
 
     public function menu(Request $request): Response

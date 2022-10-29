@@ -47,8 +47,8 @@
 														</div>
 														<div class="col d-flex justify-content-around my-2">
 															<div>
-																<a class="badge rounded-pill bg-info text-dark d-none d-lg-inline-block" href="{{facture.url}}" target='_blank'>Voir</a>
-																<a class="badge rounded-pill bg-primary" href="{{facture.url}}" download>Télécharger</a>
+																<a class="badge rounded-pill bg-info text-dark d-none d-lg-inline-block" href="{{userFolder}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" target='_blank'>Voir</a>
+																<a class="badge rounded-pill bg-primary" href="{{userFolder}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" download>Télécharger</a>
 															</div>
 														</div>
 														<div class="col d-none d-lg-inline my-2">
