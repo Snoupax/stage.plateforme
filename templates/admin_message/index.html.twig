@@ -6,10 +6,11 @@
 {% block body %}
 	<div class="container">
 		<div class="row">
-			<div class="col">
-			<h2 class="text-right ml-3">Envoyer un message</h2>
+			<div class="col text-white">
+				<h2 class="text-right ml-3 ">Envoyer un message</h2>
+				{% include "forms/admin_message.html.twig" %}
 			</div>
 		</div>
 	</div>
-	{% include "forms/admin_message.html.twig" %}
+	
 {% endblock %}

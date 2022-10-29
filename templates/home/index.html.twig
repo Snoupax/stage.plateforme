@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col d-flex flex-column justify-content-start">
-				<h2 class="text-right ml-3">Dashboard</h2>
+				<h2 class="text-right ml-3 text-white">Dashboard</h2>
 				{% for flashMessage in app.flashes('info_home')%}
 				<div class="alert alert-success">
 					{{flashMessage|raw}}
@@ -17,7 +17,7 @@
 				<div class="d-flex  flex-column justify-content-evenly h-100">
 					<div class='d-flex flex-wrap justify-content-evenly '>
 						<div class="shadow col-12 col-md-4 mt-4">
-							<div class="card-body text-center">
+							<div class="card-body text-center rounded  bg-light">
 								<h5 class="card-title">Vos Factures</h5>
 								<p class="card-text">Nouvelles factures : <span class="badge bg-secondary">0</span></p>
 								<a href="{{path('app_factures')}}" class="btn btn-primary">
@@ -27,10 +27,10 @@
 							</div>
 						</div>
 						<div class="shadow col-12 col-md-4 mt-4">
-							<div class="card-body text-center">
+							<div class="card-body text-center rounded  bg-light">
 								<h5 class="card-title">Vos Messages</h5>
 								<p class="card-text">Nouveaux Messages : <span class="badge bg-secondary">0</span></p>
-								<a href="{{path('app_factures')}}" class="btn btn-primary">
+								<a href="{{path('app_messages')}}" class="btn btn-primary">
 									<i class="fs-5 fs-md-4 p-1 bi bi-chat"></i>
 									Voir Messages
 								</a>
@@ -41,7 +41,7 @@
 						<div class="py-5 h-100">
 							<div class="row d-flex justify-content-center align-items-center h-100">
 								<div class="col col-lg-8 mb-4 mb-lg-0">
-									<div class="shadow mb-3">
+									<div class="shadow mb-3 rounded bg-light">
 										<div class="row g-0">
 											<div class=" col-12 col-md-4 gradient-custom text-center">
 											<img src="https://via.placeholder.com/600/000000/FFFFFF?text={{user.nom[:1]}}"
@@ -74,7 +74,8 @@
 																</div>
 																<div class="col-6 mb-3">
 																	<h6>Modification</h6>
-																	<p class="text-muted">{{user.dateEdit|date('d/m/Y')}}</p>
+																	<p class="text-muted">{% if user.dateEdit != null %}{{user.dateEdit|date('d/m/Y')}}{% else %}
+														<span class="bg-secondary badge">Jamais</span>{% endif %}</p>
 																</div>
 															</div>
 														</div>

@@ -7,7 +7,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-			<h2 class="text-right ml-3">Listing Factures</h2>
+			<h2 class="text-right ml-3 text-white">Listing Factures</h2>
 			
 			<div class="">
 				<a class="btn btn-primary" href="{{path('app_admin_add_facture')}}" role="button">
@@ -18,11 +18,11 @@
 			<div class="py-2 py-md-5 my-auto h-100">
 				<div class="row d-flex justify-content-center align-items-center h-100">
 					<div class="col col-lg-12 mb-4">
-						<div class="shadow mb-3">
+						<div class="shadow mb-3 bg-light rounded">
 							<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 								{% for year in years %}
 									<li class="nav-item" role="presentation">
-										<button class="nav-link {% if loop.index == 1 %}active show{% endif %}" id="pills-{{year}}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{year}}" type="button" role="tab" aria-controls="pills-{{year}}" aria-selected="true">{{year}}</button>
+										<button class="nav-link {% if loop.index == 1 %}active show{% endif %} border border-bottom-0" id="pills-{{year}}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{year}}" type="button" role="tab" aria-controls="pills-{{year}}" aria-selected="true">{{year}}</button>
 									</li>
 								{% endfor %}
 							</ul>

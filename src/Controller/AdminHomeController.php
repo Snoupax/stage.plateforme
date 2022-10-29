@@ -39,7 +39,7 @@ class AdminHomeController extends AbstractController
             // ['title' => 'Ajout Facture', 'text' => 'Ajouter une Facture', 'url' => $this->generateUrl('app_admin_add_facture'), 'icon' => 'bi bi-file-earmark-diff'],
             // ['title' => 'Envoyer Message', 'text' => 'Envoyer un message', 'url' => $this->generateUrl('app_admin_message'), 'icon' => 'bi bi-chat-quote'],
             ['title' => 'Listing Demandes', 'text' => 'Gestion Demandes', 'url' => $this->generateUrl('app_admin_demandes'), 'icon' => 'bi bi-newspaper'],
-            ['title' => 'Plannig', 'text' => 'Planning', 'url' => $this->generateUrl('app_messages'), 'icon' => 'bi bi-calendar-week'],
+            ['title' => 'Plannig', 'text' => 'Planning', 'url' => $this->generateUrl('app_admin_planning'), 'icon' => 'bi bi-calendar-week'],
             ['title' => 'app_home', 'text' => 'Interface Utilisateur', 'url' => $this->generateUrl('app_home'), 'icon' => 'bi bi-speedometer2'],
             ['title' => 'Deconnexion', 'text' => 'Deconnexion', 'url' => $this->generateUrl('app_logout'), 'icon' => 'bi bi-box-arrow-left'],
 

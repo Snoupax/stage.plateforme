@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col d-flex flex-column justify-content-start">
-				<h2 class="text-right ml-3">Dashboard</h2>
+				<h2 class="text-right ml-3 text-white">Dashboard</h2>
 				{% for flashMessage in app.flashes('info_home')%}
 				<div class="alert alert-success">
 					{{flashMessage|raw}}
@@ -18,10 +18,10 @@
 				{% endfor %}
 				<div class="d-flex  flex-column justify-content-evenly h-100">
 					<div class='d-flex flex-wrap justify-content-evenly '>
-						<div class="shadow col-12 col-md-4 mt-4  rounded">
+						<div class="shadow col-12 col-md-4 mt-4 bg-light rounded">
 							<div class="card-body ">
-								<h5 class="card-title text-center">Résumé</h5>
-								<div class="text-left">
+								<h5 class="card-title text-center ">Résumé</h5>
+								<div class="text-left mt-3">
 									<span class="">Demandes non lues : <span class="badge bg-secondary">0</span></span>
 									<br>
 									<span class="">Aujourd'hui : <span class="badge bg-secondary">0</span> Interventions</span>
@@ -29,16 +29,11 @@
 									<span class="">Cette semaine : <span class="badge bg-secondary">0</span> Interventions
 								</div>
 								
-								<div class="text-center">
-									<a href="{{path('app_admin_demandes')}}" class="btn btn-primary mt-3">
-										<i class="fs-5 fs-md-4 p-1 bi bi-filetype-pdf"></i>
-										Voir Demandes
-									</a>
-								</div>
+								
 							</div>
 						</div>
-						<div class="shadow col-12 col-md-4 mt-4  rounded">
-							<div class="card-body text-center">
+						<div class="shadow col-12 col-md-4 mt-4  bg-light rounded">
+							<div class="card-body text-center ">
 								<h5 class="card-title">Ajout</h5>
 								<div class="mt-3">
 									<a href="{{path('app_admin_add_facture')}}" class="btn btn-primary mt-1" style="width: 150px">
@@ -65,7 +60,7 @@
 						<div class="py-5 h-100">
 							<div class="row d-flex justify-content-center align-items-center h-100">
 								<div class="col col-lg-8 mb-4 mb-lg-0">
-									<div class="shadow-lg mb-3  rounded">
+									<div class="shadow-lg mb-3  rounded  bg-light">
 										<div class="row g-0 text-center " style="height: 500px">
 											<h2 class="my-5">Planning coming soon..</h2>
 										</div>

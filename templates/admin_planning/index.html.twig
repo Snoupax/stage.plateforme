@@ -1,0 +1,27 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Plannig | {{parent()}}{% endblock %}
+
+{% block body %}
+<div {{ stimulus_controller('planning')}}>
+    {% for flashMessage in app.flashes('info')%}
+		<div class="alert alert-info">{{flashMessage}}</div>
+	{% endfor %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1 class="text-center text-white">Planning</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div id='action-schedule'></div>
+			<div id="schedule"></div>
+			<div id="action-week"></div>
+			<div id="week"></div>
+			<div id="action-day"></div>
+			<div id="day"></div>
+		</div>
+	</div>
+</div>
+{% endblock %}

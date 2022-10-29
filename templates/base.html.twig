@@ -5,8 +5,7 @@
 		<meta name="viewport" content="width=device-width" initial-scale="1" shrink-to-fit="no">
 		
 		<title>
-			{% block title %}Pixel Online Creation
-			{% endblock %}
+			{% block title %}Pixel Online Creation{% endblock %}
 		</title>
 		<link rel="icon" href="https://www.pixel-online.fr/wp-content/uploads/2021/08/cropped-icon-1-32x32.jpg" sizes="32x32">
 		<link rel="icon" href="https://www.pixel-online.fr/wp-content/uploads/2021/08/cropped-icon-1-192x192.jpg" sizes="192x192">
@@ -30,6 +29,7 @@
 		{% block menu %}
 			{{render(controller("App\\Controller\\HomeController::menu"))}}
 		{% endblock %}
-		{% block body %}{% endblock %}
+		{% block body %}
+		{% endblock %}
 	</body>
 </html>
