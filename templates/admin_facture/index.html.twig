@@ -7,71 +7,70 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-			<h2 class="text-right ml-3 text-white">Listing Factures</h2>
-			
-			<div class="">
-				<a class="btn btn-primary" href="{{path('app_admin_add_facture')}}" role="button">
-					<i class="fs-5 fs-md-4 bi bi-file-earmark-diff"></i>
-					Ajouter une Facture
-				</a>
-			</div>
-			<div class="py-2 py-md-5 my-auto h-100">
-				<div class="row d-flex justify-content-center align-items-center h-100">
-					<div class="col col-lg-12 mb-4">
-						<div class="shadow mb-3 bg-light rounded">
-							<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-								{% for year in years %}
-									<li class="nav-item" role="presentation">
-										<button class="nav-link {% if loop.index == 1 %}active show{% endif %} border border-bottom-0" id="pills-{{year}}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{year}}" type="button" role="tab" aria-controls="pills-{{year}}" aria-selected="true">{{year}}</button>
-									</li>
-								{% endfor %}
-							</ul>
-							<div class="tab-content" id="pills-tabContent">
-								{% for year in years %}
-									<div class="tab-pane fade {% if loop.index == 1 %}active show{% endif %}" id="pills-{{year}}" role="tabpanel" aria-labelledby="pills-{{year}}-tab" tabindex="0">
-										<div class="card d-flex flex-row justify-content-around text-center">
-											<div class="col my-2">
-												<strong>Entreprise</strong>
+				<h2 class="text-right ml-3 text-white">Listing Factures</h2>
+
+				<div class="">
+					<a class="btn btn-primary" href="{{path('app_admin_add_facture')}}" role="button">
+						<i class="fs-5 fs-md-4 bi bi-file-earmark-diff"></i>
+						Ajouter une Facture
+					</a>
+				</div>
+				<div class="py-2 py-md-5 my-auto h-100">
+					<div class="row d-flex justify-content-center align-items-center h-100">
+						<div class="col col-lg-12 mb-4">
+							<div class="shadow mb-3 bg-white rounded">
+								<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+									{% for year in years %}
+										<li class="nav-item" role="presentation">
+											<button class="nav-link {% if loop.index == 1 %}active show{% endif %} border border-bottom-0" id="pills-{{year}}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{year}}" type="button" role="tab" aria-controls="pills-{{year}}" aria-selected="true">{{year}}</button>
+										</li>
+									{% endfor %}
+								</ul>
+								<div class="tab-content" id="pills-tabContent">
+									{% for year in years %}
+										<div class="tab-pane fade {% if loop.index == 1 %}active show{% endif %}" id="pills-{{year}}" role="tabpanel" aria-labelledby="pills-{{year}}-tab" tabindex="0">
+											<div class="card d-flex flex-row justify-content-around text-center">
+												<div class="col my-2">
+													<strong>Entreprise</strong>
+												</div>
+												<div class="col d-none d-md-none d-lg-inline my-2">
+													<strong>Date</strong>
+												</div>
+												<div class="col my-2">
+													<strong>Action</strong>
+												</div>
+												<div class="col d-none d-lg-inline my-2">
+													<strong>Lu</strong>
+												</div>
 											</div>
-											<div class="col d-none d-md-none d-lg-inline my-2">
-												<strong>Date</strong>
-											</div>
-											<div class="col my-2">
-												<strong>Action</strong>
-											</div>
-											<div class="col d-none d-lg-inline my-2">
-												<strong>Lu</strong>
-											</div>
-										</div>
-										{% for facture in factures %}
-											{% if facture.dateAjout|date('Y') == year %}
-												<div class="card d-flex flex-row justify-content-around mx-auto text-center">
-													<div class="col my-2">
-														<p class="card-text">{{facture.user.entreprise}}</p>
-													</div>
-													<div class="col my-2">
-														<p class="card-text d-none d-lg-inline">{{facture.dateAjout|date('d/m/Y')}}</p>
-													</div>
-													<div class="col d-flex justify-content-around my-2">
-														<div>
-															<a class="badge rounded-pill bg-info text-dark d-none d-lg-inline-block" href="{{facture.url}}" target='_blank'>Voir</a>
-														<a class="badge rounded-pill bg-primary" href="{{facture.url}}" download>Télécharger</a>
+											{% for facture in factures %}
+												{% if facture.dateAjout|date('Y') == year %}
+													<div class="card d-flex flex-row justify-content-around mx-auto text-center">
+														<div class="col my-2">
+															<p class="card-text">{{facture.user.entreprise}}</p>
+														</div>
+														<div class="col my-2">
+															<p class="card-text d-none d-lg-inline">{{facture.dateAjout|date('d/m/Y')}}</p>
+														</div>
+														<div class="col d-flex justify-content-around my-2">
+															<div>
+																<a class="badge rounded-pill bg-info text-dark d-none d-lg-inline-block" href="{{facture.url}}" target='_blank'>Voir</a>
+																<a class="badge rounded-pill bg-primary" href="{{facture.url}}" download>Télécharger</a>
+															</div>
+														</div>
+														<div class="col d-none d-lg-inline-block my-2">
+															{{facture.readed ? '<span class="badge bg-primary">Lu</span>' : '<span class="badge bg-danger">Non Lu</span>'}}
 														</div>
 													</div>
-													<div class="col d-none d-lg-inline-block my-2">
-														{{facture.readed ? '<span class="badge bg-primary">Lu</span>' : '<span class="badge bg-danger">Non Lu</span>'}}
-													</div>
-												</div>
-											{% endif %}
-										{% endfor %}
-									</div>
-								{% endfor %}
-							<div class="card d-flex flex-row justify-content-around mx-auto text-center">
-								<div class="col my-2"></div>
-								<div class="col my-2"></div>
-								<div class="col d-flex justify-content-around my-2"></div>
-								<div class="col d-none d-lg-inline my-2"></div>
+												{% endif %}
+											{% endfor %}
+										</div>
+									{% endfor %}
+									<div class="card d-flex flex-row justify-content-around mx-auto text-center" style="height:42px">
+										<div class="col my-2"></div>
+										<div class="col my-2"></div>
+										<div class="col d-flex justify-content-around my-2"></div>
+										<div class="col d-none d-lg-inline my-2"></div>
 
 
-
-{% endblock %}
+									{% endblock %}

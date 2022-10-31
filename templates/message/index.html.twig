@@ -7,7 +7,7 @@
 {% block body %}
 	<div class="container">
 		<div class="row">
-			<div class="col" >
+			<div class="col">
 				<h2 class="text-right ml-3 text-white">Messages</h2>
 				<div class="">
 					<a class="btn btn-primary" href="{{path('app_demande')}}" role="button">
@@ -15,7 +15,7 @@
 						Envoyer une demande
 					</a>
 				</div>
-				<div id="scroll" class="shadow col-12 col-lg-10 col-xl-10 mx-auto my-4 py-3 px-3 rounded bg-light scroll">
+				<div class="shadow col-12 col-lg-10 col-xl-10 mx-auto my-4 py-3 px-3 rounded bg-white scroll">
 					<ul class="list-unstyled">
 						{% for message in conversation %}
 							{% if side[loop.index - 1] == 1 %}
@@ -27,7 +27,8 @@
 											<p class="fw-bold mb-0 d-none d-inline-md">{{message.sujet}}</p>
 											<p class="text-muted small mb-0">
 												<i class="far fa-clock"></i>
-												{{message.dateEnvoi|date('d/m/Y')}}<span class="d-none d-lg-inline">-{{message.dateEnvoi|date('H:i:s')}}</span></p>
+												{{message.dateEnvoi|date('d/m/Y')}}<span class="d-none d-lg-inline">-{{message.dateEnvoi|date('H:i:s')}}</span>
+											</p>
 										</div>
 										<div class="card-body">
 											<p class="mb-0">
@@ -36,7 +37,7 @@
 										</div>
 									</div>
 								</li>
-								{% else %}
+							{% else %}
 
 								<li class="d-flex justify-content-between mb-4">
 									<div class="card w-100">
@@ -45,7 +46,8 @@
 											<p class="fw-bold mb-0 d-none d-inline-md">{{message.sujet}}</p>
 											<p class="text-muted small mb-0">
 												<i class="far fa-clock"></i>
-												{{message.dateEnvoi|date('d/m/Y')}}<span class="d-none d-lg-inline">-{{message.dateEnvoi|date('H:i:s')}}</span></p>
+												{{message.dateEnvoi|date('d/m/Y')}}<span class="d-none d-lg-inline">-{{message.dateEnvoi|date('H:i:s')}}</span>
+											</p>
 										</div>
 										<div class="card-body">
 											<p class="mb-0">

@@ -13,22 +13,22 @@
 					<div class="row d-flex justify-content-center align-items-center h-100">
 						<div class="col col-lg-8 mb-4 mb-lg-0">
 							<div class="shadow mb-3 rounded bg-white">
-								<div class="row g-0">
+								<div class="row g-0 p-2">
 									<div class=" col-12 col-md-4 gradient-custom text-center">
-										<img src="https://via.placeholder.com/600/000000/FFFFFF?text={{user.nom[:1]}}"
-										alt="Avatar" class="rounded-circle img-fluid my-md-5 my-3" style="width: 80px;" />
-										<h5>{{user.nom}} {{user.prenom}}</h5>
+										<img src="https://via.placeholder.com/600/000000/FFFFFF?text={{user.nom[:1]}}" alt="Avatar" class="rounded-circle img-fluid my-md-5 my-3" style="width: 80px;"/>
+										<h5>{{user.nom}}
+											{{user.prenom}}</h5>
 										<p>{{user.entreprise}}</p>
 										<i class="far fa-edit mb-5"></i>
 									</div>
 									<div class="col-md-8">
-										<div class="card-body p-4">
+										<div class="card-body p-2">
 											<h6>Information</h6>
 											<hr class="mt-0 mb-4">
 											<div class="row d-flex flex-wrap pt-1">
 												<div class="col-12 mb-3">
 													<h6>Email</h6>
-													<p >{{user.email}}</p>
+													<p>{{user.email}}</p>
 												</div>
 												<div class="col-12 mb-3">
 													<h6>Site Web</h6>
@@ -42,17 +42,28 @@
 													<h6>Creation</h6>
 													<p class="text-muted">{{user.dateCreation|date('d/m/Y')}}</p>
 												</div>
-											</div>
-											<div class="col-12 col-md-6 mb-3">
-												<h6>Modification</h6>
-												<p class="text-muted">{% if user.dateEdit != null %}{{user.dateEdit|date('d/m/Y')}}{% else %}
-												<span class="bg-secondary badge">Jamais</span>{% endif %}</p>
+												<div class="col-12 col-md-6 mb-3">
+													<h6>Modification</h6>
+													<p class="text-muted">
+														{% if user.dateEdit != null %}
+															{{user.dateEdit|date('d/m/Y')}}
+														{% else %}
+															<span class="bg-secondary badge">Jamais</span>
+														{% endif %}
+													</p>
+												</div>
 											</div>
 										</div>
 									</div>
 									<div class="d-flex flex-wrap justify-content-around">
-										<a class="btn btn-warning fw-bold text-dark my-2" alt="modifier" href="{{path('app_edit_profile')}}" role="button"><i class="fs-5 fs-md-4 p-1 bi bi-pencil-square"></i>Modifier</a>
-										<a class="btn btn-danger fw-bold text-dark my-2" alt="supprimer" href="{{path('app_delete_profile')}}" role="button"><i class="fs-5 fs-md-4 p-1 bi bi-trash"></i>Supprimer</a>
+										<a class="btn btn-primary fw-bold my-2" alt="modifier" href="{{path('app_edit_profile')}}" role="button">
+											<i class="fs-5 fs-md-4 p-1 bi bi-pencil-square"></i>
+											Modifier
+										</a>
+										<a class="btn btn-danger fw-bold my-2" alt="supprimer" href="{{path('app_delete_profile')}}" role="button">
+											<i class="fs-5 fs-md-4 p-1 bi bi-trash"></i>
+											Supprimer
+										</a>
 									</div>
 								</div>
 							</div>
@@ -62,7 +73,4 @@
 			</div>
 		</div>
 	</div>
-</div>
-</div>
-</div>
-{% endblock %}
+</div></div>{% endblock %}

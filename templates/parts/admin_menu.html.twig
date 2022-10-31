@@ -1,41 +1,41 @@
 <div class="container-fluid">
-	<div class="position-absolute" style="z-index: -1; width: 100%;height: 420px; background-color:#112458"></div>
+	<div id="bg-app" class="position-absolute"></div>
 
 	<div class="row flex-nowrap">
-		<div  class="shadow-lg col-3 col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
+		<div class="shadow-lg col-3 col-md-2 col-xl-2 px-sm-2 px-0 bg-white">
 			<div class="d-flex flex-column align-items-center px-2 pt-2 text-white min-vh-100 text-center">
 				<a class="navbar-brand mx-auto" href="{{path('app_home')}}">
-				<img class="s-1 d-none d-lg-inline w-100" src="{{asset('build/images/pixel-online.gif')}}" alt="Pixel Online Creation">
+					<img class="s-1 d-none d-lg-inline w-100" src="{{asset('build/images/pixel-online.gif')}}" alt="Pixel Online Creation">
 				</a>
 				<button class="navbar-toggler d-lg-none text-center mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
 					<a class="badge bg-primary text-light">Pixel</a>
 				</button>
 				<ul class="nav nav-navbar flex-column mb-sm-auto mb-0 align-items-center" id="menu">
-				{% set count = 0 %}
+					{% set count = 0 %}
 					{% for menu in adminMenu %}
-					
-					{% if (count == 1) or (count == 4) or (count == 5)%}
-					<hr class="bg-dark">
-					{% endif %}
+
+						{% if (count == 1) or (count == 4) or (count == 5)%}
+							<hr class="bg-dark">
+						{% endif %}
 
 						{% if menu.text == 'Interface Utilisateur' %}
 							<li class="nav-item my-2">
 
-							
+
 								<a class="text-primary fw-bold nav-link" href="{{menu.url}}" title="{{menu.title}}">
 									<div>
 										<i class="fs-2 bi-speedometer2"></i>
 									</div>
-									<div >
+									<div>
 										<span class="s-1 d-none d-sm-inline">{{menu.text}}</span>
 									</div>
 								</a>
-								
+
 							</li>
 						{% elseif menu.text == 'Deconnexion' %}
 							<li class="nav-item my-2">
 
-								
+
 								<a class="text-danger fw-bold nav-link {% if routeName == menu.url %} actived{% endif %}" href="{{menu.url}}" title="{{menu.title}}">
 									<div>
 										<i class="fs-2 fs-md-4 {{menu.icon}}"></i>
@@ -44,14 +44,14 @@
 										<span class="s-1 d-none d-sm-inline">{{menu.text}}</span>
 									</div>
 								</a>
-								
-							</li>
-							
-							{% else %}
-								 
-								 <li class="nav-item my-2">
 
-								
+							</li>
+
+						{% else %}
+
+							<li class="nav-item my-2">
+
+
 								<a class="text-dark fw-bold nav-link {% if routeName == menu.url %} actived{% endif %}" href="{{menu.url}}" title="{{menu.title}}">
 									<div>
 										<i class="fs-2 fs-md-4 {{menu.icon}}"></i>
@@ -60,9 +60,9 @@
 										<span class="s-1 d-none d-sm-inline">{{menu.text}}</span>
 									</div>
 								</a>
-								
+
 							</li>
-							
+
 						{% endif %}
 						{% set count = count + 1 %}
 					{% endfor %}
@@ -71,4 +71,4 @@
 			<hr>
 		</div>
 	</div>
-	<div class="col py-3">
+	<div class="col-9 col-md-10 py-3">

@@ -101,6 +101,7 @@ export class Month {
     const currentMonth = document.createElement("li");
     currentMonth.setAttribute("class", "page-item");
     currentMonth.setAttribute("id", "currentMonth");
+    currentMonth.setAttribute("data", this.monthsLabels[this.currentMonth]);
     const aCurrent = document.createElement("a");
     aCurrent.setAttribute("class", "page-link");
     aCurrent.innerHTML =
@@ -130,33 +131,22 @@ export class Month {
 
     action_schedule.appendChild(info_schedule);
 
-    const tabButtons = ["month", "week", "day"];
-
-    const buttons = document.createElement("div");
-    buttons.setAttribute("class", "btn-group");
-    buttons.setAttribute("role", "group");
-
-    for (let i = 0; i < tabButtons.length; i++) {
-      let button = document.createElement("button");
-      button.innerHTML = tabButtons[i];
-      button.setAttribute("id", tabButtons[i] + "Button");
-      button.setAttribute("type", "button");
-      button.setAttribute("class", "btn btn-outline-primary show-button");
-      buttons.appendChild(button);
-      action_schedule.appendChild(buttons);
-    }
     this.initButtons();
+    let scroll = document.createElement("div");
+    scroll.setAttribute("id", "scroll");
+    scroll.setAttribute("class", "overflow-scroll");
     for (let i = 0; i <= 6; i++) {
       const dayLabel = document.createElement("div");
       dayLabel.classList.add("dayLabel");
       dayLabel.innerText = this.daysLabels[i];
-      schedule.appendChild(dayLabel);
+      scroll.appendChild(dayLabel);
     }
 
     // Variable
     let prev = 1;
     let day = 1;
     let next = 1;
+
     for (let i = 1; i <= 42; i++) {
       const daySquare = document.createElement("div");
 
@@ -164,7 +154,7 @@ export class Month {
         daySquare.classList.add("dayOtherMonth");
         daySquare.innerText =
           this.previous_month_length - first_day_weekday + 1 + prev;
-        schedule.appendChild(daySquare);
+        scroll.appendChild(daySquare);
         prev++;
       } else if (day <= this.daysInMonth) {
         if (
@@ -175,16 +165,19 @@ export class Month {
           daySquare.classList.add("today");
         }
         daySquare.classList.add("day");
+        daySquare.setAttribute("data", day);
         daySquare.innerText = day;
-        schedule.appendChild(daySquare);
+        scroll.appendChild(daySquare);
         day++;
       } else {
         daySquare.classList.add("dayOtherMonth");
         daySquare.innerText = next;
-        schedule.appendChild(daySquare);
+        scroll.appendChild(daySquare);
         next++;
       }
     }
+    schedule.appendChild(scroll);
+    this.initEvent();
   }
 
   // Init button for Month
@@ -198,16 +191,24 @@ export class Month {
       this.nav--;
       this.load();
     });
+  }
 
-    document.getElementById("monthButton").addEventListener("click", () => {
-      this.load();
-      console.log("month");
-    });
-    document.getElementById("weekButton").addEventListener("click", () => {
-      console.log("week");
-    });
-    document.getElementById("dayButton").addEventListener("click", () => {
-      console.log("day");
+  initEvent() {
+    let days = document.querySelectorAll("div.day");
+    console.log(days);
+    days.forEach((day) => {
+      console.log(day);
+      day.addEventListener("click", (event) => {
+        console.log(event.target);
+        let dayT = event.target.getAttribute("data");
+        console.log(
+          "vous souhaitez programmer une intervention le " +
+            dayT +
+            " " +
+            this.monthsLabels[this.currentMonth] +
+            this.currentYear
+        );
+      });
     });
   }
 }

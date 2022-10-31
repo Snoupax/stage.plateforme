@@ -1,11 +1,11 @@
 <div class="container-fluid">
-<div class="position-absolute" style="z-index: -1; width: 100%;height: 420px; background-color:#112458"></div>
+	<div id="bg-app" class="position-absolute"></div>
 	<div class="row flex-nowrap">
-		<div  class="shadow-lg col-3 col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
-			<div  class="d-flex flex-column align-items-center px-2 pt-2 text-white min-vh-100 text-center">
+		<div class="shadow-lg col-3 col-md-2 col-xl-2 px-sm-2 px-0 bg-white">
+			<div class="d-flex flex-column align-items-center px-2 pt-2 text-white min-vh-100 text-center">
 				<a class="navbar-brand mx-auto" href="{{path('app_home')}}">
 					<div>
-						<img class="s-1 d-none d-lg-inline w-100"  src="{{asset('build/images/pixel-online.gif')}}" alt="Pixel Online Creation">
+						<img class="s-1 d-none d-lg-inline w-100" src="{{asset('build/images/pixel-online.gif')}}" alt="Pixel Online Creation">
 					</div>
 				</a>
 				<button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,16 +13,16 @@
 				</button>
 				<ul class="nav nav-navbar flex-column mb-sm-auto mb-0 align-items-center" id="menu">
 					{% if is_granted('ROLE_ADMIN') %}
-					<li class="nav-item my-2">				
-						<a class=" text-primary fw-bold nav-link" href="{{path('app_admin_home')}}" title="Admin Interface">
-							<div>
-								<i class="fs-2 bi-speedometer2"></i>
-							</div>
-							<div>
-								<span class="s-1 d-none d-sm-inline">Interface Administrateur</span>
-							</div>
-						</a>	
-					</li>
+						<li class="nav-item my-2">
+							<a class=" text-primary fw-bold nav-link" href="{{path('app_admin_home')}}" title="Admin Interface">
+								<div>
+									<i class="fs-2 bi-speedometer2"></i>
+								</div>
+								<div>
+									<span class="s-1 d-none d-sm-inline">Interface Administrateur</span>
+								</div>
+							</a>
+						</li>
 					{% endif %}
 					{% for menu in listMenu %}
 						{% if menu.text == 'Deconnexion' %}
@@ -37,7 +37,7 @@
 								</a>
 							</li>
 						{% else %}
-							 <li class="nav-item my-2">
+							<li class="nav-item my-2">
 								<a class=" text-dark fw-bold nav-link {% if routeName == menu.url %} actived{% endif %}" href="{{menu.url}}" title="{{menu.title}}">
 									<div>
 										<i class="fs-2 {{menu.icon}}"></i>
@@ -53,4 +53,4 @@
 				<hr>
 			</div>
 		</div>
-		<div class="col py-3">
+		<div class="col-9 col-md-10 py-3">
