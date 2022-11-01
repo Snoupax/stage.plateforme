@@ -8,28 +8,17 @@
 	{% for flashMessage in app.flashes('info')%}
 		<div class="alert alert-info">{{flashMessage}}</div>
 	{% endfor %}
-	<div class="test" {{stimulus_controller('testholding')}}>
-		<div id="div" class="target text-white">Target
-			<ul>
-				<li id="1" class="test" style="z-index: 1; user-select:none">1</li>
-				<li id="2" class="test" style="z-index: 1; user-select:none">2</li>
-				<li id="6" class="test" style="z-index: 1; user-select:none">6</li>
-				<li id="5" class="test" style="z-index: 1; user-select:none">5</li>
-				<li id="4" class="test" style="z-index: ; user-select:none">4</li>
-				<li id="3" class="test" style="z-index: 1; user-select:none">3</li>
-			</ul>
-			<p>Status:
-				<span class="status"/>
-			</p>
-			<p></p>
-		</div>
 
-	</div>
 	<div class="container-md" {{ stimulus_controller('planning')}}>
 		<div class="row">
 			<div class="col">
 				<h2 class="text-right ml-3 text-white">Planning</h2>
-
+				<div class="">
+					<a class="btn btn-primary" href="{{path('app_admin_interventions')}}" role="button">
+						<i class="bi bi-file-earmark-diff"></i>
+						Listing Intervention
+					</a>
+				</div>
 				<div class="py-2 py-md-5 my-auto h-100">
 					<div class="row d-flex justify-content-center align-items-center h-100">
 						<div class="col-12 col-lg-8 mb-4 overflow-hidden">

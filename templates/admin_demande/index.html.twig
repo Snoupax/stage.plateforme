@@ -10,17 +10,17 @@
 				<h2 class="text-right ml-3 text-white">Listing Demandes</h2>
 				<div class="">
 					<a class="btn btn-primary" href="{{path('app_admin_message')}}" role="button">
-						<i class="fs-5 fs-md-4 bi bi-chat-quote"></i>
+						<i class="bi bi-chat-quote"></i>
 						Envoyer un message
 					</a>
 				</div>
 				<div class="py-2 py-md-5 my-auto h-100">
-				<div class="row d-flex justify-content-center align-items-center h-100">
-					<div class="col col-lg-12 mb-4">
-						<div class="shadow mb-3">
-							
-							<div class="card">
-					
+					<div class="row d-flex justify-content-center align-items-center h-100">
+						<div class="col col-lg-12 mb-4">
+							<div class="shadow mb-3">
+
+								<div class="card">
+
 									<div>
 										<div class="card d-flex flex-row justify-content-around text-center">
 											<div class="col my-2">
@@ -40,7 +40,7 @@
 											</div>
 										</div>
 										{% for demande in demandes %}
-										
+
 											<div class="card d-flex flex-row justify-content-around mx-auto text-center">
 												<div class="col my-2">
 													<p class="card-text">{{demande.user.entreprise}}</p>
@@ -60,16 +60,16 @@
 													</div>
 												</div>
 											</div>
-											
+
 										{% endfor %}
 									</div>
-								</div>
-								<div class="card d-flex flex-row justify-content-around mx-auto text-center">
-									<div class="col my-2"></div>
-									<div class="col my-2"></div>
-									<div class="col d-flex justify-content-around my-2"></div>
-									<div class="col d-none d-lg-inline my-2"></div>
+									<div class="card justify-content-around text-center" style="height:42px"></div>
 								</div>
 							</div>
 						</div>
-	{% endblock %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div></div>{% endblock %}

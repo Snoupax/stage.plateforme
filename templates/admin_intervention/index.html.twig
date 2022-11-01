@@ -1,0 +1,76 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Listes des Interventions |
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h2 class="text-right ml-3 text-white">Liste des Interventions</h2>
+				<a class="btn btn-primary my-4 m-md-0" href="{{path('app_admin_planning')}}" role="button">
+					<i class="bi bi-arrow-left"></i>
+					Retour au planning
+				</a>
+
+				<div class="py-2 py-md-5 my-auto h-100">
+					<div class="row d-flex justify-content-center align-items-center h-100">
+						<div class="col col-lg-12 mb-4">
+							<div class="shadow mb-3">
+
+								<div class="card bg-white">
+
+									<div>
+										<div class="card d-flex flex-row justify-content-around text-center">
+											<div class="col my-2">
+												<strong>Entreprise</strong>
+											</div>
+											<div class="col d-none d-md-none d-lg-inline my-2">
+												<strong>Date Creation</strong>
+											</div>
+											<div class="col d-none d-lg-inline my-2">
+												<strong>Date de Début</strong>
+											</div>
+											<div class="col d-none d-lg-inline my-2">
+												<strong>Date de fin</strong>
+											</div>
+											<div class="col my-2">
+												<strong>Action</strong>
+											</div>
+										</div>
+										{% for intervention in interventions %}
+
+											<div class="card d-flex flex-row justify-content-around mx-auto text-center">
+												<div class="col my-2">
+													<p class="card-text">{{intervention.user.entreprise}}</p>
+												</div>
+												<div class="col d-none d-lg-inline my-2">
+													<p class="card-text">{{intervention.dateCreation|date('d/m/Y')}}</p>
+												</div>
+												<div class="col d-none d-lg-inline my-2">
+													<p class="card-text">
+														{{intervention.dateDebut|date('d/m/Y - H:i')}}
+													</p>
+												</div>
+												<div class="col d-none d-lg-inline my-2">
+													<p class="card-text">
+														{{intervention.dateFin|date('d/m/Y - H:i')}}
+													</p>
+												</div>
+												<div class="col d-flex justify-content-around my-2">
+													<div>
+														<a class="badge bg-success text-white" href="">Lire</a>
+													</div>
+												</div>
+											</div>
+
+										{% endfor %}
+
+										<div class="card justify-content-around text-center" style="height:42px"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					{% endblock %}

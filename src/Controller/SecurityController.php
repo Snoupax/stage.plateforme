@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+
 use App\Service\SendMailService;
 use App\Repository\UserRepository;
+use App\Form\ResetPasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\ResetPasswordRequestFormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,7 +46,7 @@ class SecurityController extends AbstractController
         UserRepository $usersRepository,
         TokenGeneratorInterface $tokenGenerator,
         EntityManagerInterface $entityManager,
-        SendMailService $mail
+        SendMailService $mail,
     ): Response {
         $form = $this->createForm(ResetPasswordRequestFormType::class);
 
@@ -64,24 +66,34 @@ class SecurityController extends AbstractController
 
                 // On génère un lien de réinitialisation du mot de passe
                 $url = $this->generateUrl('reset_pass', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
-
                 // On crée les données du mail
-                $context = compact('url', 'user');
+                $date = new \DateTime();
+
+                $message = " Vous avez demandé à changer le mot de passe de votre compte à notre plateforme d'échange. Pour créer un nouveau mot de passe, cliquez sur le bouton ci-dessous :\n";
+
+                $button = "Réinitialiser le mot de passe";
+
+                $sub_button = "Si vous n'avez pas demandé de reinitialisation de mot de passe, n'hésitez pas à contacter votre Agence Web.";
+
+                $context = compact('url', 'user', 'date', 'message', 'button', 'sub_button');
 
                 // Envoi du mail
                 $mail->send(
-                    'no-reply@e-commerce.fr',
+                    'no-reply@pixel-online.fr',
                     $user->getEmail(),
-                    'Réinitialisation de mot de passe',
+                    'Réinitialiser le mot de passe - Plateforme d\'échange Pixel Online Creation',
                     'password_reset',
-                    $context
+                    $context,
+                    $url
                 );
 
                 $this->addFlash('success', 'Email envoyé avec succès');
                 return $this->redirectToRoute('app_login');
+            } else {
+                $this->addFlash('danger', "L'email n'est pas enregistré sur ce site");
             }
             // $user est null
-            $this->addFlash('danger', 'Un problème est survenu');
+            $this->addFlash('danger', 'Un problème est survenu.');
             return $this->redirectToRoute('app_login');
         }
 

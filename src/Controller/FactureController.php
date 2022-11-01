@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Facture;
+use App\Form\SearchFactureFormType;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -19,6 +21,17 @@ class FactureController extends AbstractController
         $user = $this->getUser();
         $userFolder = "factures/" . substr(md5($user->getId()), 0, 9) . "/";
         $factures = $doctrine->getRepository(Facture::class)->findBy(['user' => $user], ['date_ajout' => 'DESC']);
+
+        if ((isset($_POST['button'])) && ($_POST['dateFrom'] != "") && ($_POST['dateTo'] != "")) {
+
+            $dateFrom = $_POST['dateFrom'];
+            $dateTo = $_POST['dateTo'];
+            dump($dateFrom, $dateTo);
+
+            $factures = $doctrine->getRepository(Facture::class)->getFromDateToDate($dateFrom, $dateTo);
+        }
+
+
 
         $years = [];
         foreach ($factures as $facture) {

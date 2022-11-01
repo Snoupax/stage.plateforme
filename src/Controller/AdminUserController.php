@@ -5,11 +5,13 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\ProfilFormType;
 use App\Form\RegistrationFormType;
+use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -20,7 +22,7 @@ class AdminUserController extends AbstractController
 
     #[Route('/admin/user/create', name: 'app_admin_create_user')]
     #[IsGranted('ROLE_ADMIN')]
-    public function create(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, SendMailService $mail): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -43,10 +45,32 @@ class AdminUserController extends AbstractController
                 mkdir($this->getParameter('factures_directory') . "/" . substr(md5($user->getId()), 0, 9), 0777);
             }
 
+
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
-            $this->addFlash('info_admin', "<i class='bi bi-check2-square'></i> L'utilisateur a bien été ajouté, avec le mot de passe : $userSecret");
+
+            // préparation du mail 
+            $url = $this->generateUrl('app_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
+            $date = new \DateTime();
+            $title = "Bienvenue !";
+            $password = $userSecret;
+            $contenu = "";
+            $button = "Connectez-vous";
+
+            $context = compact('user', 'url', 'date', 'title', 'password', 'contenu', 'button');
+            // Envoi du mail
+            $mail->send(
+                'no-reply@pixel-online.fr',
+                $user->getEmail(),
+                'Votre compte a été créé - Plateforme d\'échange Pixel Online Creation',
+                'newUser',
+                $context,
+            );
+
+
+            //
+            $this->addFlash('success', "<i class='bi bi-check2-square'></i> L'utilisateur a bien été ajouté, avec le mot de passe : $userSecret");
 
             return $this->redirectToRoute('app_admin_home');
         }
@@ -82,7 +106,7 @@ class AdminUserController extends AbstractController
             var_dump($user);
             $em->flush();
 
-            $this->addFlash('info_admin', "<i class='bi bi-check2-square'></i> Le profil a bien été modifié");
+            $this->addFlash('success', "<i class='bi bi-check2-square'></i> Le profil a bien été modifié");
 
             return $this->redirectToRoute('app_admin_home');
         }
@@ -106,7 +130,7 @@ class AdminUserController extends AbstractController
             $em = $doctrine->getManager();
             $em->flush();
 
-            $this->addFlash('info_admin', "<i class='bi bi-check2-square'></i> Le profil " . $user->getId() . " a été désactivé!");
+            $this->addFlash('success', "<i class='bi bi-check2-square'></i> Le profil " . $user->getId() . " a été désactivé!");
 
             return $this->redirectToRoute('app_admin_home');
         } elseif ($request->request->get('annuler')) {

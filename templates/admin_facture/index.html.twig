@@ -8,13 +8,13 @@
 		<div class="row">
 			<div class="col">
 				<h2 class="text-right ml-3 text-white">Listing Factures</h2>
-
 				<div class="">
 					<a class="btn btn-primary" href="{{path('app_admin_add_facture')}}" role="button">
-						<i class="fs-5 fs-md-4 bi bi-file-earmark-diff"></i>
+						<i class="bi bi-file-earmark-diff"></i>
 						Ajouter une Facture
 					</a>
 				</div>
+				{% include "forms/searchbar_facture.html.twig" %}
 				<div class="py-2 py-md-5 my-auto h-100">
 					<div class="row d-flex justify-content-center align-items-center h-100">
 						<div class="col col-lg-12 mb-4">
@@ -46,16 +46,16 @@
 											{% for facture in factures %}
 												{% if facture.dateAjout|date('Y') == year %}
 													<div class="card d-flex flex-row justify-content-around mx-auto text-center">
-														<div class="col my-2">
+														<div class="col my-2 mx-1">
 															<p class="card-text">{{facture.user.entreprise}}</p>
 														</div>
 														<div class="col my-2">
 															<p class="card-text d-none d-lg-inline">{{facture.dateAjout|date('d/m/Y')}}</p>
 														</div>
 														<div class="col d-flex justify-content-around my-2">
-															<div>
-																<a class="badge rounded-pill bg-info text-dark d-none d-lg-inline-block" href="{{facture.url}}" target='_blank'>Voir</a>
-																<a class="badge rounded-pill bg-primary" href="{{facture.url}}" download>Télécharger</a>
+															<div class="mx-1">
+																<a class="badge rounded-pill bg-info text-dark d-none d-lg-inline-block" href="../{{usersFolders[loop.index - 1]}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" target='_blank'>Voir</a>
+																<a class="badge rounded-pill bg-primary" href="../{{usersFolders[loop.index - 1]}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" download>Télécharger</a>
 															</div>
 														</div>
 														<div class="col d-none d-lg-inline-block my-2">
@@ -66,11 +66,13 @@
 											{% endfor %}
 										</div>
 									{% endfor %}
-									<div class="card d-flex flex-row justify-content-around mx-auto text-center" style="height:42px">
-										<div class="col my-2"></div>
-										<div class="col my-2"></div>
-										<div class="col d-flex justify-content-around my-2"></div>
-										<div class="col d-none d-lg-inline my-2"></div>
-
-
-									{% endblock %}
+									<div class="card d-flex flex-row justify-content-around mx-auto text-center" style="height:42px"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div></div>{% endblock %}

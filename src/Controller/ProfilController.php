@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfilFormType;
+use App\Service\SendMailService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -29,7 +31,7 @@ class ProfilController extends AbstractController
 
     #[Route('/profile/edit/', name: 'app_edit_profile', requirements: ['id' => "\d+"])]
     #[IsGranted('ROLE_USER')]
-    public function edit(ManagerRegistry $doctrine, Request $request): Response
+    public function edit(ManagerRegistry $doctrine, Request $request, SendMailService $mail): Response
     {
 
 
@@ -44,6 +46,7 @@ class ProfilController extends AbstractController
                 $em = $doctrine->getManager();
 
                 $em->flush();
+
 
                 $this->addFlash('profile', 'Votre profil a bien été modifié');
 
@@ -69,7 +72,7 @@ class ProfilController extends AbstractController
                 $em = $doctrine->getManager();
                 $em->flush();
 
-                $this->addFlash('info_login', 'Le profil ' . $user->getId() . ' a été désactivé!');
+                $this->addFlash('success', 'Le profil ' . $user->getId() . ' a été désactivé!');
 
                 return $this->redirectToRoute('app_logout');
             } elseif ($request->request->get('annuler')) {

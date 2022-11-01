@@ -6,6 +6,7 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use App\Entity\Demande;
 use App\Entity\Facture;
+use App\Entity\Intervention;
 use App\Entity\Message;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -185,7 +186,54 @@ class AppFixtures extends Fixture
 
 
         // Intervention 1
+        $dateStart = '22-10-2022';
+        $timeStart = '08:00';
+        $dateEnd = '24-10-2022';
+        $timeEnd = '20:00';
+        $interventionSn = new Intervention();
+        $interventionSn->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
+        $interventionSn->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
+        $interventionSn->setUser($userSn);
 
+
+        // Intervention 2
+        $dateStart = '30-10-2022';
+        $timeStart = '08:00';
+        $dateEnd = '31-10-2022';
+        $timeEnd = '20:00';
+        $interventionSno = new Intervention();
+        $interventionSno->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
+        $interventionSno->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
+        $interventionSno->setUser($userSn);
+
+        // Intervention 3
+        $dateStart = '31-10-2022';
+        $timeStart = '08:00';
+        $dateEnd = '01-11-2022';
+        $timeEnd = '20:00';
+        $interventionSnou = new Intervention();
+        $interventionSnou->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
+        $interventionSnou->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
+        $interventionSnou->setUser($userSn);
+
+        // Intervention 4
+        $dateStart = '05-11-2022';
+        $timeStart = '08:00';
+        $dateEnd = '05-11-2022';
+        $timeEnd = '20:00';
+        $interventionSnoup = new Intervention();
+        $interventionSnoup->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
+        $interventionSnoup->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
+        $interventionSnoup->setUser($userSn);
+
+        // Preparation des interventions
+
+
+
+        $manager->persist($interventionSnou);
+        $manager->persist($interventionSno);
+        $manager->persist($interventionSnoup);
+        $manager->persist($interventionSn);
 
         // Heure de maintenance 1
 
