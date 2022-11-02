@@ -26,7 +26,7 @@ class Facture
     #[ORM\Column]
     private ?bool $readed = null;
 
-    #[ORM\ManyToOne(inversedBy: 'factures')]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 

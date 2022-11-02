@@ -191,6 +191,7 @@ class AppFixtures extends Fixture
         $dateEnd = '24-10-2022';
         $timeEnd = '20:00';
         $interventionSn = new Intervention();
+        $interventionSn->setSujet('Premiere Intervention');
         $interventionSn->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
         $interventionSn->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
         $interventionSn->setUser($userSn);
@@ -202,6 +203,7 @@ class AppFixtures extends Fixture
         $dateEnd = '31-10-2022';
         $timeEnd = '20:00';
         $interventionSno = new Intervention();
+        $interventionSno->setSujet('Install Serv');
         $interventionSno->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
         $interventionSno->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
         $interventionSno->setUser($userSn);
@@ -212,6 +214,7 @@ class AppFixtures extends Fixture
         $dateEnd = '01-11-2022';
         $timeEnd = '20:00';
         $interventionSnou = new Intervention();
+        $interventionSnou->setSujet('Update Serv');
         $interventionSnou->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
         $interventionSnou->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
         $interventionSnou->setUser($userSn);
@@ -222,9 +225,20 @@ class AppFixtures extends Fixture
         $dateEnd = '05-11-2022';
         $timeEnd = '20:00';
         $interventionSnoup = new Intervention();
+        $interventionSnoup->setSujet("Update Them");
         $interventionSnoup->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
         $interventionSnoup->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
         $interventionSnoup->setUser($userSn);
+        // Intervention 5
+        $dateStart = '27-10-2022';
+        $timeStart = '08:00';
+        $dateEnd = '07-11-2022';
+        $timeEnd = '20:00';
+        $interventionPu = new Intervention();
+        $interventionPu->setSujet("Update Feat");
+        $interventionPu->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
+        $interventionPu->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
+        $interventionPu->setUser($userPu);
 
         // Preparation des interventions
 
@@ -234,7 +248,7 @@ class AppFixtures extends Fixture
         $manager->persist($interventionSno);
         $manager->persist($interventionSnoup);
         $manager->persist($interventionSn);
-
+        $manager->persist($interventionPu);
         // Heure de maintenance 1
 
 

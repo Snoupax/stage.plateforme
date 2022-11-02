@@ -31,9 +31,12 @@ class Intervention
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $message_optionnel = null;
 
-    #[ORM\ManyToOne(inversedBy: 'interventions')]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $sujet = null;
 
 
     public function __construct()
@@ -102,6 +105,18 @@ class Intervention
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getSujet(): ?string
+    {
+        return $this->sujet;
+    }
+
+    public function setSujet(string $sujet): self
+    {
+        $this->sujet = $sujet;
 
         return $this;
     }
