@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Demande;
+use App\Entity\Facture;
+use App\Entity\Intervention;
 use App\Form\ProfilFormType;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,11 +22,39 @@ class AdminHomeController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin_home')]
     #[IsGranted('ROLE_ADMIN')]
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
 
         $user = $this->getUser();
-        return $this->render('admin/index.html.twig', ['user' => $user]);
+
+        $data = $doctrine->getRepository(User::class)->getAllData();
+        $countIntervention = 0;
+        $countDemande = 0;
+        $countFactures = 0;
+        $countInterventions = 0;
+        dump($data);
+        foreach ($data as $row) {
+            if (is_a($row, Facture::class)) {
+                $countFactures++;
+            }
+            if (is_a($row, Demande::class)) {
+                if ($row->isReaded()) {
+                } else {
+                    $countDemande++;
+                }
+            }
+            if (is_a($row, Intervention::class)) {
+                $date = new \Datetime;
+                $dateString = $date->format('Y-m-d');
+                if ($row->getDateFin()->format('Y-m-d') == $dateString || ($row->getDateDebut()->format('Y-m-d') < $dateString && $row->getDateFin()->format('Y-m-d') > $dateString)) {
+                    $countIntervention++;
+                    dump($date->format($dateString));
+                    dump($row->getDateFin());
+                    dump('Une intervention aujourd"hui');
+                }
+            }
+        }
+        return $this->render('admin/index.html.twig', ['user' => $user, 'countIntervention' => $countIntervention, 'countDemande' => $countDemande, 'countInterventions' => $countInterventions, 'countFactures' => $countFactures]);
     }
 
     public function menu(Request $request): Response

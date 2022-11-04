@@ -18,14 +18,19 @@ class AdminDemandeController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function index(ManagerRegistry $doctrine): Response
     {
-        $demandes = $doctrine->getRepository(Demande::class)->findBy([], ['date_envoi' => 'DESC']);
-
-        foreach ($demandes as $demande) {
-            (!$demande->isReaded()) ? $unread = true : $unread = null;
+        $demandes = [];
+        $data = $doctrine->getRepository(Demande::class)->getAllDemandesAndUsers();
+        foreach ($data as $row) {
+            if (is_a($row, Demande::class)) {
+                array_push($demandes, $row);
+            } else {
+                dump('Utilisateur');
+            }
         }
 
+
         return $this->render('admin_demande/index.html.twig', [
-            'demandes' => $demandes, 'unread' => $unread
+            'demandes' => $demandes
         ]);
     }
 

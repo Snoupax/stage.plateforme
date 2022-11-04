@@ -35,12 +35,16 @@ class FactureController extends AbstractController
 
         $years = [];
         foreach ($factures as $facture) {
+            $facture->setReaded(1);
             $dateAjout = $facture->getDateAjout();
             $year = $dateAjout->format('Y');
             if (!in_array($year, $years)) {
                 array_push($years, $year);
             }
         }
+
+        $em = $doctrine->getManager();
+        $em->flush();
         return $this->render('facture/index.html.twig', ['factures' => $factures, 'userFolder' => $userFolder, 'years' => $years]);
     }
 }

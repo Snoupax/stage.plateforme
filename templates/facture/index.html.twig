@@ -37,25 +37,49 @@
 													<strong>Lu</strong>
 												</div>
 											</div>
+											{% set i = 1 %}
 											{% for facture in factures %}
 												{% if facture.dateAjout|date('Y') == year %}
-													<div class="card d-flex flex-row justify-content-around mx-auto text-center">
-														<div class="col my-2">
-															<p class="card-text">{{facture.user.entreprise}}</p>
-														</div>
-														<div class="col my-2">
-															<p class="card-text d-none d-lg-inline">{{facture.dateAjout|date('d/m/Y')}}</p>
-														</div>
-														<div class="col d-flex justify-content-around my-2">
-															<div>
-																<a class="badge rounded-pill bg-info text-dark d-none d-lg-inline-block" href="{{userFolder}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" target='_blank'>Voir</a>
-																<a class="badge rounded-pill bg-primary" href="{{userFolder}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" download>Télécharger</a>
+													{% if i == 0 %}
+														<div class="card d-flex flex-row justify-content-around mx-auto text-center">
+															<div class="col my-2">
+																<p class="card-text">{{facture.user.entreprise}}</p>
+															</div>
+															<div class="col my-2">
+																<p class="card-text d-none d-lg-inline">{{facture.dateAjout|date('d/m/Y')}}</p>
+															</div>
+															<div class="col d-flex justify-content-around my-2">
+																<div>
+																	<a class="badge rounded-pill bg-info text-dark d-none d-lg-inline-block" href="{{userFolder}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" target='_blank'>Voir</a>
+																	<a class="badge rounded-pill bg-primary" href="{{userFolder}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" download>Télécharger</a>
+																</div>
+															</div>
+															<div class="col d-none d-lg-inline my-2">
+																{{facture.readed ? '<span class="badge bg-primary">Lu</span>' : '<span class="badge bg-danger">Non Lu</span>'}}
 															</div>
 														</div>
-														<div class="col d-none d-lg-inline my-2">
-															{{facture.readed ? '<span class="badge bg-primary">Lu</span>' : '<span class="badge bg-danger">Non Lu</span>'}}
+														{% set i = 1 %}
+													{% else %}
+														<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-light">
+															<div class="col my-2">
+																<p class="card-text">{{facture.user.entreprise}}</p>
+															</div>
+															<div class="col my-2">
+																<p class="card-text d-none d-lg-inline">{{facture.dateAjout|date('d/m/Y')}}</p>
+															</div>
+															<div class="col d-flex justify-content-around my-2">
+																<div>
+																	<a class="badge rounded-pill bg-info text-dark d-none d-lg-inline-block" href="{{userFolder}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" target='_blank'>Voir</a>
+																	<a class="badge rounded-pill bg-primary" href="{{userFolder}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" download>Télécharger</a>
+																</div>
+															</div>
+															<div class="col d-none d-lg-inline my-2">
+																{{facture.readed ? '<span class="badge bg-primary">Lu</span>' : '<span class="badge bg-danger">Non Lu</span>'}}
+															</div>
 														</div>
-													</div>
+														{% set i = 0 %}
+													{% endif %}
+
 												{% endif %}
 											{% endfor %}
 										</div>
@@ -68,5 +92,10 @@
 									<div class="col d-none d-lg-inline my-2"></div>
 								</div>
 							</div>
-
-						{% endblock %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div></div></div>{% endblock %}

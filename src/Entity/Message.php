@@ -29,7 +29,7 @@ class Message
     #[ORM\Column]
     private ?bool $readed = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'messages')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 

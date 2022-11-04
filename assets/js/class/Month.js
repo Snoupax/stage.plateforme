@@ -42,12 +42,58 @@ export class Month {
   // METHOD
 
   async load() {
+    this.initDate();
+
+    this.initMonthInNavBar();
+
+    this.initNavBar();
+
+    this.initButtons();
+    // Rempli les event grace au fetch
+    this.events = await this.getAllEvents();
+    await this.initCalendar();
+
+    this.initAddIntervention();
+
+    this.initEventModal();
+  }
+
+  async read() {
+    this.initDate();
+
+    this.initMonthInNavBar();
+
+    this.initNavBar();
+
+    this.initButtonsRead();
+    // Rempli les event grace au fetch
+    this.events = await this.getAllEvents();
+    await this.initCalendar();
+
+    this.initEventModal();
+  }
+
+  // Initialise la date
+  initDate() {
+    this.currentDate = new Date();
+    this.currentDay = this.currentDate.getDate();
+    this.currentYear = this.currentDate.getFullYear();
+  }
+
+  // Initialise la navbar du planning
+  initNavBar() {
+    // test if input date is correct, instead use current month
+    this.month =
+      isNaN(this.currentMonth) || this.currentMonth == null
+        ? this.currentDate.getMonth() + 1
+        : this.currentMonth;
+    this.year =
+      isNaN(this.currentYear) || this.currentYear == null
+        ? this.currentDate.getFullYear()
+        : this.currentYear;
     // Get element for inject
     const action_schedule = document.getElementById("action-schedule");
-    const schedule = document.getElementById("schedule");
     action_schedule.innerHTML = "";
-    schedule.innerHTML = "";
-
     // Creation de la navbar
     const info_schedule = document.createElement("ul");
     info_schedule.setAttribute("class", "pagination");
@@ -58,7 +104,8 @@ export class Month {
     currentMonth.setAttribute("data", this.monthsLabels[this.currentMonth]);
     const aCurrent = document.createElement("a");
     aCurrent.setAttribute("class", "page-link");
-
+    aCurrent.innerHTML =
+      this.monthsLabels[this.currentMonth] + " - " + this.currentYear;
     const aNext = document.createElement("a");
     aNext.setAttribute("class", "page-link");
     const nextMonth = document.createElement("li");
@@ -85,15 +132,10 @@ export class Month {
     info_schedule.appendChild(nextMonth);
 
     action_schedule.appendChild(info_schedule);
+  }
 
-    this.initButtons();
-
-    // Initialise la date
-    this.currentDate = new Date();
-    this.currentDay = this.currentDate.getDate();
-    this.currentYear = this.currentDate.getFullYear();
-
-    // Initialise le mois selon la navbar
+  // Initialise le mois selon la navbar
+  initMonthInNavBar() {
     if (this.nav !== 0) {
       this.currentMonth = this.currentDate.getMonth() + this.nav;
       if (this.currentMonth > 11) {
@@ -120,133 +162,6 @@ export class Month {
       this.currentMonth + 1,
       0
     ).getDate();
-
-    // First Version
-    // test if input date is correct, instead use current month
-    this.month =
-      isNaN(this.currentMonth) || this.currentMonth == null
-        ? this.currentDate.getMonth() + 1
-        : this.currentMonth;
-    this.year =
-      isNaN(this.currentYear) || this.currentYear == null
-        ? this.currentDate.getFullYear()
-        : this.currentYear;
-
-    // Recupérer le premier jour du mois et le premier jour (Lundi..) de la premiere semaine du mois
-    let firstDayWeekDay =
-      this.firstDayOfMonth.getDay() == 0 ? 7 : this.firstDayOfMonth.getDay();
-    // Recupere la longueur du mois précédent
-    this.previousMonthLength = new Date(this.year, this.month, 0).getDate();
-
-    aCurrent.innerHTML =
-      this.monthsLabels[this.currentMonth] + " - " + this.currentYear;
-    // Creation de la div scrollable
-    let scroll = document.createElement("div");
-    scroll.setAttribute("id", "scroll");
-    scroll.setAttribute("class", "overflow-scroll");
-
-    // Creation des libellés
-    for (let i = 0; i <= 6; i++) {
-      const dayLabel = document.createElement("div");
-      dayLabel.classList.add("dayLabel");
-      dayLabel.innerText = this.daysLabels[i];
-      scroll.appendChild(dayLabel);
-    }
-
-    // Rempli les event grace au fetch
-    this.events = await this.getEvent();
-    // Variable
-    let prev = 1;
-    let day = 1;
-    let next = 1;
-
-    // Creation du Calendrier
-    for (let i = 1; i <= 42; i++) {
-      const daySquare = document.createElement("div");
-      let daydata = day < 10 ? "0" + day : day;
-      let month = this.month + 1 < 10 ? "0" + (this.month + 1) : this.month + 1;
-      const dayAttribute = daydata + "-" + month + "-" + this.year;
-
-      if (i < firstDayWeekDay) {
-        daySquare.classList.add("dayOtherMonth");
-        daySquare.innerText =
-          this.previousMonthLength - firstDayWeekDay + 1 + prev;
-        scroll.appendChild(daySquare);
-        prev++;
-      } else if (day <= this.daysInMonth) {
-        const eventsForDay = [];
-
-        this.events.forEach((event) => {
-          if (
-            event.dateDebut.substr(0, 10) === dayAttribute ||
-            event.dateFin.substr(0, 10) === dayAttribute
-          ) {
-            eventsForDay.push(event);
-          } else if (
-            this.cmpDateString(event.dateDebut.substr(0, 10), dayAttribute) &&
-            this.cmpDateString(dayAttribute, event.dateFin.substr(0, 10))
-          ) {
-            eventsForDay.push(event);
-          }
-        });
-
-        if (
-          day == this.currentDay &&
-          this.currentMonth == this.currentDate.getMonth() &&
-          this.currentYear == this.currentDate.getFullYear()
-        ) {
-          daySquare.classList.add("today");
-        }
-        const dayNb = document.createElement("div");
-        dayNb.setAttribute("data-date", dayAttribute);
-        dayNb.innerText = day;
-        daySquare.appendChild(dayNb);
-
-        if (eventsForDay) {
-          if (eventsForDay.length > 2) {
-            const eventDiv = document.createElement("div");
-            eventDiv.setAttribute(
-              "class",
-              "event badge bg-dark mw-100 overfow-hidden "
-            );
-            eventDiv.setAttribute("data-date", dayAttribute);
-            eventDiv.style.maxWidth = "50px";
-            eventDiv.innerText = "Voir +";
-            daySquare.appendChild(eventDiv);
-          } else {
-            eventsForDay.forEach((event) => {
-              const eventDiv = document.createElement("div");
-              eventDiv.setAttribute(
-                "class",
-                "event badge bg-dark mw-100 overfow-hidden"
-              );
-              eventDiv.setAttribute("data-date", dayAttribute);
-              eventDiv.style.maxWidth = "50px";
-              eventDiv.innerText =
-                event.user.entreprise.substr(0, 4) +
-                " : " +
-                event.sujet.substr(0, 12);
-              daySquare.appendChild(eventDiv);
-            });
-          }
-        }
-
-        daySquare.classList.add();
-        daySquare.setAttribute("class", "day overflow-hidden p-1");
-        daySquare.setAttribute("data-date", dayAttribute);
-
-        scroll.appendChild(daySquare);
-        day++;
-      } else {
-        daySquare.classList.add("dayOtherMonth");
-        daySquare.innerText = next;
-        scroll.appendChild(daySquare);
-        next++;
-      }
-    }
-    schedule.appendChild(scroll);
-    this.initAddEvent();
-    this.initEventAddEvent();
   }
 
   // Init button
@@ -271,14 +186,181 @@ export class Month {
         this.load();
       }
     });
-    document.getElementById("closeButton").addEventListener("click", (e) => {
-      e.preventDefault();
-      this.closeModal();
-    });
-    document.getElementById("valid").addEventListener("click", (e) => {});
   }
 
-  initEventAddEvent() {
+  // Init button
+  initButtonsRead() {
+    document.getElementById("nextButton").addEventListener("click", () => {
+      console.log(this.nav);
+      if (this.isLoad) {
+        console.log("Loading...");
+      } else {
+        this.nav++;
+        this.read();
+      }
+    });
+
+    document.getElementById("prevButton").addEventListener("click", () => {
+      console.log(this.nav);
+
+      if (this.isLoad) {
+        console.log("Loading...");
+      } else {
+        this.nav--;
+        this.read();
+      }
+    });
+  }
+
+  // Recuperer toutes les interventions en JSON
+  async getAllEvents(id = 0) {
+    const response = await fetch("/events");
+    const events = await response.json();
+    let userEvents = [];
+
+    if (id != 0) {
+      events.forEach((event) => {
+        event.users.forEach((user) => {
+          if (user.id == id) {
+            userEvents.push(event);
+          }
+        });
+      });
+      return userEvents;
+    }
+    return events;
+  }
+
+  // Create the calendar in HTML
+  async initCalendar() {
+    const schedule = document.getElementById("schedule");
+    schedule.innerHTML = "";
+
+    // Recupérer le premier jour du mois et le premier jour (Lundi..) de la premiere semaine du mois
+    let firstDayWeekDay =
+      this.firstDayOfMonth.getDay() == 0 ? 7 : this.firstDayOfMonth.getDay();
+    // Recupere la longueur du mois précédent
+    this.previousMonthLength = new Date(this.year, this.month, 0).getDate();
+    // Creation de la div scrollable
+    let scroll = document.createElement("div");
+    scroll.setAttribute("id", "scroll");
+    scroll.setAttribute("class", "overflow-scroll");
+
+    // Creation des libellés
+    for (let i = 0; i <= 6; i++) {
+      const dayLabel = document.createElement("div");
+      dayLabel.classList.add("dayLabel");
+      dayLabel.innerText = this.daysLabels[i];
+      scroll.appendChild(dayLabel);
+    }
+
+    // Variable
+    let prev = 1;
+    let day = 1;
+    let next = 1;
+    // Creation du Calendrier
+    for (let i = 1; i <= 42; i++) {
+      const daySquare = document.createElement("div");
+      let daydata = day < 10 ? "0" + day : day;
+      let month = this.month + 1 < 10 ? "0" + (this.month + 1) : this.month + 1;
+      let dayAttribute = "";
+
+      if (i < firstDayWeekDay) {
+        let dayNb = this.previousMonthLength - firstDayWeekDay + 1 + prev;
+        dayAttribute = dayNb + "-" + (month - 1) + "-" + this.year;
+        daySquare.classList.add("dayOtherMonth");
+        daySquare.setAttribute("data-date", dayAttribute);
+        daySquare.innerText = dayNb;
+        scroll.appendChild(daySquare);
+        prev++;
+      } else if (day <= this.daysInMonth) {
+        dayAttribute = daydata + "-" + month + "-" + this.year;
+        const eventsForDay = [];
+        this.events.forEach((event) => {
+          if (
+            event.dateDebut.substr(0, 10) === dayAttribute ||
+            event.dateFin.substr(0, 10) === dayAttribute
+          ) {
+            eventsForDay.push(event);
+          } else if (
+            this.cmpDateString(event.dateDebut.substr(0, 10), dayAttribute) &&
+            this.cmpDateString(dayAttribute, event.dateFin.substr(0, 10))
+          ) {
+            eventsForDay.push(event);
+          }
+        });
+
+        if (
+          day == this.currentDay &&
+          this.currentMonth == this.currentDate.getMonth() &&
+          this.currentYear == this.currentDate.getFullYear()
+        ) {
+          daySquare.setAttribute("id", "today");
+        }
+        const dayNb = document.createElement("div");
+        dayNb.setAttribute("data-date", dayAttribute);
+        dayNb.setAttribute("class", "dayNb");
+        dayNb.innerText = day;
+        daySquare.appendChild(dayNb);
+
+        if (eventsForDay) {
+          if (eventsForDay.length > 2) {
+            const eventDiv = document.createElement("div");
+            eventDiv.setAttribute(
+              "class",
+              "event badge bg-dark mw-100 overfow-hidden "
+            );
+            eventDiv.setAttribute("data-date", dayAttribute);
+            eventDiv.style.maxWidth = "50px";
+            eventDiv.innerText = "Voir +";
+            daySquare.appendChild(eventDiv);
+          } else {
+            eventsForDay.forEach((event) => {
+              const eventDiv = document.createElement("div");
+              eventDiv.setAttribute(
+                "class",
+                "event badge bg-dark mw-100 overfow-hidden"
+              );
+              eventDiv.setAttribute("data-date", dayAttribute);
+              eventDiv.style.maxWidth = "50px";
+              let entreprises = "";
+
+              event.users.forEach((user) => {
+                if (event.users.length > 1) {
+                  entreprises = "Multi";
+                } else {
+                  entreprises = user.entreprise;
+                }
+              });
+
+              eventDiv.innerText =
+                entreprises.substr(0, 5) + " : " + event.sujet.substr(0, 12);
+
+              daySquare.appendChild(eventDiv);
+            });
+          }
+        }
+
+        daySquare.classList.add();
+        daySquare.setAttribute("class", "day overflow-hidden p-1");
+        daySquare.setAttribute("data-date", dayAttribute);
+
+        scroll.appendChild(daySquare);
+        day++;
+      } else {
+        dayAttribute = next + "-" + (month - 1) + "-" + this.year;
+        daySquare.classList.add("dayOtherMonth");
+        daySquare.setAttribute("data-date", dayAttribute);
+        daySquare.innerText = next;
+        scroll.appendChild(daySquare);
+        next++;
+      }
+    }
+    schedule.appendChild(scroll);
+  }
+
+  // add Event Click for open modal from day
+  initEventModal() {
     let events = document.querySelectorAll(".event");
     let THAT = this;
 
@@ -291,9 +373,23 @@ export class Month {
         event.stopPropagation();
       });
     });
+    if (document.getElementById("closeButton")) {
+      document.getElementById("closeButton").addEventListener("click", (e) => {
+        e.preventDefault();
+        this.closeModal();
+      });
+    }
   }
 
-  initAddEvent() {
+  // Add Event Click on Event in calendar
+  initAddIntervention() {
+    if (document.getElementById("closeButton")) {
+      document.getElementById("closeButton").addEventListener("click", (e) => {
+        e.preventDefault();
+        this.closeModalForm();
+      });
+    }
+
     let days = document.querySelectorAll("div.day");
     days.forEach((day) => {
       day.addEventListener("mousedown", (e) => {
@@ -308,6 +404,7 @@ export class Month {
     });
   }
 
+  // Permet de savoir si le click est maintenue ou non.
   onMouseDown(e) {
     let THAT = this;
     console.log(e.target.id);
@@ -316,6 +413,14 @@ export class Month {
       this.holdActive = true;
       let date = e.target.getAttribute("data-date");
       console.log(date);
+      let daysSquare = document.querySelectorAll("div.day");
+      console.log(daysSquare);
+      daysSquare.forEach((daySquare) => {
+        if (daySquare.getAttribute("data-date") == date) {
+          console.log(daySquare);
+          daySquare.style.backgroundColor = "orange";
+        }
+      });
       console.log("Holding...");
       THAT.setDateFrom(date);
       THAT.holded = true;
@@ -327,8 +432,9 @@ export class Month {
       clearTimeout(this.holdStarter);
       // Entrer le jour cliqué dans le formulaire
       let date = e.target.getAttribute("data-date");
+      let daysSquare = document.querySelectorAll("div.day");
       console.log(date);
-      console.log(this.holded);
+
       if (this.holded) {
         this.setDateTo(date);
       } else {
@@ -337,6 +443,12 @@ export class Month {
       }
       this.openModalForm();
       this.holded = false;
+      daysSquare.forEach((daySquare) => {
+        if (daySquare.style.backgroundColor == "green") {
+          console.log(daySquare);
+          daySquare.style.backgroundColor = "white";
+        }
+      });
     } else if (this.holdActive) {
       this.holdActive = false;
       let date = e.target.getAttribute("data-date");
@@ -345,6 +457,25 @@ export class Month {
     }
   }
 
+  // Rempli le formulaire : Date de debut
+  setDateFrom(date) {
+    let dateFrom = document.getElementById("dateFrom");
+    dateFrom.setAttribute(
+      "value",
+      this.dateStringEn(date).replace(/\//g, "-") + "T08:00"
+    );
+  }
+
+  // Rempli le formulaire : Date de fin
+  setDateTo(date) {
+    let dateTo = document.getElementById("dateTo");
+    dateTo.setAttribute(
+      "value",
+      this.dateStringEn(date).replace(/\//g, "-") + "T20:00"
+    );
+  }
+
+  // Ouvre le modal de chaque jour
   openModalEvent(date) {
     // Contruct Modal
     let modal = document.getElementById("modal");
@@ -365,7 +496,6 @@ export class Month {
         this.closeModal();
       }
     });
-
     this.events.forEach((event) => {
       if (
         (this.cmpDateString(event.dateDebut, date) &&
@@ -408,38 +538,25 @@ export class Month {
     });
   }
 
-  setDateFrom(date) {
-    let dateFrom = document.getElementById("dateFrom");
-    dateFrom.setAttribute(
-      "value",
-      this.dateStringEn(date).replace(/\//g, "-") + "T08:00"
-    );
-  }
-  setDateTo(date) {
-    let dateTo = document.getElementById("dateTo");
-    dateTo.setAttribute(
-      "value",
-      this.dateStringEn(date).replace(/\//g, "-") + "T20:00"
-    );
-  }
-
-  openModalForm(date) {
+  // Ouvre le modal avec le formulaire pour ajouter une intervention
+  openModalForm() {
     let modal = document.getElementById("modalForm");
     modal.style.display = "block";
   }
+
+  // Permet de fermer les modals
   closeModal() {
     let modal = document.getElementById("modal");
-    let modalForm = document.getElementById("modalForm");
+
     modal.style.display = "none";
+  }
+
+  closeModalForm() {
+    let modalForm = document.getElementById("modalForm");
     modalForm.style.display = "none";
   }
 
-  async getEvent() {
-    const response = await fetch("/test");
-    const events = await response.json();
-    return events;
-  }
-
+  // Compare 2 date en string avec l'écriture "DD/MM/YYYY"
   cmpDateString(dateA, dateB, egal = false) {
     let dateEnA = this.dateStringEn(dateA);
     let dateEnB = this.dateStringEn(dateB);
@@ -461,6 +578,7 @@ export class Month {
     }
   }
 
+  // Transforme une date:string "DD/MM/YYYY" en date:string "YYYY/MM/DD"
   dateStringEn(date) {
     let year = date.substr(6, 4);
     let month = date.substr(3, 2);

@@ -15,13 +15,14 @@ class InterventionFormType extends AbstractType
     {
 
         $builder->add(
-            'user',
+            'users',
             EntityType::class,
             [
                 'class' => User::class,
                 'choice_label' => function (User $user) {
                     return $user->getEntreprise() . " - " . $user->getEmail() . ".";
                 },
+                'multiple' => true,
                 'query_builder' => function (UserRepository $rp) {
                     return $rp->getUsers();
                 }

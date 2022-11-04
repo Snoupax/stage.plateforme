@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\User;
 use App\Entity\Demande;
 use App\Entity\Message;
 use App\Service\cmpDateService;
@@ -22,17 +23,20 @@ class MessageController extends AbstractController
         $conversation =  [];
         $user = $this->getUser();
         $userFolder = "factures/" . substr(md5($user->getId()), 0, 9) . "/";
-        $messages = $doctrine->getRepository(Message::class)->findBy(['user' => $user],  ['date_envoi' => 'ASC']);
-        $demandes = $doctrine->getRepository(Demande::class)->findBy(['user' => $user],  ['date_envoi' => 'ASC']);
+        $dataUser = $doctrine->getRepository(User::class)->getMessagesAndDemandesFromUser($user->getId());
 
-        foreach ($messages as $message) {
-            $message->setReaded(1);
-            array_push($conversation, $message);
+        dump($dataUser);
+        foreach ($dataUser as $row) {
+            if (is_a($row, Demande::class)) {
+                array_push($conversation, $row);
+            }
+            if (is_a($row, Message::class)) {
+                array_push($conversation, $row);
+                $row->setReaded(1);
+            }
         }
 
-        foreach ($demandes as $demande) {
-            array_push($conversation, $demande);
-        }
+
         $em = $doctrine->getManager();
         $em->flush();
 

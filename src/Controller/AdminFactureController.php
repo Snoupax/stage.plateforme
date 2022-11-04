@@ -21,20 +21,30 @@ class AdminFactureController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function index(ManagerRegistry $doctrine): Response
     {
-        $factures = $doctrine->getRepository(Facture::class)->findBy([], ['date_ajout' => 'DESC']);
-
         $usersFolders = [];
+        $factures = [];
+        $years = [];
 
         if ((isset($_POST['button'])) && ($_POST['dateFrom'] != "") && ($_POST['dateTo'] != "")) {
             $dateFrom = $_POST['dateFrom'];
             $dateTo = $_POST['dateTo'];
             dump($dateFrom, $dateTo);
 
-            $factures = $doctrine->getRepository(Facture::class)->getFromDateToDate($dateFrom, $dateTo);
+            $data = $doctrine->getRepository(Facture::class)->getFromDateToDate($dateFrom, $dateTo);
+        } else {
+            $data = $doctrine->getRepository(Facture::class)->getAllFacturesAndUsers();
         }
 
-        $years = [];
+        foreach ($data as $row) {
+            if (is_a($row, Facture::class)) {
+                array_push($factures, $row);
+            } else {
+                dump('Pas une facture');
+            }
+        }
+
         foreach ($factures as $facture) {
+
             $dateAjout = $facture->getDateAjout();
             $user = $facture->getUser();
 
@@ -46,9 +56,6 @@ class AdminFactureController extends AbstractController
             }
         }
 
-
-
-        // dd($years);
         return $this->render('admin_facture/index.html.twig', ['factures' => $factures, 'years' => $years, 'usersFolders' => $usersFolders]);
     }
 

@@ -42,10 +42,19 @@ a {
     background-size: cover;
     background-position: center;
     filter: blur(4px);
-    box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.5) inset; 
-	-webkit-box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.5) inset; 
-	-moz-box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.8) inset; 
+	-webkit-box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.8) inset; 
+	-moz-box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.8) inset;
   width: 100%;
+  vh: 100;
+  }
+
+  .link-nav {
+    font-weight: 600;
+  }
+
+  .link-nav:hover {
+    text-decoration: underline;
   }
 
 .bg-text {
@@ -95,7 +104,7 @@ a {
   overflow-y: scroll;
 }
 .actived {
-  color: red!important;
+  color: blue!important;
 }
 
 
@@ -179,10 +188,14 @@ a {
   background-color: rgb(179, 179, 179);
 
 }
-.today {
+#today {
   background-color: rgb(119, 176, 176);
 }
 
+
+.event:hover {
+  background-color: green!important;
+}
 
 
 

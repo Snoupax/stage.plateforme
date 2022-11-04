@@ -63,6 +63,44 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
 
+    // SELECT count(*) FROM `user` as `u` INNER JOIN `demande` as `d` on u.id = d.user_id WHERE d.readed = 0 AND u.id = 54;
+    public function getAllCountFromUser($id)
+    {
+
+        $qb = $this->createQueryBuilder('u')
+            ->select('u', 'f', 'm')
+            ->join('App\Entity\Facture', 'f', 'WITH', 'u.id = f.user')
+            ->join('App\Entity\Message', 'm', 'WITH', 'u.id = m.user')
+            ->where('u.id = :id')
+            ->setParameter('id', $id);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getMessagesAndDemandesFromUser($id)
+    {
+
+        $qb = $this->createQueryBuilder('u')
+            ->select('u', 'd', 'm')
+            ->join('App\Entity\Demande', 'd', 'WITH', 'u.id = d.user')
+            ->join('App\Entity\Message', 'm', 'WITH', 'u.id = m.user')
+            ->where('u.id = :id')
+            ->setParameter('id', $id);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getAllData()
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('f', 'd', 'i')
+            ->join('App\Entity\Demande', 'd')
+            ->join('App\Entity\Intervention', 'i')
+            ->join('App\Entity\Facture', 'f');
+
+        return $qb->getQuery()->getResult();
+    }
+
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */

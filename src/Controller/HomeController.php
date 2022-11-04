@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\Facture;
+use App\Entity\Message;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -11,13 +15,36 @@ class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
     #[IsGranted('ROLE_USER')]
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
 
         $user = $this->getUser();
 
-        return $this->render('home/index.html.twig', ['user' => $user]);
+
+        $dataUser = $doctrine->getRepository(User::class)->getAllCountFromUser($user->getId());
+        $countFacture = 0;
+        $countMessage = 0;
+        foreach ($dataUser as $row) {
+            if (is_a($row, Facture::class)) {
+                if ($row->isReaded()) {
+                    dump('facture lue');
+                } else {
+                    $countFacture++;
+                }
+            }
+            if (is_a($row, Message::class)) {
+                if ($row->isReaded()) {
+                    dump('message lu');
+                } else {
+                    $countMessage++;
+                }
+            }
+        }
+
+        return $this->render('home/index.html.twig', ['user' => $user, 'countFacture' => $countFacture, 'countMessage' => $countMessage]);
     }
+
+
 
     public function menu(): Response
     {

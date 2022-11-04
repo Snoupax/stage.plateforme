@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\InterventionRepository;
@@ -31,17 +33,17 @@ class Intervention
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $message_optionnel = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
-
     #[ORM\Column(length: 255)]
     private ?string $sujet = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    private Collection $users;
 
 
     public function __construct()
     {
         $this->dateCreation =   new \DateTime();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -97,18 +99,6 @@ class Intervention
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getSujet(): ?string
     {
         return $this->sujet;
@@ -117,6 +107,30 @@ class Intervention
     public function setSujet(string $sujet): self
     {
         $this->sujet = $sujet;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        $this->users->removeElement($user);
 
         return $this;
     }

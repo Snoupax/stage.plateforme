@@ -43,14 +43,25 @@ class FactureRepository extends ServiceEntityRepository
     public function getFromDateToDate($dateFrom, $dateTo)
     {
         $qb = $this->createQueryBuilder('f')
+            ->select('f', 'u')
+            ->innerJoin('App\Entity\User', 'u', 'WITH', 'f.user = u.id')
             ->where('f.date_ajout BETWEEN :dateFrom AND :dateTo')
             ->setParameter('dateFrom', $dateFrom)
             ->setParameter('dateTo', $dateTo)
             ->orderBy('f.date_ajout', 'DESC');
 
-        $query = $qb->getQuery();
 
-        return $query->getResult();
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getAllFacturesAndUsers()
+    {
+        $qb = $this->createQueryBuilder('f')
+            ->select('f', 'u')
+            ->innerJoin('App\Entity\User', 'u', 'WITH', 'f.user = u.id')
+            ->orderBy('f.date_ajout', 'DESC');
+
+        return $qb->getQuery()->getResult();
     }
 
     //    /**

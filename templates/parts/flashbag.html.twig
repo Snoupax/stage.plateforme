@@ -1,10 +1,10 @@
 {% for flashMessage in app.flashes('success')%}
-	<div class="alert alert-success">
+	<div class="alert alert-success my-2">
 		{{flashMessage|raw}}
 	</div>
 {% endfor %}
 {% for flashMessage in app.flashes('danger')%}
-	<div class="alert alert-danger">
+	<div class="alert alert-danger my-2">
 		{{flashMessage|raw}}
 	</div>
 {% endfor %}

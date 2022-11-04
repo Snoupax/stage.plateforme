@@ -22,12 +22,12 @@
 							<li class="nav-item my-2 col-12">
 
 
-								<a class="text-primary fw-bold nav-link d-flex flex-nowrap" href="{{menu.url}}" title="{{menu.title}}">
-									<div class="col-3 d-flex align-items-center">
+								<a class="text-success nav-link d-flex flex-nowrap" href="{{menu.url}}" title="{{menu.title}}">
+									<div class="col-12 col-sm-3 d-flex align-items-center">
 										<i class="fs-2 bi-speedometer2"></i>
 									</div>
-									<div class="col-9 d-flex align-items-center justify-content-center">
-										<span class="s-1 d-none d-sm-inline-block">{{menu.text}}</span>
+									<div class="link-nav col-0 col-sm-9 d-flex justify-content-center align-items-center">
+										<span class="s-1 d-none d-sm-inline">{{menu.text}}</span>
 									</div>
 								</a>
 
@@ -36,11 +36,11 @@
 							<li class="nav-item my-2 col-12">
 
 
-								<a class="text-danger fw-bold nav-link {% if routeName == menu.url %} actived{% endif %} d-flex flex-nowrap" href="{{menu.url}}" title="{{menu.title}}">
-									<div class="col-3 d-flex align-items-center">
+								<a class="text-danger nav-link {% if routeName == menu.url %} actived{% endif %} d-flex flex-nowrap" href="{{menu.url}}" title="{{menu.title}}">
+									<div class="col-12 col-sm-3 d-flex align-items-center">
 										<i class="fs-2 fs-md-4 {{menu.icon}}"></i>
 									</div>
-									<div class="col-9 d-flex align-items-center justify-content-center">
+									<div class="link-nav col-0 col-sm-9 d-flex align-items-center justify-content-center">
 										<span class="s-1 d-none d-sm-inline-block">{{menu.text}}</span>
 									</div>
 								</a>
@@ -52,11 +52,11 @@
 							<li class="nav-item my-2 col-12">
 
 
-								<a class=" text-dark fw-bold nav-link {% if routeName == menu.url %} actived{% endif %} d-flex flex-nowrap" href="{{menu.url}}" title="{{menu.title}}">
-									<div class="col-3 d-flex align-items-center ">
+								<a class="text-dark nav-link {% if routeName == menu.url %} actived{% endif %} d-flex flex-nowrap" href="{{menu.url}}" title="{{menu.title}}">
+									<div class="col-12 col-sm-3 d-flex align-items-center ">
 										<i class="fs-2 fs-md-4 {{menu.icon}}"></i>
 									</div>
-									<div class="col-9 d-flex align-items-center justify-content-center">
+									<div class="link-nav col-0 col-sm-9 d-flex align-items-center justify-content-center">
 										<span class="s-1 d-none d-sm-inline-block ">{{menu.text}}</span>
 									</div>
 								</a>

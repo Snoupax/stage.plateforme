@@ -16,7 +16,7 @@
 							<div class="card-body text-center rounded  bg-white">
 								<h5 class="card-title">Vos Factures</h5>
 								<p class="card-text">Nouvelles factures :
-									<span class="badge bg-secondary">0</span>
+									<span class="badge bg-secondary">{{countFacture}}</span>
 								</p>
 								<a href="{{path('app_factures')}}" class="btn btn-primary">
 									<i class="p-1 bi bi-filetype-pdf"></i>
@@ -28,7 +28,7 @@
 							<div class="card-body text-center rounded  bg-white">
 								<h5 class="card-title">Vos Messages</h5>
 								<p class="card-text">Nouveaux Messages :
-									<span class="badge bg-secondary">0</span>
+									<span class="badge bg-secondary">{{countMessage}}</span>
 								</p>
 								<a href="{{path('app_messages')}}" class="btn btn-primary">
 									<i class="p-1 bi bi-chat"></i>
@@ -40,17 +40,17 @@
 					<div>
 						<div class="py-5 h-100">
 							<div class="row d-flex justify-content-center align-items-center h-100">
-								<div class="col col-lg-8 mb-4 mb-lg-0">
+								<div class="col col-md-7 col-lg-7 mb-4 mb-lg-0">
 									<div class="shadow mb-3 rounded bg-white">
 										<div class="row g-0 p-2">
-											<div class=" col-12 col-md-4 gradient-custom text-center">
+											<div class=" col-12 col-md-6 gradient-custom text-center">
 												<img src="https://via.placeholder.com/600/000000/FFFFFF?text={{user.nom[:1]}}" alt="Avatar" class="rounded-circle img-fluid my-md-5 my-3" style="width: 80px;"/>
 												<h5>{{user.nom}}
 													{{user.prenom}}</h5>
 												<p>{{user.entreprise}}</p>
 												<i class="far fa-edit mb-5"></i>
 											</div>
-											<div class="col-md-8">
+											<div class="col-md-6">
 												<div class="card-body p-2">
 													<h6>Information</h6>
 													<hr class="mt-0 mb-4">
@@ -64,34 +64,13 @@
 															<a href="https://{{user.siteWeb}}">{{user.siteWeb}}</a>
 														</div>
 													</div>
-													<h6>Compte</h6>
-													<hr class="mt-0 mb-4">
-													<div class="row pt-1">
-														<div class="col-12 col-md-6 mb-3">
-															<h6>Creation</h6>
-															<p class="text-muted">{{user.dateCreation|date('d/m/Y')}}</p>
-														</div>
-														<div class="col-12 col-md-6 mb-3">
-															<h6>Modification</h6>
-															<p class="text-muted">
-																{% if user.dateEdit != null %}
-																	{{user.dateEdit|date('d/m/Y')}}
-																{% else %}
-																	<span class="bg-secondary badge">Jamais</span>
-																{% endif %}
-															</p>
-														</div>
-													</div>
+
 												</div>
 											</div>
 											<div class="d-flex flex-wrap justify-content-around">
-												<a class="btn btn-primary fw-bold my-2" alt="modifier" href="{{path('app_edit_profile')}}" role="button">
-													<i class="p-1 bi bi-pencil-square"></i>
-													Modifier
-												</a>
-												<a class="btn btn-danger fw-bold my-2" alt="supprimer" href="{{path('app_delete_profile')}}" role="button">
-													<i class="p-1 bi bi-trash"></i>
-													Supprimer
+												<a class="btn btn-primary fw-bold my-2" alt="modifier" href="{{path('app_profile')}}" role="button">
+													<i class="bi bi-person-circle"></i>
+													Voir Profil
 												</a>
 											</div>
 										</div>

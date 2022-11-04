@@ -29,7 +29,7 @@ class Demande
     #[ORM\Column]
     private ?bool $readed = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'demandes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 

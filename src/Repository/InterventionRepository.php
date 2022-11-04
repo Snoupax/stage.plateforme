@@ -39,28 +39,41 @@ class InterventionRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Intervention[] Returns an array of Intervention objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('i.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function getInterventionFromUser($id)
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->select('i', 'u')
+            ->innerJoin('App\Entity\User', 'u')
+            ->where('u.id = :id')
+            ->setParameter('id', $id)
+            ->orderBy('i.date_debut', 'DESC');
 
-//    public function findOneBySomeField($value): ?Intervention
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    //    /**
+    //     * @return Intervention[] Returns an array of Intervention objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('i')
+    //            ->andWhere('i.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('i.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Intervention
+    //    {
+    //        return $this->createQueryBuilder('i')
+    //            ->andWhere('i.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

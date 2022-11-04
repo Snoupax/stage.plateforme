@@ -39,31 +39,85 @@
 												<strong>Action</strong>
 											</div>
 										</div>
+										{% set i = 1 %}
 										{% for intervention in interventions %}
 
-											<div class="card d-flex flex-row justify-content-around mx-auto text-center">
-												<div class="col my-2">
-													<p class="card-text">{{intervention.user.entreprise}}</p>
-												</div>
-												<div class="col d-none d-lg-inline my-2">
-													<p class="card-text">{{intervention.dateCreation|date('d/m/Y')}}</p>
-												</div>
-												<div class="col d-none d-lg-inline my-2">
-													<p class="card-text">
-														{{intervention.dateDebut|date('d/m/Y - H:i')}}
-													</p>
-												</div>
-												<div class="col d-none d-lg-inline my-2">
-													<p class="card-text">
-														{{intervention.dateFin|date('d/m/Y - H:i')}}
-													</p>
-												</div>
-												<div class="col d-flex justify-content-around my-2">
-													<div>
-														<a class="badge bg-success text-white" href="">Lire</a>
+											{% if i == 0 %}
+												<div class="card d-flex flex-row justify-content-around mx-auto text-center">
+													<div class="col my-2">
+														<p class="card-text">
+															{% for user in intervention.users %}
+																{% if loop.index == 1 %}
+																	{{user.entreprise}}
+
+																{% else %}
+																	-
+																	{{user.entreprise}}
+																{% endif %}
+
+
+															{% endfor %}
+														</p>
+													</div>
+													<div class="col d-none d-lg-inline my-2">
+														<p class="card-text">{{intervention.dateCreation|date('d/m/Y')}}</p>
+													</div>
+													<div class="col d-none d-lg-inline my-2">
+														<p class="card-text">
+															{{intervention.dateDebut|date('d/m/Y - H:i')}}
+														</p>
+													</div>
+													<div class="col d-none d-lg-inline my-2">
+														<p class="card-text">
+															{{intervention.dateFin|date('d/m/Y - H:i')}}
+														</p>
+													</div>
+													<div class="col d-flex justify-content-around my-2">
+														<div>
+															<a class="badge bg-success text-white" href="">Lire</a>
+														</div>
 													</div>
 												</div>
-											</div>
+												{% set i = 1 %}
+											{% else %}
+												<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-light">
+													<div class="col my-2">
+														<p class="card-text">
+															{% for user in intervention.users %}
+																{% if loop.index == 1 %}
+																	{{user.entreprise}}
+
+																{% else %}
+																	-
+																	{{user.entreprise}}
+																{% endif %}
+
+
+															{% endfor %}
+														</p>
+													</div>
+													<div class="col d-none d-lg-inline my-2">
+														<p class="card-text">{{intervention.dateCreation|date('d/m/Y')}}</p>
+													</div>
+													<div class="col d-none d-lg-inline my-2">
+														<p class="card-text">
+															{{intervention.dateDebut|date('d/m/Y - H:i')}}
+														</p>
+													</div>
+													<div class="col d-none d-lg-inline my-2">
+														<p class="card-text">
+															{{intervention.dateFin|date('d/m/Y - H:i')}}
+														</p>
+													</div>
+													<div class="col d-flex justify-content-around my-2">
+														<div>
+															<a class="badge bg-success text-white" href="">Lire</a>
+														</div>
+													</div>
+												</div>
+												{% set i = 0 %}
+											{% endif %}
+
 
 										{% endfor %}
 

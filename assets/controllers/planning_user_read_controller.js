@@ -1,4 +1,4 @@
-// src/controllers/planning_controller.js
+// src/controllers/planning_user_readcontroller.js
 import { Controller } from "@hotwired/stimulus";
 
 import { Month } from "../js/class/Month";
@@ -8,6 +8,6 @@ export default class extends Controller {
 
   connect() {
     let calendar = new Month();
-    calendar.load();
+    calendar.readByUser();
   }
 }

@@ -194,7 +194,7 @@ class AppFixtures extends Fixture
         $interventionSn->setSujet('Premiere Intervention');
         $interventionSn->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
         $interventionSn->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
-        $interventionSn->setUser($userSn);
+        $interventionSn->addUser($userSn);
 
 
         // Intervention 2
@@ -206,7 +206,8 @@ class AppFixtures extends Fixture
         $interventionSno->setSujet('Install Serv');
         $interventionSno->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
         $interventionSno->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
-        $interventionSno->setUser($userSn);
+        $interventionSno->addUser($userSn);
+        $interventionSno->addUser($userPu);
 
         // Intervention 3
         $dateStart = '31-10-2022';
@@ -217,7 +218,7 @@ class AppFixtures extends Fixture
         $interventionSnou->setSujet('Update Serv');
         $interventionSnou->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
         $interventionSnou->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
-        $interventionSnou->setUser($userSn);
+        $interventionSnou->addUser($userSn);
 
         // Intervention 4
         $dateStart = '05-11-2022';
@@ -228,7 +229,7 @@ class AppFixtures extends Fixture
         $interventionSnoup->setSujet("Update Them");
         $interventionSnoup->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
         $interventionSnoup->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
-        $interventionSnoup->setUser($userSn);
+        $interventionSnoup->addUser($userSn);
         // Intervention 5
         $dateStart = '27-10-2022';
         $timeStart = '08:00';
@@ -238,7 +239,7 @@ class AppFixtures extends Fixture
         $interventionPu->setSujet("Update Feat");
         $interventionPu->setDateDebut(\DateTime::createFromFormat('d-m-Y H:i', $dateStart . ' ' . $timeStart));
         $interventionPu->setDateFin(\DateTime::createFromFormat('d-m-Y H:i', $dateEnd . ' ' . $timeEnd));
-        $interventionPu->setUser($userPu);
+        $interventionPu->addUser($userPu);
 
         // Preparation des interventions
 

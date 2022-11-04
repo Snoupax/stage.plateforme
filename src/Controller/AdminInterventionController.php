@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminInterventionController extends AbstractController
 {
     #[Route('/admin/interventions', name: 'app_admin_interventions')]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(ManagerRegistry $doctrine): Response
     {
         $interventions = $doctrine->getRepository(Intervention::class)->findby([], ['date_debut' => 'DESC']);
@@ -28,7 +30,8 @@ class AdminInterventionController extends AbstractController
     }
 
 
-    #[Route('/test', name: 'app_admin_test')]
+    #[Route('/events', name: 'app_admin_events')]
+    #[IsGranted('ROLE_ADMIN')]
     public function test(ManagerRegistry $doctrine): Response
     {
         $data = $doctrine->getRepository(Intervention::class)->findby([], ['date_debut' => 'DESC']);
