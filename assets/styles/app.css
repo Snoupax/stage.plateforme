@@ -114,7 +114,9 @@ a {
   overflow-y: scroll;
 }
 
-
+.scroll-x {
+  overflow-x: scroll;
+}
 /* Planning */
 #scroll {
   display: grid;

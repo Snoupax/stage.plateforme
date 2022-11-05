@@ -486,7 +486,7 @@ export class Month {
     let modalDiv = document.createElement("div");
     modalDiv.setAttribute(
       "class",
-      "modalDiv card col-8 mx-auto my-auto d-flex"
+      "modalDiv card col-9 col-md-8 mx-auto my-auto d-flex"
     );
     let closeDiv = document.createElement("div");
     let close = document.createElement("button");
@@ -515,7 +515,7 @@ export class Month {
       "d-flex flex-row justify-content-around text-center"
     );
     labelModal.innerHTML =
-      '<div class="col my-2"><strong>N°</strong></div><div class="col my-2"><strong>Entreprise</strong></div><div class="col my-2"><strong>Sujet</strong></div><div class="col my-2"><strong>Date de Début</strong></div><div class="col d-none d-lg-inline my-2"><strong>Date de fin</strong></div>';
+      '<div class="col my-2 d-none d-lg-inline"><strong>N°</strong></div><div class="col my-2"><strong>Entreprise</strong></div><div class="col my-2"><strong>Sujet</strong></div><div class="col my-2"><strong>Date de Début</strong></div><div class="col my-2"><strong>Date de fin</strong></div>';
 
     ///
 
@@ -574,7 +574,7 @@ export class Month {
               +"</p>";
               break;
             case "id":
-              id += "<p class='col my-2'>" + event.id;
+              id += "<p class='col my-2 d-none d-lg-inline'>" + event.id;
               +"</p>";
               break;
             default:
