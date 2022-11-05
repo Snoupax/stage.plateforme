@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class ResetPasswordFormType extends AbstractType
 {
@@ -14,10 +16,21 @@ class ResetPasswordFormType extends AbstractType
         $builder
             ->add('password', PasswordType::class, [
                 'label' => 'Entrez votre mot de passe',
-                'attr' => [
-                    'class' => 'form-control'
+                'mapped' => false,
+                'required' => false,
+                'attr' => ['autocomplete' => 'new-password'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Entrez votre mot de passe',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Votre mot de passe doit comporter {{ limit }} caractères.',
+                        'max' => 4096,
+                    ])
                 ]
-            ]);
+            ])
+            ->add('envoyer', SubmitType::class, ['attr' => ['class' => "btn-success"]]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

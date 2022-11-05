@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class InterventionController extends AbstractController
 {
@@ -27,5 +28,18 @@ class InterventionController extends AbstractController
 
 
         return $this->render('intervention/index.html.twig', ['interventions' => $interventions, 'user' => $user]);
+    }
+
+    #[Route('/intervention/{id}', name: 'app_intervention')]
+    #[IsGranted('ROLE_USER')]
+    #[ParamConverter('Intervention', class: Intervention::class)]
+    public function show(Intervention $intervention, ManagerRegistry $doctrine): Response
+    {
+        $intervention;
+        $intervention = $doctrine->getRepository(Intervention::class)->find($intervention->getId());
+        $user = $this->getUser();
+        dump($intervention);
+
+        return $this->render('intervention/show.html.twig', ['intervention' => $intervention, 'user' => $user]);
     }
 }

@@ -52,6 +52,14 @@ class InterventionRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function getAllInterventions()
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->join('App\Entity\User', 'u');
+
+        return $qb->getQuery()->getResult();
+    }
+
     //    /**
     //     * @return Intervention[] Returns an array of Intervention objects
     //     */

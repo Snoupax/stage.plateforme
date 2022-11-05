@@ -8,6 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,6 +25,7 @@ class MessageFormType extends AbstractType
                 'user',
                 EntityType::class,
                 [
+                    'label' => 'Entreprise',
                     'class' => User::class,
                     'choice_label' => function (User $user) {
                         return $user->getEntreprise() . " - " . $user->getEmail() . ".";
@@ -32,10 +35,41 @@ class MessageFormType extends AbstractType
                     }
                 ],
             )
-            ->add('sujet', TextType::class, ['label' => 'Sujet'])
-            ->add('pieceJointe', FileType::class, ['label' => 'Piece Jointe(Facultatif)', 'required' => false])
-            ->add('contenu', TextareaType::class, ['label' => 'Message', 'attr' => ['class' => 'form-control'],])
-            ->add('envoyer', SubmitType::class, ['attr' => ['class' => "btn-success"]]);
+            ->add('sujet', TextType::class, [
+                'label' => 'Sujet',
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Entrez le sujet de votre demande'
+                    ]),
+                    new Length([
+                        'min' => 2,
+                        'minMessage' => 'Le sujet de votre demande doit contenir {{ limit }} caractères'
+                    ])
+                ]
+            ])
+            ->add('pieceJointe', FileType::class, [
+                'label' => 'Piece Jointe',
+                'required' => false,
+            ])
+            ->add('contenu', TextareaType::class, [
+                'label' => 'Message',
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Entrez le message'
+                    ]),
+                    new Length([
+                        'min' => 10,
+                        'minMessage' => 'Votre message doit contenir {{ limit }} caractères'
+                    ])
+                ],
+                'attr' => ['class' => 'form-control'],
+
+            ])
+            ->add('envoyer', SubmitType::class, [
+                'attr' => ['class' => "btn-success"]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

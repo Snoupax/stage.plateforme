@@ -20,11 +20,17 @@
 								<div class="text-left mt-3">
 									<span class="d-inline-block">Demandes non lues :
 										{% if countDemande == 0 %}
-											<span class="badge bg-secondary">{{countDemande}}</span>
-										{% elseif countDemande == 1 %}
-											<span class="badge bg-success">{{countDemande}}</span>
-										{% else %}
-											<span class="badge bg-danger">{{countDemande}}</span>
+											<a href="{{path('app_admin_demandes')}}">
+												<span class="badge bg-secondary">{{countDemande}}</span>
+											</a>
+										{% elseif countDemande > 0 %}
+											<a href="{{path('app_admin_demandes')}}">
+												<span class="badge bg-success">{{countDemande}}</span>
+											</a>
+										{% elseif countDemande > 2 %}
+											<a href="{{path('app_admin_demandes')}}">
+												<span class="badge bg-danger">{{countDemande}}</span>
+											</a>
 										{% endif %}
 									</span>
 								</span>
@@ -75,9 +81,9 @@
 				<div>
 					<div class="py-5 h-100" {{ stimulus_controller('planning_read')}}>
 						<div class="row d-flex justify-content-center align-items-center h-100">
-							<div class="col col-lg-8 mb-4 mb-lg-0">
+							<div class="col col-lg-10 mb-4 mb-lg-0">
 								<div class="shadow-lg mb-3  rounded  bg-white">
-									<div class="row g-0 text-center " style="height: 500px">
+									<div class="row g-0  " style="height: 500px">
 										<div id='action-schedule' class="d-flex flex-wrap"></div>
 										<div id="schedule" class="overflow-hidden" data-user="{{user.id}}"></div>
 										<div id="action-week"></div>

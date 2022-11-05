@@ -9,13 +9,7 @@
 		<div class="row">
 			<div class="col text-white">
 				<h2 class="text-right ml-3 text-white">Modifier le profil</h2>
-				{% if is_granted('ROLE_ADMIN') %}
-					<a class="btn btn-primary" href="{{path('app_admin_users')}}" role="button">
-						<i class="bi bi-arrow-left"></i>
-						Retour à la liste
-					</a>
-				{% endif %}
-				{% include "forms/edit_profile.html.twig" %}
+				{% include "forms/first_edit_profile.html.twig" %}
 			</div>
 		</div>
 	</div>

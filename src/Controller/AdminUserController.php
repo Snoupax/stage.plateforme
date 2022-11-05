@@ -31,8 +31,7 @@ class AdminUserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $userSecret = substr(md5($user->getEntreprise()), 0, 9);
-            var_dump($user->getId());
-            var_dump($userSecret);
+
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -103,7 +102,7 @@ class AdminUserController extends AbstractController
 
             $em = $doctrine->getManager();
 
-            var_dump($user);
+
             $em->flush();
 
             $this->addFlash('success', "<i class='bi bi-check2-square'></i> Le profil a bien été modifié");

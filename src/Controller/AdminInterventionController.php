@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class AdminInterventionController extends AbstractController
 {
@@ -22,11 +23,32 @@ class AdminInterventionController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function index(ManagerRegistry $doctrine): Response
     {
-        $interventions = $doctrine->getRepository(Intervention::class)->findby([], ['date_debut' => 'DESC']);
+        $interventions = [];
+        $users = [];
+        $data = $doctrine->getRepository(Intervention::class)->getAllInterventions();
+        foreach ($data as $row) {
+            if (is_a($row, Intervention::class)) {
+                array_push($interventions, $row);
+            } else {
+                array_push($users, $row);
+            }
+        }
 
 
+        return $this->render('admin_intervention/index.html.twig', ['interventions' => $interventions, 'users' => $users]);
+    }
 
-        return $this->render('admin_intervention/index.html.twig', ['interventions' => $interventions]);
+    #[Route('admin/intervention/{id}', name: 'app_admin_intervention')]
+    #[IsGranted('ROLE_ADMIN')]
+    #[ParamConverter('Intervention', class: Intervention::class)]
+    public function show(Intervention $intervention, ManagerRegistry $doctrine): Response
+    {
+        $intervention;
+        $intervention = $doctrine->getRepository(Intervention::class)->find($intervention->getId());
+        $user = $this->getUser();
+        dump($intervention);
+
+        return $this->render('admin_intervention/show.html.twig', ['intervention' => $intervention, 'user' => $user]);
     }
 
 

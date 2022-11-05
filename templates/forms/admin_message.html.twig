@@ -2,14 +2,22 @@
 
 	<div class="row">
 		<div class="col">
-			{{form(form)}}
+			<div class="col-12 col-md-10">
+				{{form_start(form)}}
+				{{form_row(form.user)}}
+				{{form_row(form.sujet)}}
+				{{form_row(form.pieceJointe)}}
+				{{form_row(form.contenu)}}
+				{{form_widget(form.envoyer)}}
+				<a class="btn btn-danger d-inline" href="javascript:history.go(-1)" role="button">
+					Annuler
+				</a>
+				{{form_end(form)}}
 			</div>
 		</div>
 		<div class="mb-3 row">
 			<div class="col-sm-2"></div>
-			<div class="col-sm-10">
-				<a class="btn btn-danger" href="javascript:history.go(-1)" role="button">Annuler</a>
-			</div>
+			<div class="col-sm-10"></div>
 		</div>
 	</div>
 </div>

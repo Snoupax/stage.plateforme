@@ -27,7 +27,7 @@
 												<strong>Entreprise</strong>
 											</div>
 											<div class="col d-none d-md-none d-lg-inline my-2">
-												<strong>Date Creation</strong>
+												<strong>Sujet</strong>
 											</div>
 											<div class="col d-none d-lg-inline my-2">
 												<strong>Date de Début</strong>
@@ -46,85 +46,94 @@
 												<div class="card d-flex flex-row justify-content-around mx-auto text-center">
 													<div class="col my-2">
 														<p class="card-text">
+															{% set i = 0 %}
 															{% for user in intervention.users %}
-																{% if loop.index == 1 %}
-																	{{user.entreprise}}
-
+																{% if intervention.users|length > 2 %}
+																	{% if i == 0 %}
+																		{{user.entreprise}}
+																		et d'autres..
+																		{% set i = 1 %}
+																	{% endif %}
 																{% else %}
-																	-
-																	{{user.entreprise}}
-																{% endif %}
+																	{% if loop.index == 1 %}
+																		{{user.entreprise}}
+																	{% elseif intervention.users|length > 2 %}
+																		-
+																		{{user.entreprise}}
+																	{% endif %}
 
+																{% endif %}
 
 															{% endfor %}
 														</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">{{intervention.dateCreation|date('d/m/Y')}}</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">
-															{{intervention.dateDebut|date('d/m/Y - H:i')}}
-														</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">
-															{{intervention.dateFin|date('d/m/Y - H:i')}}
-														</p>
-													</div>
-													<div class="col d-flex justify-content-around my-2">
-														<div>
-															<a class="badge bg-success text-white" href="">Lire</a>
-														</div>
+													</p>
+												</div>
+												<div class="col d-none d-lg-inline my-2">
+													<p class="card-text">{{intervention.sujet[:10]}}</p>
+												</div>
+												<div class="col d-none d-lg-inline my-2">
+													<p class="card-text">
+														{{intervention.dateDebut|date('d/m/Y - H:i')}}
+													</p>
+												</div>
+												<div class="col d-none d-lg-inline my-2">
+													<p class="card-text">
+														{{intervention.dateFin|date('d/m/Y - H:i')}}
+													</p>
+												</div>
+												<div class="col d-flex justify-content-around my-2">
+													<div>
+														<a class="badge bg-success text-white" href="{{path('app_admin_intervention', {'id':intervention.id})}}">Voir</a>
 													</div>
 												</div>
-												{% set i = 1 %}
-											{% else %}
-												<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-light">
-													<div class="col my-2">
-														<p class="card-text">
-															{% for user in intervention.users %}
-																{% if loop.index == 1 %}
-																	{{user.entreprise}}
+											</div>
+											{% set i = 1 %}
+										{% else %}
+											<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-light">
+												<div class="col my-2">
+													<p class="card-text">
+														{% for user in intervention.users %}
+															{% if loop.index == 1 %}
+																{{user.entreprise}}
 
-																{% else %}
-																	-
-																	{{user.entreprise}}
-																{% endif %}
+															{% else %}
+																-
+																{{user.entreprise}}
+															{% endif %}
 
 
-															{% endfor %}
-														</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">{{intervention.dateCreation|date('d/m/Y')}}</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">
-															{{intervention.dateDebut|date('d/m/Y - H:i')}}
-														</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">
-															{{intervention.dateFin|date('d/m/Y - H:i')}}
-														</p>
-													</div>
-													<div class="col d-flex justify-content-around my-2">
-														<div>
-															<a class="badge bg-success text-white" href="">Lire</a>
-														</div>
+														{% endfor %}
+													</p>
+												</div>
+												<div class="col d-none d-lg-inline my-2">
+													<p class="card-text">{{intervention.sujet}}</p>
+												</div>
+												<div class="col d-none d-lg-inline my-2">
+													<p class="card-text">
+														{{intervention.dateDebut|date('d/m/Y - H:i')}}
+													</p>
+												</div>
+												<div class="col d-none d-lg-inline my-2">
+													<p class="card-text">
+														{{intervention.dateFin|date('d/m/Y - H:i')}}
+													</p>
+												</div>
+												<div class="col d-flex justify-content-around my-2">
+													<div>
+														<a class="badge bg-success text-white" href="{{path('app_admin_intervention', {'id':intervention.id})}}">Voir</a>
 													</div>
 												</div>
-												{% set i = 0 %}
-											{% endif %}
+											</div>
+											{% set i = 0 %}
+										{% endif %}
 
 
-										{% endfor %}
+									{% endfor %}
 
-										<div class="card justify-content-around text-center" style="height:42px"></div>
-									</div>
+									<div class="card justify-content-around text-center" style="height:42px"></div>
 								</div>
 							</div>
 						</div>
+					</div>
 
-					{% endblock %}
+				{% endblock %}

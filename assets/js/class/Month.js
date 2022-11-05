@@ -2,7 +2,7 @@ export class Month {
   constructor() {
     this.nav = 0;
     this.holdStarter = null;
-    this.holdDelay = 500;
+    this.holdDelay = 350;
     this.holdActive = false;
     this.holded = false;
     this.currentYear = 0;
@@ -213,21 +213,10 @@ export class Month {
   }
 
   // Recuperer toutes les interventions en JSON
-  async getAllEvents(id = 0) {
+  async getAllEvents() {
     const response = await fetch("/events");
     const events = await response.json();
-    let userEvents = [];
 
-    if (id != 0) {
-      events.forEach((event) => {
-        event.users.forEach((user) => {
-          if (user.id == id) {
-            userEvents.push(event);
-          }
-        });
-      });
-      return userEvents;
-    }
     return events;
   }
 
@@ -249,7 +238,7 @@ export class Month {
     // Creation des libellés
     for (let i = 0; i <= 6; i++) {
       const dayLabel = document.createElement("div");
-      dayLabel.classList.add("dayLabel");
+      dayLabel.setAttribute("class", "dayLabel overflow-hidden p-1");
       dayLabel.innerText = this.daysLabels[i];
       scroll.appendChild(dayLabel);
     }
@@ -268,7 +257,7 @@ export class Month {
       if (i < firstDayWeekDay) {
         let dayNb = this.previousMonthLength - firstDayWeekDay + 1 + prev;
         dayAttribute = dayNb + "-" + (month - 1) + "-" + this.year;
-        daySquare.classList.add("dayOtherMonth");
+        daySquare.setAttribute("class", "dayOtherMonth overflow-hidden p-1");
         daySquare.setAttribute("data-date", dayAttribute);
         daySquare.innerText = dayNb;
         scroll.appendChild(daySquare);
@@ -308,34 +297,44 @@ export class Month {
             const eventDiv = document.createElement("div");
             eventDiv.setAttribute(
               "class",
-              "event badge bg-dark mw-100 overfow-hidden "
+              "event badge bg-dark mw-100 overfow-hidden d-flex flex-wrap"
             );
             eventDiv.setAttribute("data-date", dayAttribute);
             eventDiv.style.maxWidth = "50px";
-            eventDiv.innerText = "Voir +";
+            let eventP = document.createElement("span");
+            eventP.setAttribute("data-date", dayAttribute);
+            eventP.setAttribute("class", "spanEvent overflow-hidden");
+            eventP.innerText = "Voir +";
+
+            eventDiv.appendChild(eventP);
             daySquare.appendChild(eventDiv);
           } else {
             eventsForDay.forEach((event) => {
               const eventDiv = document.createElement("div");
+
               eventDiv.setAttribute(
                 "class",
-                "event badge bg-dark mw-100 overfow-hidden"
+                "event badge bg-dark mw-100 overfow-hidden d-flex flex-wrap mb-1"
               );
               eventDiv.setAttribute("data-date", dayAttribute);
               eventDiv.style.maxWidth = "50px";
+              let eventP = document.createElement("span");
+              eventP.setAttribute("data-date", dayAttribute);
+              eventP.setAttribute("class", "spanEvent overflow-hidden");
+
               let entreprises = "";
 
               event.users.forEach((user) => {
                 if (event.users.length > 1) {
-                  entreprises = "Multi";
+                  entreprises = "1 et +";
                 } else {
                   entreprises = user.entreprise;
                 }
               });
 
-              eventDiv.innerText =
-                entreprises.substr(0, 5) + " : " + event.sujet.substr(0, 12);
-
+              eventP.innerText =
+                entreprises.substr(0, 10) + " : " + event.sujet.substr(0, 12);
+              eventDiv.appendChild(eventP);
               daySquare.appendChild(eventDiv);
             });
           }
@@ -349,6 +348,7 @@ export class Month {
         day++;
       } else {
         dayAttribute = next + "-" + (month - 1) + "-" + this.year;
+        daySquare.setAttribute("class", "day overflow-hidden p-1");
         daySquare.classList.add("dayOtherMonth");
         daySquare.setAttribute("data-date", dayAttribute);
         daySquare.innerText = next;
@@ -444,9 +444,9 @@ export class Month {
       this.openModalForm();
       this.holded = false;
       daysSquare.forEach((daySquare) => {
-        if (daySquare.style.backgroundColor == "green") {
+        if (daySquare.style.backgroundColor == "orange") {
           console.log(daySquare);
-          daySquare.style.backgroundColor = "white";
+          daySquare.style.backgroundColor = "#efefef";
         }
       });
     } else if (this.holdActive) {
@@ -480,14 +480,21 @@ export class Month {
     // Contruct Modal
     let modal = document.getElementById("modal");
     modal.innerHTML = "";
+    modal.style.display = "block";
     let modalContainer = document.createElement("div");
     modalContainer.setAttribute("class", "vh-100 d-flex align-items-center");
     let modalDiv = document.createElement("div");
-    modalDiv.setAttribute("class", "card col-6 mx-auto my-auto d-flex");
+    modalDiv.setAttribute(
+      "class",
+      "modalDiv card col-8 mx-auto my-auto d-flex"
+    );
     let closeDiv = document.createElement("div");
     let close = document.createElement("button");
     close.setAttribute("id", "closeButton");
-    close.innerHTML = "X";
+    close.setAttribute("type", "button");
+    close.setAttribute("class", "btn-close");
+    close.setAttribute("aria-label", "Close");
+    close.innerHTML = "";
 
     modal.addEventListener("click", (e) => {
       e.preventDefault();
@@ -496,6 +503,26 @@ export class Month {
         this.closeModal();
       }
     });
+
+    let headModal = document.createElement("h1");
+    headModal.setAttribute("class", "text-center");
+    headModal.innerHTML = "Intervention(s) du " + date;
+    ///
+
+    let labelModal = document.createElement("div");
+    labelModal.setAttribute(
+      "class",
+      "d-flex flex-row justify-content-around text-center"
+    );
+    labelModal.innerHTML =
+      '<div class="col my-2"><strong>N°</strong></div><div class="col my-2"><strong>Entreprise</strong></div><div class="col my-2"><strong>Sujet</strong></div><div class="col my-2"><strong>Date de Début</strong></div><div class="col d-none d-lg-inline my-2"><strong>Date de fin</strong></div>';
+
+    ///
+
+    modalDiv.appendChild(closeDiv);
+    modalDiv.appendChild(headModal);
+    modalDiv.appendChild(labelModal);
+    ///
     this.events.forEach((event) => {
       if (
         (this.cmpDateString(event.dateDebut, date) &&
@@ -503,39 +530,70 @@ export class Month {
         this.cmpDateString(date, event.dateDebut, true) ||
         this.cmpDateString(date, event.dateFin, true)
       ) {
-        modal.style.display = "block";
-        let headModal = document.createElement("h1");
-        headModal = "Liste du " + date;
         let infoModal = document.createElement("div");
+        infoModal.setAttribute(
+          "class",
+          "d-flex flex-row justify-content-around text-center"
+        );
+
         let contentModal = "";
-        contentModal += "Intervention " + event.id + " <br>";
+        let id = "";
+        let societyInfo = "";
+        let sujet = "";
+        let dateFin = "";
+        let dateDebut = "";
+
         for (const property in event) {
-          if (property == "user") {
-            contentModal +=
-              "<p class='card-text'> Entreprise : " +
-              event.user.entreprise +
-              "</p>";
-          } else if (property == "messageOptionnel") {
-          } else {
-            contentModal +=
-              "<p class='card-text'>" +
-              property +
-              " : " +
-              event[property] +
-              "</p>";
+          switch (property) {
+            case "users":
+              societyInfo += "<p class='col my-2'>";
+              let i = 0;
+              event.users.forEach((user) => {
+                if (event.users.length > 2) {
+                  if (i == 0) {
+                    societyInfo += user.entreprise + " et d'autres...";
+                  }
+                  i = 1;
+                } else {
+                  societyInfo += user.entreprise + " ";
+                }
+              });
+              societyInfo += "</p>";
+              break;
+            case "sujet":
+              sujet = "<p class='col my-2'>" + event.sujet.substr(0, 15);
+              +"</p>";
+              break;
+            case "dateFin":
+              dateFin += "<p class='col my-2'>" + event.dateDebut.substr(0, 10);
+              +"</p>";
+              break;
+            case "dateDebut":
+              dateDebut +=
+                "<p class='col my-2'>" + event.dateDebut.substr(0, 10);
+              +"</p>";
+              break;
+            case "id":
+              id += "<p class='col my-2'>" + event.id;
+              +"</p>";
+              break;
+            default:
+              break;
           }
         }
+        contentModal += id + societyInfo + sujet + dateDebut + dateFin;
 
+        ///
         // render modal
         infoModal.innerHTML = contentModal;
-
         modalDiv.appendChild(infoModal);
-        modalDiv.appendChild(closeDiv);
-        modalContainer.appendChild(modalDiv);
-        modal.appendChild(modalContainer);
-        closeDiv.appendChild(close);
       }
     });
+
+    modalContainer.appendChild(modalDiv);
+    modal.appendChild(modalContainer);
+    closeDiv.appendChild(close);
+    ////
   }
 
   // Ouvre le modal avec le formulaire pour ajouter une intervention

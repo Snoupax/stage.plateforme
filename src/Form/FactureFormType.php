@@ -11,7 +11,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
+/**
+ * Formulaire pour facture, côté admin
+ */
 class FactureFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -21,6 +25,7 @@ class FactureFormType extends AbstractType
                 'user',
                 EntityType::class,
                 [
+                    'label' => 'Entreprise',
                     'class' => User::class,
                     'choice_label' => function (User $user) {
                         return $user->getEntreprise() . " - " . $user->getEmail() . ".";
@@ -30,9 +35,18 @@ class FactureFormType extends AbstractType
                     }
                 ],
             )
-            ->add('message_optionnel', TextType::class, ['label' => 'Message(Facultatif)', 'required' => false])
-            ->add('url', FileType::class, ['label' => "Facture"])
-            ->add('envoyer', SubmitType::class, ['attr' => ['class' => "btn-success"]]);
+            ->add('messageOptionnel', TextareaType::class, [
+                'label' => 'Message(Optionnel)',
+                'required' => false,
+                'attr' => ['class' => 'form-control']
+
+            ])
+            ->add('url', FileType::class, [
+                'label' => "Facture"
+            ])
+            ->add('envoyer', SubmitType::class, [
+                'attr' => ['class' => "btn-success"]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

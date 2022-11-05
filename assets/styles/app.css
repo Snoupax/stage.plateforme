@@ -4,29 +4,36 @@ blanc : #FFFFFF
 */
 
 
-
+/* App */
 body {
-    background-color: #FFFFFF;
+  background-color: #FFFFFF;
 }
+
 a {
   text-decoration: none;
 }
 
+
+/* background */
 .bg-white {
   background-color: #FFFFFF;
 }
+
+
+/* login page */
 .login {
-    min-height: 100vh;
-  }
+  min-height: 100vh;
+}
+
 .login-heading {
-    font-weight: 300;
-  }
+  font-weight: 300;
+}
   
 .btn-login {
-    font-size: 0.9rem;
-    letter-spacing: 0.05rem;
-    padding: 0.75rem 1rem;
-  }
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
 
 #forgottenPass a:hover {
   text-decoration: underline;
@@ -38,91 +45,77 @@ a {
 
 
 .bg-image {
-    background-image: url('/public/build/images/computer-program-coding-on-screen.jpg');
-    background-size: cover;
-    background-position: center;
-    filter: blur(4px);
-    box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.8) inset; 
+  background-image: url('/public/build/images/computer-program-coding-on-screen.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(4px);
+  box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.8) inset; 
 	-webkit-box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.8) inset; 
 	-moz-box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.8) inset;
   width: 100%;
   vh: 100;
-  }
+}
 
-  .link-nav {
-    font-weight: 600;
-  }
-
-  .link-nav:hover {
-    text-decoration: underline;
-  }
 
 .bg-text {
-    color: white;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    top: 50%;
-    left: 75%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    width: 45%;
-    padding: 20px;
-    text-shadow: 2px 2px 2px #000000;
-    border-radius: 20px;
-  }
+  color: white;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 45%;
+  padding: 20px;
+  text-shadow: 2px 2px 2px #000000;
+  border-radius: 20px;
+}
 
+.bg-first {
+  background-color: #112458;
+}
 
-  .bg-first {
-    background-color: #112458;
-  }
+#bg-app {
+  z-index: -1; 
+  width: 100%;
+  height: 620px; 
+  background-color:#112458;
+}
+
+@media (max-width: 769px) {  
   #bg-app {
-    z-index: -1; 
-    width: 100%;
-    height: 620px; 
-    background-color:#112458;
-  }
-
-  @media (max-width: 769px) {  
-    #bg-app {
     height: 620px; 
   } 
 }
 
 
+/* Navbar */
+.link-nav {
+  font-weight: 600;
+}
+
+.link-nav:hover {
+  text-decoration: underline;
+}
+
 #shadow-nav {
   box-shadow:3px -1px 6px -1px rgba(0,0,0,0.45);
 }
 
-.accordion-button:not(.collapsed) {
-  color: black;
-  background-color: #FFFFFF;
-} 
-
-.scroll {
-  max-height: 100vh;
-  overflow-y: scroll;
-}
 .actived {
   color: blue!important;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
+/* Message */
+.scroll {
+  max-height: 100vh;
+  overflow-y: scroll;
+}
 
 
 /* Planning */
-
 #scroll {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -132,16 +125,22 @@ a {
 }
 
 #action-schedule {
+  color: #000000;
+  margin-top: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Opera and Firefox */
+  user-select: none; 
+  -ms-user-select: none; 
+  -moz-user-select: none; 
+  -khtml-user-select: none; 
+  -webkit-user-select: none; 
+  -webkit-touch-callout: none; 
+}
+
+#action-schedule .page-link {
+  color: #000000!important;
+  font-weight: 600;
 }
 
 @media only screen and (min-width: 1023px) {
@@ -149,108 +148,62 @@ a {
   min-width: 155px;
  }
 }
-  
 
 
-#lastDayOfWeek, #firstDayOfWeek, #the-day {
-  padding: 10px;
-  margin: 5px;
-  min-width: 100px;
-}
-
-
+/* Navbar planning */
 .page-link {
   text-align: center;
 }
 
 
-
-.show-button {
-  height: 40px;
-}
-
+/* Planning day */
 .dayLabel {
-  border: 1px solid gray;
+  border: 3px solid white;
   height: 40px;
-  background-color: #FFFFFF;
+  background-color: #878080;
+  border-radius: 5px;
   min-width: 75px;
+  text-align: center;
+  font-weight: 600;
+  color: white;
 }
 
 .dayOtherMonth, .day {
   width: 100%;
   height: 80px;
-  border: 1px solid gray;
-  background-color: white;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+.day {
+  background-color: #efefef;
 }
 
 .dayOtherMonth {
   color: rgb(0, 0, 0);
   background-color: rgb(179, 179, 179);
-
 }
+
 #today {
   background-color: rgb(119, 176, 176);
 }
 
+.dayNb {
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.day:hover .dayNb {
+  font-weight: 750;
+}
 
 .event:hover {
+  margin: 2px;
   background-color: green!important;
 }
 
-
-
-#week {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  
-}
-#info-week {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: 5px 10px ;
-}
-
-.dayCol {
-  font-weight: bold;
-  background-color: gray;
-  color: white;
-  width: 100%;
-  text-align: center;
-  border: 1px solid black;
-}
-
-.dayWeek {
-  border: 4px solid black;
-  background-color: white;
-}
-
-.hourWeek {
-  border: 1px solid black;
-  min-height: 50px;
-}
-
-
-
-#info-day {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: 5px 10;
-}
-
-#dayCol {
-  background-color: gray;
-  color: white;
-}
-
-.hourDay {
-  border: 1px solid black;
-  min-height: 50px;
-  background-color: white;
-}
-.hour {
-  width: 5%;
+.modalDiv .card-text {
+  margin: 5px;
 }
 
 #modal, #modalForm {
@@ -270,5 +223,5 @@ a {
   z-index: 1; /* Sit on top */
   right: 25%;
   top: 50%;
-  overflow: auto; /* Enable scroll if needed */
+  margin: 15px;
 }

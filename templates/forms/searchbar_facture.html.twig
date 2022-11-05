@@ -1,10 +1,17 @@
-<div class="card p-3 mt-3">
+<div class="card col-12 col-md-8 p-3 mt-3 mx-auto">
 	<form action="" method="post">
-		<label for="dateFrom">Recherche par date: De</label>
-		<input type="date" name="dateFrom">
-		<label for="dateTo">au</label>
-		<input type="date" name="dateTo">
-		<input type="submit" name="button" value="Envoyer">
+		<div class="d-flex justify-content-center">
+			<div class="my-3 mx-3">
+				<label for="dateFrom">Recherche : Du</label>
+				<input type="date" name="dateFrom">
+			</div>
+			<div class="my-3 mx-3">
+				<label for="dateTo">Au</label>
+				<input type="date" name="dateTo">
+			</div>
+			<div class="my-3 mx-3"><input class="btn btn-primary" type="submit" name="button" value="Envoyer"></div>
+		</div>
+
 	</form>
 
 </div>

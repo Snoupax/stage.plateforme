@@ -37,17 +37,21 @@
 									<div id="modalForm" class="col-9 col-md-10 py-3 vh-100">
 										<div class="card col-6 mx-auto text-center" style="margin-top: 20%">
 											<form class="p-3 col-12" method="post">
-												<div>
-													<label for="dateFrom">Du</label>
-													<input type="datetime-local" name="dateFrom" id="dateFrom">
-													<label for="dateTo">Au</label>
-													<input type="datetime-local" name="dateTo" id="dateTo">
+												<div class="my-3">
+													<div class="my-3">
+														<label for="dateFrom">Du</label>
+														<input type="datetime-local" name="dateFrom" id="dateFrom">
+													</div>
+													<div class="my-3">
+														<label for="dateTo">Au</label>
+														<input type="datetime-local" name="dateTo" id="dateTo">
+													</div>
 													{{form(form)}}
-														<input id="valid" name="valid" type="submit" value="Envoyer">
+														<input id="valid" class="btn btn-success" name="valid" type="submit" value="Envoyer">
 													</div>
 												</form>
 												<div>
-													<button id="closeButton">X</button>
+													<button id="closeButton" type="button" class="btn-close" aria-label="Close"></button>
 												</div>
 											</div>
 										</div>

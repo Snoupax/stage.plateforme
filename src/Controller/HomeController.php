@@ -19,6 +19,9 @@ class HomeController extends AbstractController
     {
 
         $user = $this->getUser();
+        if ($user->getActivation() == 0) {
+            return $this->redirectToRoute('app_firstedit_profile');
+        }
 
 
         $dataUser = $doctrine->getRepository(User::class)->getAllCountFromUser($user->getId());
@@ -54,6 +57,7 @@ class HomeController extends AbstractController
             ['title' => 'Vos Factures', 'text' => 'Vos Factures', 'url' => $this->generateUrl('app_factures'), 'icon' => 'bi bi-filetype-pdf'],
             ['title' => 'Vos messages', 'text' => 'Vos messages', 'url' => $this->generateUrl('app_messages'), 'icon' => 'bi bi-chat'],
             ['title' => 'Envoyer une demande', 'text' => 'Envoyer une demande', 'url' => $this->generateUrl('app_demande'), 'icon' => 'bi bi-send-plus'],
+            ['title' => 'Interventions', 'text' => 'Interventions', 'url' => $this->generateUrl('app_interventions'), 'icon' => 'bi bi-calendar-event-fill'],
             ['title' => 'Deconnexion', 'text' => 'Deconnexion', 'url' => $this->generateUrl('app_logout'), 'icon' => 'bi bi-box-arrow-left'],
         ];
 

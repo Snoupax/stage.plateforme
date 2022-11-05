@@ -12,9 +12,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class ProfilFormType extends AbstractType
+class ProfilFirstEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -25,6 +26,21 @@ class ProfilFormType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Entrez votre email',
+                    ])
+                ]
+            ])
+            ->add('password', PasswordType::class, [
+                'mapped' => false,
+                'required' => false,
+                'attr' => ['autocomplete' => 'new-password'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Entrez votre mot de passe',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Votre mot de passe doit comporter {{ limit }} caractères.',
+                        'max' => 4096,
                     ])
                 ]
             ])
@@ -80,7 +96,7 @@ class ProfilFormType extends AbstractType
                     ])
                 ]
             ])
-            ->add('activation', NumberType::class, ['attr' => ['min' => 0, 'max' => 9]])
+
             ->add('modifier', SubmitType::class, ['attr' => ['class' => 'btn-success']]);
     }
 
