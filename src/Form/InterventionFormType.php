@@ -35,16 +35,6 @@ class InterventionFormType extends AbstractType
         )
             ->add('sujet', TextType::class, [
                 'label' => 'Sujet',
-                'required' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Entrez le sujet de votre demande'
-                    ]),
-                    new Length([
-                        'min' => 2,
-                        'minMessage' => 'Le sujet de votre demande doit contenir {{ limit }} caractères'
-                    ])
-                ]
             ])
             ->add('messageOptionnel', TextareaType::class, [
                 'label' => 'Message(Optionnel)',

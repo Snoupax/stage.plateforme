@@ -20,8 +20,11 @@
 								</p>
 								<p style="margin-top:0;margin-bottom:25px;font-size:14px">{{message}}
 								</p>
-								{% if (message_optionnel is defined)%}
+								{% if (message_optionnel != "")%}
 									<p style="margin-top:0;margin-bottom:25px;font-size:14px">Message supplémentaire de l'administrateur :
+
+									</p>
+									<p>
 										{{message_optionnel}}
 									</p>
 								{% endif %}
