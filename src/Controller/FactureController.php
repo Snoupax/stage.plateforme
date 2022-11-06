@@ -22,7 +22,7 @@ class FactureController extends AbstractController
         $userFolder = "factures/" . substr(md5($user->getId()), 0, 9) . "/";
         $factures = $doctrine->getRepository(Facture::class)->findBy(['user' => $user], ['date_ajout' => 'DESC']);
 
-        if ((isset($_POST['button'])) && ($_POST['dateFrom'] != "") && ($_POST['dateTo'] != "")) {
+        if ((isset($_POST['rechercher'])) && ($_POST['dateFrom'] != "") && ($_POST['dateTo'] != "")) {
 
             $dateFrom = $_POST['dateFrom'];
             $dateTo = $_POST['dateTo'];

@@ -37,7 +37,7 @@ class InterventionFormType extends AbstractType
                 'label' => 'Sujet',
             ])
             ->add('messageOptionnel', TextareaType::class, [
-                'label' => 'Message(Optionnel)',
+                'label' => 'Message (Opt)',
                 'required' => false,
                 'attr' => ['class' => 'form-control']
 

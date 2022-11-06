@@ -32,7 +32,6 @@ class AdminHomeController extends AbstractController
         $countDemande = 0;
         $countFactures = 0;
         $countInterventions = 0;
-        dump($data);
         foreach ($data as $row) {
             if (is_a($row, Facture::class)) {
                 $countFactures++;
@@ -48,9 +47,6 @@ class AdminHomeController extends AbstractController
                 $dateString = $date->format('Y-m-d');
                 if ($row->getDateFin()->format('Y-m-d') == $dateString || ($row->getDateDebut()->format('Y-m-d') < $dateString && $row->getDateFin()->format('Y-m-d') > $dateString)) {
                     $countIntervention++;
-                    dump($date->format($dateString));
-                    dump($row->getDateFin());
-                    dump('Une intervention aujourd"hui');
                 }
             }
         }

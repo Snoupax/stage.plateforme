@@ -25,7 +25,7 @@ class AdminFactureController extends AbstractController
         $factures = [];
         $years = [];
 
-        if ((isset($_POST['button'])) && ($_POST['dateFrom'] != "") && ($_POST['dateTo'] != "")) {
+        if ((isset($_POST['rechercher'])) && ($_POST['dateFrom'] != "") && ($_POST['dateTo'] != "")) {
             $dateFrom = $_POST['dateFrom'];
             $dateTo = $_POST['dateTo'];
             dump($dateFrom, $dateTo);
