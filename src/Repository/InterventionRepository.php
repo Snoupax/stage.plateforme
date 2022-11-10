@@ -46,7 +46,7 @@ class InterventionRepository extends ServiceEntityRepository
             ->innerJoin('App\Entity\User', 'u')
             ->where('u.id = :id')
             ->setParameter('id', $id)
-            ->orderBy('i.date_debut', 'DESC');
+            ->orderBy('i.date_fin', 'DESC');
 
 
         return $qb->getQuery()->getResult();
