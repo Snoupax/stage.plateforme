@@ -40,61 +40,36 @@
 
 											{% if i == 0 %}
 												<div class="card d-flex flex-row justify-content-around mx-auto text-center">
-													<div class="col my-2">
-														<p class="card-text">
-															{{user.entreprise}}
-														</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">{{intervention.sujet}}</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">
-															{{intervention.dateDebut|date('d/m/Y - H:i')}}
-														</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">
-															{{intervention.dateFin|date('d/m/Y - H:i')}}
-														</p>
-													</div>
-													<div class="col d-flex justify-content-around my-2">
-														<div>
-															<a class="badge bg-success text-white" href="{{path('app_intervention', {'id':intervention.id})}}">Voir</a>
-														</div>
-													</div>
-												</div>
 												{% set i = 1 %}
-											{% else %}
+												{% else %}
 												<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-lightgray">
-													<div class="col my-2">
-														<p class="card-text">
-															{{user.entreprise}}
-														</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">{{intervention.sujet[:10]}}</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">
-															{{intervention.dateDebut|date('d/m/Y - H:i')}}
-														</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">
-															{{intervention.dateFin|date('d/m/Y - H:i')}}
-														</p>
-													</div>
-													<div class="col d-flex justify-content-around my-2">
-														<div>
-															<a class="badge bg-success text-white" href="{{path('app_intervention', {'id':intervention.id})}}">Voir</a>
-														</div>
-													</div>
-												</div>
 												{% set i = 0 %}
 											{% endif %}
-
-
+													<div class="col my-2">
+														<p class="card-text">
+															{{user.entreprise}}
+														</p>
+													</div>
+													<div class="col d-none d-lg-inline my-2">
+													<p class="card-text">{{intervention.sujet[:10]}}</p>
+													</div>
+													<div class="col d-none d-lg-inline my-2">
+														<p class="card-text">
+															{{intervention.dateDebut|date('d/m/Y - H:i')}}
+														</p>
+													</div>
+													<div class="col d-none d-lg-inline my-2">
+														<p class="card-text">
+															{{intervention.dateFin|date('d/m/Y - H:i')}}
+														</p>
+													</div>
+													<div class="col d-flex justify-content-around my-2">
+														<div>
+															<a class="badge bg-success text-white" href="{{path('app_intervention', {'id':intervention.id})}}">Voir</a>
+														</div>
+													</div>
+												</div>
+											
 										{% endfor %}
 
 										<div class="card justify-content-around text-center" style="height:42px"></div>

@@ -99,7 +99,11 @@ padding: 0px!important;
 }
 
 .actived {
-  color: blue!important;
+  color: #0B5ED7!important;
+}
+
+.activ {
+  background-color: #0B5ED7;
 }
 
 .hr {

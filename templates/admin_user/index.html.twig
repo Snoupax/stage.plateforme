@@ -45,6 +45,11 @@
 
 											{% if i == 0 %}
 												<div class="card d-flex flex-row justify-content-around mx-auto text-center">
+												{% set i = 1 %}
+											{% else %}
+												<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-lightgray">
+												{% set i = 0 %}
+											{% endif %}
 													<div class="col my-2">
 														<p class="card-text">{{user.entreprise}}</p>
 													</div>
@@ -79,46 +84,6 @@
 														</div>
 													</div>
 												</div>
-												{% set i = 1 %}
-											{% else %}
-												<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-lightgray">
-													<div class="col my-2">
-														<p class="card-text">{{user.entreprise}}</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">{{user.dateCreation|date('d/m/Y')}}</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">
-															{% if user.dateEdit != null %}
-																{{user.dateEdit|date('d/m/Y')}}
-															{% else %}
-																<span class="bg-secondary badge">Jamais</span>
-															{% endif %}
-														</p>
-													</div>
-													<div class="col d-none d-lg-inline my-2">
-														{% if user.activation == 0 %}
-															<span class="badge bg-primary">Non Activé</span>
-														{% elseif user.activation == 1 %}
-															<span class="badge bg-info">Activé</span>
-														{% elseif user.activation == 5 %}
-															<span class="badge bg-secondary">Desactivé</span>
-														{% elseif user.activation == 3 %}
-															<span class="badge bg-success">Administrateur</span>
-														{% endif %}
-													</div>
-													<div class="col d-flex justify-content-around my-2">
-														<div>
-															<a class="badge bg-info text-dark " href="{{path('app_admin_show_user', {'id':user.id})}}">Profil</a>
-															<a class="badge bg-warning text-dark d-none d-lg-inline" href="{{path('app_admin_edit_user', {'id':user.id})}}">Modifier</a>
-															<a class="badge bg-danger text-white d-none d-lg-inline" href="{{path('app_admin_delete_user', {'id':user.id})}}">Supprimer</a>
-														</div>
-													</div>
-												</div>
-												{% set i = 0 %}
-											{% endif %}
-
 										{% endfor %}
 
 										<div class="card d-flex flex-row justify-content-around mx-auto text-center">

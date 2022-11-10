@@ -39,6 +39,12 @@
 												{% if facture.dateAjout|date('Y') == year %}
 													{% if i == 0 %}
 														<div class="card d-flex flex-row justify-content-around mx-auto text-center">
+														{% set i = 1 %}
+													{% else %}
+														<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-lightgray">
+														{% set i = 0 %}
+													{% endif %}
+
 															<div class="col my-2">
 																<p class="card-text">{{facture.dateAjout|date('d/m/Y')}}</p>
 															</div>
@@ -49,28 +55,9 @@
 																</div>
 															</div>
 															<div class="col my-2">
-																<p class="card-text d-none d-lg-inline">{{facture.message[10:]}}</p>
+																<p class="card-text d-none d-lg-inline">{{facture.messageOptionnel[:10]}}</p>
 															</div>
 														</div>
-														{% set i = 1 %}
-													{% else %}
-														<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-lightgray">
-															<div class="col my-2">
-																<p class="card-text d-none d-lg-inline">{{facture.dateAjout|date('d/m/Y')}}</p>
-															</div>
-															<div class="col d-flex justify-content-around my-2">
-																<div>
-																	<a class="badge rounded-pill bg-info text-dark d-none d-lg-inline-block" href="{{userFolder}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" target='_blank'>Voir</a>
-																	<a class="badge rounded-pill bg-primary" href="{{userFolder}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" download>Télécharger</a>
-																</div>
-															</div>
-															<div class="col my-2">
-																<p class="card-text d-none d-lg-inline">{{facture.message[10:]}}</p>
-															</div>
-														</div>
-														{% set i = 0 %}
-													{% endif %}
-
 												{% endif %}
 											{% endfor %}
 										</div>

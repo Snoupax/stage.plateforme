@@ -23,7 +23,7 @@
 
 
 								<a class="text-danger nav-link {% if routeName == menu.url %} actived{% endif %} d-flex flex-nowrap" href="{{menu.url}}" title="{{menu.title}}">
-									<div class="col-12 col-lg-3 d-flex align-items-center justify-content-center bg-white rounded-pill p-1">
+									<div class="col-12 col-lg-3 d-flex align-items-center justify-content-center{% if routeName == menu.url %} activ {% else %} bg-white{% endif %}  rounded-pill p-1">
 										<img class="iconMenu w-75" src="{{asset(menu.icon)}}" alt="icon menu">
 									</div>
 									<div class="link-nav col-0 col-lg-9 d-flex align-items-center justify-content-center">
@@ -39,7 +39,7 @@
 
 
 								<a class="text-white nav-link {% if routeName == menu.url %} actived{% endif %} d-flex flex-nowrap" href="{{menu.url}}" title="{{menu.title}}">
-									<div class="col-12 col-lg-3 d-flex align-items-center justify-content-center bg-white rounded-pill p-1">
+									<div class="col-12 col-lg-3 d-flex align-items-center justify-content-center {% if routeName == menu.url %} activ {% else %} bg-white{% endif %} rounded-pill p-1">
 										<img class="iconMenu w-75" src="{{asset(menu.icon)}}" alt="icon menu">
 									</div>
 									<div class="link-nav col-0 col-lg-9 d-flex align-items-center justify-content-center">
