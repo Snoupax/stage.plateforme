@@ -4,11 +4,11 @@
 	<div class="row w-100">
 		<div class="shadow-lg col-3 col-md-2 col-xl-2 px-sm-2 px-0 bg-gray">
 			<div class="d-flex flex-column align-items-center px-2 pt-2 text-white min-vh-100 h-100 text-center">
-				<a class="navbar-brand mx-auto" href="{{path('app_home')}}">
+				<a class="navbar-brand mx-auto" href="{{path('app_admin_home')}}">
 					<img class="s-1 d-none d-lg-inline w-100 p-2 m-2" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.pixel-online.fr/wp-content/uploads/2017/07/logo-pixel.png" alt="Pixel Online Creation">
 				</a>
-				<button class="navbar-toggler d-lg-none text-center mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
-					<a class="badge bg-primary text-light">Pixel</a>
+				<button class="navbar-toggler d-lg-none text-center mx-auto" type="button">
+					<a href="{{path('app_admin_home')}}" class="badge bg-primary text-light">Pixel</a>
 				</button>
 				<ul class="nav nav-navbar flex-column mb-sm-auto mb-0 align-items-start" id="menu">
 					{% set count = 0 %}
