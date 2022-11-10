@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col d-flex flex-column justify-content-start">
-				<h2 class="text-right ml-3 text-white">Dashboard</h2>
+				<h2 class="text-right ml-3 text-dark">Dashboard</h2>
 				{% include "parts/flashbag.html.twig" %}
 				<div class="d-flex  flex-column justify-content-evenly h-100">
 					<div class='d-flex flex-wrap justify-content-evenly '>
@@ -16,7 +16,11 @@
 							<div class="card-body text-center rounded  bg-white">
 								<h5 class="card-title">Vos Factures</h5>
 								<p class="card-text">Nouvelles factures :
-									<span class="badge bg-secondary">{{countFacture}}</span>
+									{% if countFacture == 0 %}
+										<span class="badge bg-secondary">{{countFacture}}</span>
+									{% else %}
+										<span class="badge bg-success">{{countFacture}}</span>
+									{% endif %}
 								</p>
 								<a href="{{path('app_factures')}}" class="btn btn-primary">
 									<i class="p-1 bi bi-filetype-pdf"></i>
@@ -28,7 +32,11 @@
 							<div class="card-body text-center rounded  bg-white">
 								<h5 class="card-title">Vos Messages</h5>
 								<p class="card-text">Nouveaux Messages :
-									<span class="badge bg-secondary">{{countMessage}}</span>
+									{% if countMessage == 0 %}
+										<span class="badge bg-secondary">{{countMessage}}</span>
+									{% else %}
+										<span class="badge bg-success">{{countMessage}}</span>
+									{% endif %}
 								</p>
 								<a href="{{path('app_messages')}}" class="btn btn-primary">
 									<i class="p-1 bi bi-chat"></i>

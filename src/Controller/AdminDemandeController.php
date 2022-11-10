@@ -23,8 +23,6 @@ class AdminDemandeController extends AbstractController
         foreach ($data as $row) {
             if (is_a($row, Demande::class)) {
                 array_push($demandes, $row);
-            } else {
-                dump('Utilisateur');
             }
         }
 

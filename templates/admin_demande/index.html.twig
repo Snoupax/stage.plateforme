@@ -7,7 +7,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h2 class="text-right ml-3 text-white">Listing Demandes</h2>
+				<h2 class="text-right ml-3 text-dark">Listing Demandes</h2>
 				<div class="">
 					<a class="btn btn-primary" href="{{path('app_admin_message')}}" role="button">
 						<i class="bi bi-chat-quote"></i>
@@ -22,7 +22,7 @@
 								<div class="card">
 
 									<div>
-										<div class="card d-flex flex-row justify-content-around text-center">
+										<div class="card d-flex flex-row justify-content-around text-center text-white bg-gray">
 											<div class="col my-2">
 												<strong>Entreprise</strong>
 											</div>
@@ -33,13 +33,13 @@
 												<strong>Sujet</strong>
 											</div>
 											<div class="col d-none d-lg-inline my-2">
-												<strong>Detail</strong>
+												<strong>Etat</strong>
 											</div>
 											<div class="col my-2">
 												<strong>Action</strong>
 											</div>
 										</div>
-										{% set i = 1 %}
+										{% set i = 0 %}
 										{% for demande in demandes %}
 
 											{% if i == 0 %}
@@ -64,7 +64,7 @@
 												</div>
 												{% set i = 1 %}
 											{% else %}
-												<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-light">
+												<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-lightgray">
 													<div class="col my-2">
 														<p class="card-text">{{demande.user.entreprise}}</p>
 													</div>

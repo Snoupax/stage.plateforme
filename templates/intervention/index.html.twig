@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h2 class="text-right ml-3 text-white">Liste des Interventions</h2>
+				<h2 class="text-right ml-3 text-dark">Liste des Interventions</h2>
 
 				<div class="py-2 py-md-5 my-auto h-100">
 					<div class="row d-flex justify-content-center align-items-center h-100">
@@ -18,7 +18,7 @@
 								<div class="card bg-white">
 
 									<div>
-										<div class="card d-flex flex-row justify-content-around text-center">
+										<div class="card d-flex flex-row justify-content-around text-center bg-gray text-white">
 											<div class="col my-2">
 												<strong>Entreprise</strong>
 											</div>
@@ -35,7 +35,7 @@
 												<strong>Action</strong>
 											</div>
 										</div>
-										{% set i = 1 %}
+										{% set i = 0 %}
 										{% for intervention in interventions %}
 
 											{% if i == 0 %}
@@ -66,7 +66,7 @@
 												</div>
 												{% set i = 1 %}
 											{% else %}
-												<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-light">
+												<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-lightgray">
 													<div class="col my-2">
 														<p class="card-text">
 															{{user.entreprise}}
@@ -102,5 +102,9 @@
 								</div>
 							</div>
 						</div>
-
-					{% endblock %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div></div>{% endblock %}

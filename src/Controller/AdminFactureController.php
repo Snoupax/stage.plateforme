@@ -28,7 +28,6 @@ class AdminFactureController extends AbstractController
         if ((isset($_POST['rechercher'])) && ($_POST['dateFrom'] != "") && ($_POST['dateTo'] != "")) {
             $dateFrom = $_POST['dateFrom'];
             $dateTo = $_POST['dateTo'];
-            dump($dateFrom, $dateTo);
 
             $data = $doctrine->getRepository(Facture::class)->getFromDateToDate($dateFrom, $dateTo);
         } else {
@@ -38,8 +37,6 @@ class AdminFactureController extends AbstractController
         foreach ($data as $row) {
             if (is_a($row, Facture::class)) {
                 array_push($factures, $row);
-            } else {
-                dump('Pas une facture');
             }
         }
 

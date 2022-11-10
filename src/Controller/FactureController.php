@@ -26,7 +26,6 @@ class FactureController extends AbstractController
 
             $dateFrom = $_POST['dateFrom'];
             $dateTo = $_POST['dateTo'];
-            dump($dateFrom, $dateTo);
 
             $factures = $doctrine->getRepository(Facture::class)->getFromDateToDate($dateFrom, $dateTo);
         }

@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h2 class="text-right ml-3 text-white">Listing Utilisateurs</h2>
+				<h2 class="text-right ml-3 text-dark">Listing Utilisateurs</h2>
 				<div class="">
 					<a class="btn btn-primary" href="{{path('app_admin_create_user')}}" role="button">
 						<i class="bi bi-person-plus"></i>
@@ -23,7 +23,7 @@
 								<div class="card bg-white">
 
 									<div>
-										<div class="card d-flex flex-row justify-content-around text-center">
+										<div class="card d-flex flex-row justify-content-around text-center text-white bg-gray">
 											<div class="col my-2">
 												<strong>Entreprise</strong>
 											</div>
@@ -40,7 +40,7 @@
 												<strong>Action</strong>
 											</div>
 										</div>
-										{% set i = 1 %}
+										{% set i = 0 %}
 										{% for user in users %}
 
 											{% if i == 0 %}
@@ -68,7 +68,7 @@
 														{% elseif user.activation == 2 %}
 															<span class="badge bg-secondary">Desactivé</span>
 														{% elseif user.activation == 3 %}
-															<span class="badge bg-danger">Administrateur</span>
+															<span class="badge bg-success">Administrateur</span>
 														{% endif %}
 													</div>
 													<div class="col d-flex justify-content-around my-2">
@@ -81,7 +81,7 @@
 												</div>
 												{% set i = 1 %}
 											{% else %}
-												<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-light">
+												<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-lightgray">
 													<div class="col my-2">
 														<p class="card-text">{{user.entreprise}}</p>
 													</div>
@@ -102,10 +102,10 @@
 															<span class="badge bg-primary">Non Activé</span>
 														{% elseif user.activation == 1 %}
 															<span class="badge bg-info">Activé</span>
-														{% elseif user.activation == 2 %}
+														{% elseif user.activation == 5 %}
 															<span class="badge bg-secondary">Desactivé</span>
 														{% elseif user.activation == 3 %}
-															<span class="badge bg-danger">Administrateur</span>
+															<span class="badge bg-success">Administrateur</span>
 														{% endif %}
 													</div>
 													<div class="col d-flex justify-content-around my-2">

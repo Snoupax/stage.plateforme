@@ -38,7 +38,6 @@ class InterventionController extends AbstractController
         $intervention;
         $intervention = $doctrine->getRepository(Intervention::class)->find($intervention->getId());
         $user = $this->getUser();
-        dump($intervention);
 
         return $this->render('intervention/show.html.twig', ['intervention' => $intervention, 'user' => $user]);
     }

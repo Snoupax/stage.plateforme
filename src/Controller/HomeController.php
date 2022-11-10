@@ -21,6 +21,9 @@ class HomeController extends AbstractController
         $user = $this->getUser();
         if ($user->getActivation() == 0) {
             return $this->redirectToRoute('app_firstedit_profile');
+        } elseif ($user->getActivation() == 5) {
+            $this->addFlash('danger', "<i class='bi bi-care-square'></i> Le compte n'existe pas.");
+            return $this->redirectToRoute('app_logout');
         }
 
 
@@ -30,14 +33,12 @@ class HomeController extends AbstractController
         foreach ($dataUser as $row) {
             if (is_a($row, Facture::class)) {
                 if ($row->isReaded()) {
-                    dump('facture lue');
                 } else {
                     $countFacture++;
                 }
             }
             if (is_a($row, Message::class)) {
                 if ($row->isReaded()) {
-                    dump('message lu');
                 } else {
                     $countMessage++;
                 }
@@ -52,13 +53,13 @@ class HomeController extends AbstractController
     public function menu(): Response
     {
         $listMenu = [
-            ['title' => 'Dashboard', 'text' => 'Accueil', 'url' => $this->generateUrl('app_home'), 'icon' => 'bi bi-house'],
-            ['title' => 'Profil', 'text' => 'Profil', 'url' => $this->generateUrl('app_profile'), 'icon' => 'bi bi-person-circle'],
-            ['title' => 'Vos Factures', 'text' => 'Vos Factures', 'url' => $this->generateUrl('app_factures'), 'icon' => 'bi bi-filetype-pdf'],
-            ['title' => 'Vos messages', 'text' => 'Vos messages', 'url' => $this->generateUrl('app_messages'), 'icon' => 'bi bi-chat'],
-            ['title' => 'Envoyer une demande', 'text' => 'Envoyer une demande', 'url' => $this->generateUrl('app_demande'), 'icon' => 'bi bi-send-plus'],
-            ['title' => 'Interventions', 'text' => 'Interventions', 'url' => $this->generateUrl('app_interventions'), 'icon' => 'bi bi-calendar-event-fill'],
-            ['title' => 'Deconnexion', 'text' => 'Deconnexion', 'url' => $this->generateUrl('app_logout'), 'icon' => 'bi bi-box-arrow-left'],
+            ['title' => 'Dashboard', 'text' => 'Accueil', 'url' => $this->generateUrl('app_home'), 'icon' => './build/images/icons/home.svg'],
+            ['title' => 'Profil', 'text' => 'Profil', 'url' => $this->generateUrl('app_profile'), 'icon' => './build/images/icons/profil.svg'],
+            ['title' => 'Vos Factures', 'text' => 'Vos Factures', 'url' => $this->generateUrl('app_factures'), 'icon' => './build/images/icons/facture.svg'],
+            ['title' => 'Vos messages', 'text' => 'Vos messages', 'url' => $this->generateUrl('app_messages'), 'icon' => './build/images/icons/message.svg'],
+            ['title' => 'Envoyer une demande', 'text' => 'Envoyer une demande', 'url' => $this->generateUrl('app_demande'), 'icon' => './build/images/icons/ask.svg'],
+            ['title' => 'Interventions', 'text' => 'Interventions', 'url' => $this->generateUrl('app_interventions'), 'icon' => './build/images/icons/send.svg'],
+            ['title' => 'Deconnexion', 'text' => 'Deconnexion', 'url' => $this->generateUrl('app_logout'), 'icon' => './build/images/icons/off.svg'],
         ];
 
         $routeName = '';

@@ -7,9 +7,6 @@ class cmpDateService
 {
     public function cmpDate($a, $b)
     {
-        // To confirm expected result, dump the data for inspection.
-        //var_dump($a);
-        //var_dump($b);
         $date1 = $a->getDateEnvoi();
         $date2 = $b->getDateEnvoi();
 

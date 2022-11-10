@@ -6,8 +6,8 @@
 {% block body %}
 	<div class="container">
 		<div class="row">
-			<div class="col col-lg-12 col-xl-10 mx-auto">
-				<h2 class="text-right ml-3 text-white">Factures</h2>
+			<div class="col">
+				<h2 class="text-right ml-3 text-dark">Factures</h2>
 				{% include "forms/searchbar_facture.html.twig" %}
 				<div class="py-2 my-auto mt-4">
 					<div class="row d-flex justify-content-center align-items-center">
@@ -23,30 +23,24 @@
 								<div class="tab-content" id="pills-tabContent">
 									{% for year in years %}
 										<div class="tab-pane fade {% if loop.index == 1 %}active show{% endif %}" id="pills-{{year}}" role="tabpanel" aria-labelledby="pills-{{year}}-tab" tabindex="0">
-											<div class="card d-flex flex-row justify-content-around text-center">
+											<div class="card d-flex flex-row justify-content-around text-center text-white bg-gray">
 												<div class="col my-2">
-													<strong>Entreprise</strong>
-												</div>
-												<div class="col d-none d-md-none d-lg-inline my-2">
 													<strong>Date</strong>
 												</div>
 												<div class="col my-2">
 													<strong>Action</strong>
 												</div>
 												<div class="col d-none d-lg-inline my-2">
-													<strong>Lu</strong>
+													<strong>Message(opt)</strong>
 												</div>
 											</div>
-											{% set i = 1 %}
+											{% set i = 0 %}
 											{% for facture in factures %}
 												{% if facture.dateAjout|date('Y') == year %}
 													{% if i == 0 %}
 														<div class="card d-flex flex-row justify-content-around mx-auto text-center">
 															<div class="col my-2">
-																<p class="card-text">{{facture.user.entreprise}}</p>
-															</div>
-															<div class="col my-2">
-																<p class="card-text d-none d-lg-inline">{{facture.dateAjout|date('d/m/Y')}}</p>
+																<p class="card-text">{{facture.dateAjout|date('d/m/Y')}}</p>
 															</div>
 															<div class="col d-flex justify-content-around my-2">
 																<div>
@@ -54,16 +48,13 @@
 																	<a class="badge rounded-pill bg-primary" href="{{userFolder}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" download>Télécharger</a>
 																</div>
 															</div>
-															<div class="col d-none d-lg-inline my-2">
-																{{facture.readed ? '<span class="badge bg-primary">Lu</span>' : '<span class="badge bg-danger">Non Lu</span>'}}
+															<div class="col my-2">
+																<p class="card-text d-none d-lg-inline">{{facture.message[10:]}}</p>
 															</div>
 														</div>
 														{% set i = 1 %}
 													{% else %}
-														<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-light">
-															<div class="col my-2">
-																<p class="card-text">{{facture.user.entreprise}}</p>
-															</div>
+														<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-lightgray">
 															<div class="col my-2">
 																<p class="card-text d-none d-lg-inline">{{facture.dateAjout|date('d/m/Y')}}</p>
 															</div>
@@ -73,8 +64,8 @@
 																	<a class="badge rounded-pill bg-primary" href="{{userFolder}}{{facture.dateAjout|date('Y')}}/{{facture.url}}" download>Télécharger</a>
 																</div>
 															</div>
-															<div class="col d-none d-lg-inline my-2">
-																{{facture.readed ? '<span class="badge bg-primary">Lu</span>' : '<span class="badge bg-danger">Non Lu</span>'}}
+															<div class="col my-2">
+																<p class="card-text d-none d-lg-inline">{{facture.message[10:]}}</p>
 															</div>
 														</div>
 														{% set i = 0 %}

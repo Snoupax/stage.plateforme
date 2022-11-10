@@ -167,7 +167,7 @@ export class Month {
   // Init button
   initButtons() {
     document.getElementById("nextButton").addEventListener("click", () => {
-      console.log(this.nav);
+      // console.log(this.nav);
       if (this.isLoad) {
         console.log("Loading...");
       } else {
@@ -177,7 +177,7 @@ export class Month {
     });
 
     document.getElementById("prevButton").addEventListener("click", () => {
-      console.log(this.nav);
+      // console.log(this.nav);
 
       if (this.isLoad) {
         console.log("Loading...");
@@ -191,7 +191,7 @@ export class Month {
   // Init button
   initButtonsRead() {
     document.getElementById("nextButton").addEventListener("click", () => {
-      console.log(this.nav);
+      // console.log(this.nav);
       if (this.isLoad) {
         console.log("Loading...");
       } else {
@@ -201,7 +201,7 @@ export class Month {
     });
 
     document.getElementById("prevButton").addEventListener("click", () => {
-      console.log(this.nav);
+      // console.log(this.nav);
 
       if (this.isLoad) {
         console.log("Loading...");
@@ -366,10 +366,8 @@ export class Month {
 
     events.forEach((event) => {
       event.addEventListener("mousedown", (event) => {
-        console.log(event.target);
         let dayT = event.target.getAttribute("data-date");
         THAT.openModalEvent(dayT);
-        console.log("Click sur Event " + dayT);
         event.stopPropagation();
       });
     });
@@ -394,12 +392,10 @@ export class Month {
     days.forEach((day) => {
       day.addEventListener("mousedown", (e) => {
         this.onMouseDown(e);
-        console.log(day);
       });
 
       day.addEventListener("mouseup", (e) => {
         this.onMouseUp(e);
-        console.log(day);
       });
     });
   }
@@ -407,17 +403,15 @@ export class Month {
   // Permet de savoir si le click est maintenue ou non.
   onMouseDown(e) {
     let THAT = this;
-    console.log(e.target.id);
+
     this.holdStarter = setTimeout(function () {
       this.holdStarter = null;
       this.holdActive = true;
       let date = e.target.getAttribute("data-date");
-      console.log(date);
       let daysSquare = document.querySelectorAll("div.day");
-      console.log(daysSquare);
       daysSquare.forEach((daySquare) => {
+        daySquare.classList.add("clicked");
         if (daySquare.getAttribute("data-date") == date) {
-          console.log(daySquare);
           daySquare.style.backgroundColor = "orange";
         }
       });
@@ -427,32 +421,30 @@ export class Month {
     }, this.holdDelay);
   }
 
+  // permet de savoir quand le click est relaché
   onMouseUp(e) {
     if (this.holdStarter) {
       clearTimeout(this.holdStarter);
       // Entrer le jour cliqué dans le formulaire
       let date = e.target.getAttribute("data-date");
       let daysSquare = document.querySelectorAll("div.day");
-      console.log(date);
 
       if (this.holded) {
         this.setDateTo(date);
       } else {
         this.setDateFrom(date);
-        console.log("Click sur jour");
       }
       this.openModalForm();
       this.holded = false;
       daysSquare.forEach((daySquare) => {
+        daySquare.classList.remove("clicked");
         if (daySquare.style.backgroundColor == "orange") {
-          console.log(daySquare);
           daySquare.style.backgroundColor = "#efefef";
         }
       });
     } else if (this.holdActive) {
+      daySquare.classList.remove("clicked");
       this.holdActive = false;
-      let date = e.target.getAttribute("data-date");
-      console.log(date);
       console.log("Holded");
     }
   }
@@ -489,6 +481,7 @@ export class Month {
       "modalDiv card col-9 col-md-8 mx-auto my-auto d-flex"
     );
     let closeDiv = document.createElement("div");
+    closeDiv.setAttribute("class", "d-flex justify-content-end");
     let close = document.createElement("button");
     close.setAttribute("id", "closeButton");
     close.setAttribute("type", "button");
@@ -505,14 +498,14 @@ export class Month {
     });
 
     let headModal = document.createElement("h1");
-    headModal.setAttribute("class", "text-center");
+    headModal.setAttribute("class", "text-center mb-5");
     headModal.innerHTML = "Intervention(s) du " + date;
     ///
 
     let labelModal = document.createElement("div");
     labelModal.setAttribute(
       "class",
-      "d-flex flex-row justify-content-around text-center"
+      "d-flex flex-row justify-content-around text-center border border-dark text-white bg-gray"
     );
     labelModal.innerHTML =
       '<div class="col my-2 d-none d-lg-inline"><strong>N°</strong></div><div class="col my-2"><strong>Entreprise</strong></div><div class="col my-2"><strong>Sujet</strong></div><div class="col my-2"><strong>Date de Début</strong></div><div class="col my-2"><strong>Date de fin</strong></div>';
@@ -523,6 +516,8 @@ export class Month {
     modalDiv.appendChild(headModal);
     modalDiv.appendChild(labelModal);
     ///
+    let i = 0;
+    ///
     this.events.forEach((event) => {
       if (
         (this.cmpDateString(event.dateDebut, date) &&
@@ -531,10 +526,19 @@ export class Month {
         this.cmpDateString(date, event.dateFin, true)
       ) {
         let infoModal = document.createElement("div");
-        infoModal.setAttribute(
-          "class",
-          "d-flex flex-row justify-content-around text-center"
-        );
+        if (i == 0) {
+          infoModal.setAttribute(
+            "class",
+            "d-flex flex-row justify-content-around text-center border border-dark"
+          );
+          i++;
+        } else {
+          infoModal.setAttribute(
+            "class",
+            "d-flex flex-row justify-content-around text-center border border-dark  bg-lightgray"
+          );
+          i--;
+        }
 
         let contentModal = "";
         let id = "";
@@ -549,32 +553,33 @@ export class Month {
               societyInfo += "<p class='col my-2'>";
               let i = 0;
               event.users.forEach((user) => {
-                if (event.users.length > 2) {
-                  if (i == 0) {
-                    societyInfo += user.entreprise + " et d'autres...";
-                  }
+                if (event.users.length > 1) {
+                  // if (i == 0) {
+                  societyInfo += user.entreprise.substr(0, 8) + "<br>";
+                  // }
                   i = 1;
                 } else {
-                  societyInfo += user.entreprise + " ";
+                  societyInfo += user.entreprise.substr(0, 8) + " ";
                 }
               });
               societyInfo += "</p>";
               break;
             case "sujet":
-              sujet = "<p class='col my-2'>" + event.sujet.substr(0, 15);
+              sujet = "<p class='col my-auto'>" + event.sujet.substr(0, 10);
               +"</p>";
               break;
             case "dateFin":
-              dateFin += "<p class='col my-2'>" + event.dateDebut.substr(0, 10);
+              dateFin +=
+                "<p class='col my-auto'>" + event.dateDebut.substr(0, 10);
               +"</p>";
               break;
             case "dateDebut":
               dateDebut +=
-                "<p class='col my-2'>" + event.dateDebut.substr(0, 10);
+                "<p class='col my-auto'>" + event.dateDebut.substr(0, 10);
               +"</p>";
               break;
             case "id":
-              id += "<p class='col my-2 d-none d-lg-inline'>" + event.id;
+              id += "<p class='col my-auto d-none d-lg-inline'>" + event.id;
               +"</p>";
               break;
             default:

@@ -47,7 +47,6 @@ class ProfilController extends AbstractController
 
                 $user->setDateEdit(new \DateTime());
 
-                dump($request->request->get('password'));
                 $user->setPassword(
                     $userPasswordHasher->hashPassword(
                         $user,
@@ -112,7 +111,6 @@ class ProfilController extends AbstractController
                 $user->setActivation('1');
 
                 $user->setDateEdit(new \DateTime());
-                dump($request->request->get('password'));
                 $user->setPassword(
                     $userPasswordHasher->hashPassword(
                         $user,

@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h2 class="text-right ml-3 text-white">Messages</h2>
+				<h2 class="text-right ml-3 text-dark">Messages</h2>
 				<div class="">
 					<a class="btn btn-primary" href="{{path('app_demande')}}" role="button">
 						<i class="bi bi-send-plus"></i>
@@ -25,11 +25,13 @@
 										<div class="card-header d-flex justify-content-between p-3">
 											<p class="fw-bold mb-0">Anthony Paris</p>
 											<p class="fw-bold mb-0 d-none d-md-inline">{{message.sujet}}</p>
-											<a href="{{userFolder}}{{message.dateEnvoi|date('Y')}}/{{message.pieceJointe}}" target="_blank">
-												<i class="bi bi-paperclip primary"></i>
-												<span class="d-none d-lg-inline">Pièce jointe</span>
+											{% if message.pieceJointe != null %}
+												<a href="{{userFolder}}{{message.dateEnvoi|date('Y')}}/{{message.pieceJointe}}" target="_blank">
+													<i class="bi bi-paperclip primary"></i>
+													<span class="d-none d-lg-inline">Pièce jointe</span>
 
-											</a>
+												</a>
+											{% endif %}
 											<p class="text-muted small mb-0">
 												<i class="d-none d-lg-inline bi bi-clock"></i>
 												{{message.dateEnvoi|date('d/m/Y')}}<span class="d-none d-lg-inline">-{{message.dateEnvoi|date('H:i:s')}}</span>
@@ -49,11 +51,13 @@
 										<div class="card-header d-flex justify-content-between p-3">
 											<p class="fw-bold mb-0">Vous</p>
 											<p class="fw-bold mb-0 d-none d-md-inline">{{message.sujet}}</p>
-											<a href="{{userFolder}}{{message.dateEnvoi|date('Y')}}/{{message.pieceJointe}}" target="_blank">
-												<i class="bi bi-paperclip primary"></i>
-												<span class="d-none d-lg-inline">Pièce jointe</span>
+											{% if message.pieceJointe != null %}
+												<a href="{{userFolder}}{{message.dateEnvoi|date('Y')}}/{{message.pieceJointe}}" target="_blank">
+													<i class="bi bi-paperclip primary"></i>
+													<span class="d-none d-lg-inline">Pièce jointe</span>
 
-											</a>
+												</a>
+											{% endif %}
 											<p class="text-muted small mb-0">
 												<i class="d-none d-lg-inline bi bi-clock"></i>
 												{{message.dateEnvoi|date('d/m/Y')}}<span class="d-none d-lg-inline">-{{message.dateEnvoi|date('H:i:s')}}</span>

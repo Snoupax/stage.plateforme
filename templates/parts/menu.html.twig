@@ -1,49 +1,51 @@
-<div class="container-fluid">
+<div class="container-fluid p-0">
 	<div id="bg-app" class="position-absolute"></div>
-	<div class="row flex-nowrap">
-		<div class="shadow-lg col-3 col-md-2 col-xl-2 px-sm-2 px-0 bg-white">
-			<div class="d-flex flex-column align-items-center px-2 pt-2 text-white min-vh-100 text-center">
+	<div class="row w-100">
+		<div class="shadow-lg col-3 col-md-2 col-xl-2 px-sm-2 px-0 bg-gray">
+			<div class="d-flex flex-column align-items-center px-2 pt-2 text-white min-vh-100 h-100 text-center">
 				<a class="navbar-brand mx-auto" href="{{path('app_home')}}">
 					<div>
-						<img class="s-1 d-none d-lg-inline w-100" src="{{asset('build/images/pixel-online.gif')}}" alt="Pixel Online Creation">
+						<img class="s-1 d-none d-lg-inline w-100 p-2 m-2" src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.pixel-online.fr/wp-content/uploads/2017/07/logo-pixel.png" alt="Pixel Online Creation">
 					</div>
 				</a>
 				<button class="navbar-toggler d-lg-none" type="button">
 					<span class="badge bg-primary">Pixel</span>
 				</button>
-				<ul class="nav nav-navbar flex-column mb-sm-auto mb-0 align-items-center" id="menu">
+				<ul class="nav nav-navbar flex-column mb-sm-auto mb-0 align-items-center mt-3" id="menu">
 					{% if is_granted('ROLE_ADMIN') %}
 						<li class="nav-item my-2 col-12">
-							<a class="text-success nav-link d-flex flex-nowrap" href="{{path('app_admin_home')}}" title="Admin Interface">
-								<div class="col-12 col-sm-3 d-flex  align-items-center">
-									<i class="fs-2 bi bi-speedometer2"></i>
+							<a class="text-white nav-link d-flex flex-nowrap" href="{{path('app_admin_home')}}" title="Admin Interface">
+								<div class="col-12 col-lg-3 d-flex  align-items-center justify-content-center p-1 bg-white rounded-pill">
+									<img src="{{asset('build/images/icons/dashboard.svg')}}" alt="" class="iconMenu w-75">
 								</div>
-								<div class="link-nav col-0 col-sm-9 d-flex align-items-center justify-content-center">
-									<span class="s-1 d-none d-sm-inline">Interface Administrateur</span>
+								<div class="link-nav col-sm-9 d-flex align-items-center justify-content-center">
+									<span class="s-1 d-none d-lg-inline">Interface Admin
+									</span>
 								</div>
 							</a>
 						</li>
+						<hr class="hr">
 					{% endif %}
 					{% for menu in listMenu %}
 						{% if menu.text == 'Deconnexion' %}
 							<li class="nav-item my-2 col-12">
 								<a class=" text-danger  nav-link d-flex flex-nowrap {% if routeName == menu.url %} actived{% endif %}" href="{{menu.url}}" title="{{menu.title}}">
-									<div class="col-12 col-sm-3 d-flex  align-items-center">
-										<i class="fs-2 {{menu.icon}}"></i>
+									<div class="col-12 col-lg-3 d-flex  align-items-center justify-content-center p-1 bg-white rounded-pill">
+										<img class="iconMenu w-75" src="{{asset(menu.icon)}}" alt="icon menu">
 									</div>
-									<div class="link-nav col-0 col-sm-9 d-flex align-items-center justify-content-center">
-										<span class="s-1 d-none d-sm-inline">{{menu.text}}</span>
+									<div class="link-nav col-md-9 d-flex align-items-center justify-content-center">
+										<span class="s-1 d-none d-lg-inline">{{menu.text}}</span>
 									</div>
 								</a>
 							</li>
 						{% else %}
 							<li class="nav-item my-2 col-12">
-								<a class="text-dark  nav-link d-flex flex-nowrap {% if routeName == menu.url %} actived{% endif %}" href="{{menu.url}}" title="{{menu.title}}">
-									<div class="col-12 col-sm-3 d-flex align-items-center">
-										<i class="fs-2 {{menu.icon}}"></i>
+								<a class="text-white  nav-link d-flex flex-nowrap {% if routeName == menu.url %} actived{% endif %}" href="{{menu.url}}" title="{{menu.title}}">
+									<div class="col-12 col-lg-3 d-flex align-items-center justify-content-center p-1 bg-white rounded-pill">
+										<img class="iconMenu w-75" src="{{asset(menu.icon)}}" alt="icon menu">
 									</div>
-									<div class="link-nav col-9 d-flex align-items-center justify-content-center">
-										<span class="s-1 d-none d-sm-inline">{{menu.text}}</span>
+									<div class="link-nav col-md-9 d-flex align-items-center justify-content-center">
+										<span class="s-1 d-none d-lg-inline">{{menu.text}}</span>
 									</div>
 								</a>
 							</li>
@@ -53,4 +55,4 @@
 				<hr>
 			</div>
 		</div>
-		<div class="col-9 col-md-10 py-3">
+		<div class="test col-9 col-md-10 py-3">

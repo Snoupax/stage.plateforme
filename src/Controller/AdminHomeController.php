@@ -59,16 +59,16 @@ class AdminHomeController extends AbstractController
 
         $adminMenu = [
 
-            ['title' => 'Dashboard', 'text' => 'Accueil', 'url' => $this->generateUrl('app_admin_home'), 'icon' => 'bi bi-house'],
-            ['title' => 'Listing User', 'text' => 'Utilisateurs', 'url' => $this->generateUrl('app_admin_users'), 'icon' => 'bi bi-people'],
+            ['title' => 'Dashboard', 'text' => 'Accueil', 'url' => $this->generateUrl('app_admin_home'), 'icon' => 'build/images/icons/home.svg'],
+            ['title' => 'Listing User', 'text' => 'Utilisateurs', 'url' => $this->generateUrl('app_admin_users'), 'icon' => 'build/images/icons/users.svg'],
             // ['title' => 'Ajout User', 'text' => 'Ajouter un Utilisateur', 'url' => $this->generateUrl('app_admin_create_user'), 'icon' => 'bi bi-person-plus'],
-            ['title' => 'Listing Facture', 'text' => 'Factures', 'url' => $this->generateUrl('app_admin_factures'), 'icon' => 'bi bi-filetype-pdf'],
+            ['title' => 'Listing Facture', 'text' => 'Factures', 'url' => $this->generateUrl('app_admin_factures'), 'icon' => 'build/images/icons/facture.svg'],
             // ['title' => 'Ajout Facture', 'text' => 'Ajouter une Facture', 'url' => $this->generateUrl('app_admin_add_facture'), 'icon' => 'bi bi-file-earmark-diff'],
             // ['title' => 'Envoyer Message', 'text' => 'Envoyer un message', 'url' => $this->generateUrl('app_admin_message'), 'icon' => 'bi bi-chat-quote'],
-            ['title' => 'Listing Demandes', 'text' => 'Demandes', 'url' => $this->generateUrl('app_admin_demandes'), 'icon' => 'bi bi-newspaper'],
-            ['title' => 'Plannig', 'text' => 'Planning', 'url' => $this->generateUrl('app_admin_planning'), 'icon' => 'bi bi-calendar-week'],
-            ['title' => 'app_home', 'text' => 'Interface Utilisateur', 'url' => $this->generateUrl('app_home'), 'icon' => 'bi bi-speedometer2'],
-            ['title' => 'Deconnexion', 'text' => 'Deconnexion', 'url' => $this->generateUrl('app_logout'), 'icon' => 'bi bi-box-arrow-left'],
+            ['title' => 'Listing Demandes', 'text' => 'Demandes', 'url' => $this->generateUrl('app_admin_demandes'), 'icon' => 'build/images/icons/ask.svg'],
+            ['title' => 'Plannig', 'text' => 'Planning', 'url' => $this->generateUrl('app_admin_planning'), 'icon' => 'build/images/icons/calendar.svg'],
+            ['title' => 'app_home', 'text' => 'Interface Utilisateur', 'url' => $this->generateUrl('app_home'), 'icon' => 'build/images/icons/dashboard.svg'],
+            ['title' => 'Deconnexion', 'text' => 'Deconnexion', 'url' => $this->generateUrl('app_logout'), 'icon' => 'build/images/icons/off.svg'],
 
         ];
         $routeName = '';

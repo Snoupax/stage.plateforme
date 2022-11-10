@@ -10,14 +10,14 @@
 	<div class="container">
 		<div class="row">
 			<div class="col d-flex flex-column justify-content-start">
-				<h2 class="text-right ml-3 text-white">Dashboard</h2>
+				<h2 class="text-right ml-3 text-dark">Dashboard</h2>
 				{% include "parts/flashbag.html.twig" %}
 				<div class="d-flex  flex-column justify-content-evenly h-100">
-					<div class='d-flex flex-wrap justify-content-evenly '>
+					<div class='d-flex flex-wrap justify-content-evenly'>
 						<div class="shadow col-12 col-md-4 mt-4 bg-white rounded">
 							<div class="card-body ">
 								<h5 class="card-title text-center ">Résumé</h5>
-								<div class="text-left mt-3">
+								<div class="text-leftmt-3 d-flex flex-column align-items-center">
 									<span class="d-inline-block">Demandes non lues :
 										{% if countDemande == 0 %}
 											<a href="{{path('app_admin_demandes')}}">
@@ -33,71 +33,72 @@
 											</a>
 										{% endif %}
 									</span>
-								</span>
-								<span class="d-inline-block">Aujourd'hui :
-									{% if countIntervention == 0 %}
-										<span class="badge bg-secondary">{{countIntervention}}</span>
-									{% elseif countIntervention > 0 %}
-										<span class="badge bg-success">{{countIntervention}}</span>
-									{% elseif countIntervention > 2 %}
-										<span class="badge bg-danger">{{countIntervention}}</span>
-									{% endif %}
-									Interventions
-								</span>
+									<hr class="hr-dash">
+									<span class="d-block">Aujourd'hui :
+										{% if countIntervention == 0 %}
+											<span class="badge bg-secondary">{{countIntervention}}</span>
+										{% elseif countIntervention > 0 %}
+											<span class="badge bg-success">{{countIntervention}}</span>
+										{% elseif countIntervention > 2 %}
+											<span class="badge bg-danger">{{countIntervention}}</span>
+										{% endif %}
+										Interventions
+									</span>
+									<hr class="hr-dash">
+									<span class="d-inline-block">Nombre de factures déposées :
+										<span class="">{{countFactures}}</span>
 
-								<span class="d-inline-block">Nombre de factures déposées :
-									<span class="">{{countFactures}}</span>
-
-								</span>
-							</div>
+									</span>
+								</div>
 
 
-						</div>
-					</div>
-					<div class="shadow col-12 col-md-4 mt-4  bg-white rounded">
-						<div class="card-body text-center ">
-							<h5 class="card-title">Ajout</h5>
-							<div class="mt-4">
-								<a href="{{path('app_admin_add_facture')}}" class="btn btn-primary mt-2" style="width: 150px">
-									<i class="p-1 bi bi-file-earmark-diff"></i>
-									Facture
-								</a>
-								<a href="{{path('app_admin_message')}}" class="btn btn-primary mt-2" style="width: 150px">
-									<i class="p-1 bi bi-chat"></i>
-									Message
-								</a>
-								<a href="{{path('app_admin_create_user')}}" class="btn btn-primary mt-2" style="width: 150px">
-									<i class="p-1 bi bi-person-plus"></i>
-									Utilisateur
-								</a>
-								<a href="{{path('app_admin_planning')}}" class="btn btn-primary mt-2" style="width: 150px">
-									<i class="p-1 bi bi-calendar-event"></i>
-									Intervention
-								</a>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div>
-					<div class="py-5 h-100" {{ stimulus_controller('planning_read')}}>
-						<div class="row d-flex justify-content-center align-items-center h-100">
-							<div class="col col-lg-10 mb-4 mb-lg-0">
-								<div class="shadow-lg mb-3  rounded  bg-white">
-									<div class="row g-0  " style="height: 500px">
-										<div id='action-schedule' class="d-flex flex-wrap"></div>
-										<div id="schedule" class="overflow-hidden" data-user="{{user.id}}"></div>
-										<div id="action-week"></div>
-										<div id="week"></div>
-										<div id="action-day"></div>
-										<div id="day"></div>
-									</div>
+						<div class="shadow col-12 col-md-4 mt-4  bg-white rounded">
+							<div class="card-body text-center ">
+								<h5 class="card-title">Ajout</h5>
+								<div class="mt-4">
+									<a href="{{path('app_admin_add_facture')}}" class="btn btn-primary mt-2" style="width: 150px">
+										<i class="p-1 bi bi-file-earmark-diff"></i>
+										Facture
+									</a>
+									<a href="{{path('app_admin_message')}}" class="btn btn-primary mt-2" style="width: 150px">
+										<i class="p-1 bi bi-chat"></i>
+										Message
+									</a>
+									<a href="{{path('app_admin_create_user')}}" class="btn btn-primary mt-2" style="width: 150px">
+										<i class="p-1 bi bi-person-plus"></i>
+										Utilisateur
+									</a>
+									<a href="{{path('app_admin_planning')}}" class="btn btn-primary mt-2" style="width: 150px; width: fit-content">
+										<i class="p-1 bi bi-calendar-event"></i>
+										Intervention
+									</a>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div id="modal" class="col-9 col-md-10 py-3"></div>
+					<div>
+						<div class="py-5 h-100" {{ stimulus_controller('planning_read')}}>
+							<div class="row d-flex justify-content-center align-items-center h-100">
+								<div class="col col-lg-10 mb-4 mb-lg-0">
+									<div class="shadow-lg mb-3  rounded  bg-white">
+										<div class="row g-0  " style="height: 500px">
+											<div id='action-schedule' class="d-flex flex-wrap"></div>
+											<div id="schedule" class="overflow-hidden" data-user="{{user.id}}"></div>
+											<div id="action-week"></div>
+											<div id="week"></div>
+											<div id="action-day"></div>
+											<div id="day"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="modal" class="col-9 col-md-10 py-3"></div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div></div></div></div>{% endblock %}
+</div></div></div>{% endblock %}

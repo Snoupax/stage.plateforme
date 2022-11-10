@@ -25,7 +25,6 @@ class MessageController extends AbstractController
         $userFolder = "factures/" . substr(md5($user->getId()), 0, 9) . "/";
         $dataUser = $doctrine->getRepository(User::class)->getMessagesAndDemandesFromUser($user->getId());
 
-        dump($dataUser);
         foreach ($dataUser as $row) {
             if (is_a($row, Demande::class)) {
                 array_push($conversation, $row);

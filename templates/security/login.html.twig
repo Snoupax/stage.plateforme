@@ -15,6 +15,7 @@
 								<div>
 									<img class="s-1 w-100" src="{{asset('build/images/pixel-online.gif')}}" alt="Pixel Online Creation">
 								</div>
+								{% include "parts/flashbag.html.twig" %}
 								<form method="post">
 									{% if error %}
 										<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -54,17 +55,9 @@
 				</div>
 			</div>
 			<div class="d-none d-md-flex col-md-4 col-lg-6 bg-bg-image">
-				<div class="d-md-flex col-12 bg-image"></div>
+				<div class="d-md-flex col-12 bg-image shadow-sm"></div>
 			</div>
-			<div class="d-none d-md-none d-lg-flex  col-md-4 col-lg-6 bg-text position-absolute">
-				<h3 class="text-center text-white my-4">Bienvenue sur votre plateforme<br>
-					d'échanges avec votre Agence Web</h3>
-				<span class="text-center text-white my-2">Gérer vos Factures</span>
-				<span class="text-center text-white my-2">Liste des interventions sur votre site web</span>
-				<span class="text-center text-white my-2">Envoyez-nous vos demandes</span>
-				<span class="text-center text-white my-2">Recevez des messages de votre coloborateur</span>
 
-			</div>
 		</div>
 	</div>
-{% endblock %}
+</div></div>{% endblock %}
