@@ -55,7 +55,8 @@ class InterventionRepository extends ServiceEntityRepository
     public function getAllInterventions()
     {
         $qb = $this->createQueryBuilder('i')
-            ->join('App\Entity\User', 'u');
+            ->join('App\Entity\User', 'u')
+            ->orderBy('i.date_fin', 'DESC');
 
         return $qb->getQuery()->getResult();
     }
