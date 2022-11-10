@@ -10,12 +10,12 @@
 			<div class="col">
 				<h2 class="text-right ml-3 text-dark">Liste des Interventions</h2>
 
-				<div class="py-2 py-md-5 my-auto h-100">
+				<div class="py-2 py-md-5 my-auto h-80">
 					<div class="row d-flex justify-content-center align-items-center h-100">
 						<div class="col col-lg-12 mb-4">
 							<div class="shadow mb-3">
 
-								<div class="card bg-white">
+								<div class="card bg-white scroll">
 
 									<div>
 										<div class="card d-flex flex-row justify-content-around text-center bg-gray text-white">
@@ -73,7 +73,7 @@
 														</p>
 													</div>
 													<div class="col d-none d-lg-inline my-2">
-														<p class="card-text">{{intervention.sujet}}</p>
+														<p class="card-text">{{intervention.sujet[:10]}}</p>
 													</div>
 													<div class="col d-none d-lg-inline my-2">
 														<p class="card-text">
