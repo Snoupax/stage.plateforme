@@ -13,7 +13,8 @@ export class Month {
     this.daysInMonth = 0;
     this.sundayFirst = false;
     this.previousMonthLength = 0;
-    this.events;
+    this.events = [];
+    this.dateFrom = "";
     this.daysLabels = [
       "Lundi",
       "Mardi",
@@ -348,7 +349,7 @@ export class Month {
         day++;
       } else {
         dayAttribute = next + "-" + (month - 1) + "-" + this.year;
-        daySquare.setAttribute("class", "day overflow-hidden p-1");
+        daySquare.setAttribute("class", "overflow-hidden p-1");
         daySquare.classList.add("dayOtherMonth");
         daySquare.setAttribute("data-date", dayAttribute);
         daySquare.innerText = next;
@@ -397,17 +398,22 @@ export class Month {
       day.addEventListener("mouseup", (e) => {
         this.onMouseUp(e);
       });
+      day.addEventListener("mouseenter", (e) => {
+        this.onMouseEnter(e);
+      });
     });
   }
 
   // Permet de savoir si le click est maintenue ou non.
   onMouseDown(e) {
     let THAT = this;
-
+    let date = e.target.getAttribute("data-date");
+    console.log(date);
+    this.dateFrom = date;
     this.holdStarter = setTimeout(function () {
       this.holdStarter = null;
       this.holdActive = true;
-      let date = e.target.getAttribute("data-date");
+
       let daysSquare = document.querySelectorAll("div.day");
       daysSquare.forEach((daySquare) => {
         daySquare.classList.add("clicked");
@@ -441,11 +447,54 @@ export class Month {
         if (daySquare.style.backgroundColor == "orange") {
           daySquare.style.backgroundColor = "#efefef";
         }
+        if (daySquare.getAttribute("id") == "today") {
+          daySquare.style.backgroundColor = "rgb(119, 176, 176)";
+        }
       });
     } else if (this.holdActive) {
       daySquare.classList.remove("clicked");
       this.holdActive = false;
       console.log("Holded");
+    }
+  }
+
+  onMouseEnter(e) {
+    if (this.holded) {
+      console.log(e.target);
+      let date = e.target.getAttribute("data-date");
+      console.log(date);
+      let daysSquare = document.querySelectorAll("div.day");
+      console.log(this.dateFrom);
+      console.log(this.dateStringEn(this.dateFrom));
+      console.log(this.dateStringEn(date));
+      daysSquare.forEach((daySquare) => {
+        if (
+          this.dateStringEn(this.dateFrom) < this.dateStringEn(date) ||
+          this.dateStringEn(this.dateFrom) == this.dateStringEn(date)
+        ) {
+          if (
+            (this.dateStringEn(daySquare.getAttribute("data-date")) >
+              this.dateStringEn(this.dateFrom) &&
+              this.dateStringEn(daySquare.getAttribute("data-date")) <
+                this.dateStringEn(date)) ||
+            this.dateStringEn(daySquare.getAttribute("data-date")) ==
+              this.dateStringEn(date) ||
+            this.dateStringEn(daySquare.getAttribute("data-date")) ==
+              this.dateStringEn(this.dateFrom)
+          ) {
+            daySquare.style.backgroundColor = "orange";
+          } else {
+            if (
+              daySquare.getAttribute("class") != "dayOtherMonth" &&
+              daySquare.getAttribute("id") == "today"
+            ) {
+              daySquare.style.backgroundColor = "rgb(119, 176, 176)";
+            } else {
+              daySquare.style.backgroundColor = "#efefef";
+            }
+          }
+        }
+      });
     }
   }
 
@@ -461,10 +510,15 @@ export class Month {
   // Rempli le formulaire : Date de fin
   setDateTo(date) {
     let dateTo = document.getElementById("dateTo");
-    dateTo.setAttribute(
-      "value",
-      this.dateStringEn(date).replace(/\//g, "-") + "T20:00"
-    );
+    if (
+      this.dateStringEn(date) > this.dateStringEn(this.dateFrom) ||
+      this.dateStringEn(date) == this.dateStringEn(this.dateFrom)
+    ) {
+      dateTo.setAttribute(
+        "value",
+        this.dateStringEn(date).replace(/\//g, "-") + "T20:00"
+      );
+    }
   }
 
   // Ouvre le modal de chaque jour
@@ -623,6 +677,9 @@ export class Month {
   cmpDateString(dateA, dateB, egal = false) {
     let dateEnA = this.dateStringEn(dateA);
     let dateEnB = this.dateStringEn(dateB);
+
+    console.log(dateEnA);
+    console.log(dateEnB);
 
     let d1 = Date.parse(dateEnA);
     let d2 = Date.parse(dateEnB);
