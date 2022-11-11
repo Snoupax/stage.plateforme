@@ -526,7 +526,7 @@ export class Month {
     let modalDiv = document.createElement("div");
     modalDiv.setAttribute(
       "class",
-      "modalDiv card col-9 col-md-8 mx-auto my-auto d-flex"
+      "modalDiv card col-12 col-md-8 mx-auto my-auto d-flex"
     );
     let closeDiv = document.createElement("div");
     closeDiv.setAttribute("class", "d-flex justify-content-end");
