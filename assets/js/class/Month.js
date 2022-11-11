@@ -408,7 +408,6 @@ export class Month {
   onMouseDown(e) {
     let THAT = this;
     let date = e.target.getAttribute("data-date");
-    console.log(date);
     this.dateFrom = date;
     this.holdStarter = setTimeout(function () {
       this.holdStarter = null;
@@ -460,13 +459,8 @@ export class Month {
 
   onMouseEnter(e) {
     if (this.holded) {
-      console.log(e.target);
       let date = e.target.getAttribute("data-date");
-      console.log(date);
       let daysSquare = document.querySelectorAll("div.day");
-      console.log(this.dateFrom);
-      console.log(this.dateStringEn(this.dateFrom));
-      console.log(this.dateStringEn(date));
       daysSquare.forEach((daySquare) => {
         if (
           this.dateStringEn(this.dateFrom) < this.dateStringEn(date) ||
@@ -677,9 +671,6 @@ export class Month {
   cmpDateString(dateA, dateB, egal = false) {
     let dateEnA = this.dateStringEn(dateA);
     let dateEnB = this.dateStringEn(dateB);
-
-    console.log(dateEnA);
-    console.log(dateEnB);
 
     let d1 = Date.parse(dateEnA);
     let d2 = Date.parse(dateEnB);

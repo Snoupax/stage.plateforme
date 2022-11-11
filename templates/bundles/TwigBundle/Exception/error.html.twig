@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+	{% block menu %}{% endblock %}
 	<div id="main">
 
 		<section class="single-post-content">
@@ -19,11 +20,11 @@
 						{% elseif app.request.attributes.get('exception').statusCode == '500' %}
 							<h1 class="display-2 fw-bold">ERREUR 500</h1>
 							<h5>Oups !?! Alors là, on a un problème... La page ou la section ne s'affiche pas. Si vous avez 2
-																                        minutes, merci de prévenir l'administrateur du site.</h5>
+																																								                        minutes, merci de prévenir l'administrateur du site.</h5>
 						{% else %}
 							<h5>Oups !?! Désolé, il y a une erreur. Si vous avez 2
-																                        minutes, merci de prévenir l'administrateur du site ou d'envoyer un message depuis la page
-								<a href="{{ path('app_contact') }}">contact</a>.</h5>
+																																								                        minutes, merci de prévenir l'administrateur du site ou d'envoyer un message depuis la page
+								<a href="{{ path('app_demande') }}">demande</a>.</h5>
 						{% endif %}
 					</div>
 
