@@ -7,7 +7,8 @@ for install :
 1. Creer .env.local :
 
 DATABASE_URL="mysql://root:@127.0.0.1:3306/plateforme-facture?serverVersion=8&charset=utf8mb4"
-
+APP_ENV=prod
+MAILER_DSN=
 
 2.composer install
 
