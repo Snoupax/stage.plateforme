@@ -33,7 +33,7 @@ class ProfilController extends AbstractController
 
     #[Route('/profile/edit/', name: 'app_edit_profile', requirements: ['id' => "\d+"])]
     #[IsGranted('ROLE_USER')]
-    public function edit(ManagerRegistry $doctrine, Request $request, SendMailService $mail, UserPasswordHasherInterface $userPasswordHasher): Response
+    public function edit(ManagerRegistry $doctrine, Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
 
 
