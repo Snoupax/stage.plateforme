@@ -14,7 +14,7 @@
 						Envoyer un message
 					</a>
 				</div>
-				<div class="py-2 py-md-5 my-auto h-100">
+				<div class="py-2  my-auto h-100">
 					<div class="row d-flex justify-content-center align-items-center h-100">
 						<div class="col col-lg-12 mb-4">
 							<div class="shadow mb-3">
@@ -44,11 +44,11 @@
 
 											{% if i == 0 %}
 												<div class="card d-flex flex-row justify-content-around mx-auto text-center">
-												{% set i = 1 %}
-											{% else %}
-												<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-lightgray">
-												{% set i = 0 %}
-											{% endif %}
+													{% set i = 1 %}
+												{% else %}
+													<div class="card d-flex flex-row justify-content-around mx-auto text-center bg-lightgray">
+														{% set i = 0 %}
+													{% endif %}
 
 													<div class="col my-2">
 														<p class="card-text">{{demande.user.entreprise}}</p>
@@ -68,9 +68,10 @@
 														</div>
 													</div>
 												</div>
-										{% endfor %}
+											{% endfor %}
+										</div>
+										<div class="card justify-content-around text-center" style="height:42px"></div>
 									</div>
-									<div class="card justify-content-around text-center" style="height:42px"></div>
 								</div>
 							</div>
 						</div>
@@ -79,4 +80,4 @@
 			</div>
 		</div>
 	</div>
-</div></div>{% endblock %}
+</div>{% endblock %}
